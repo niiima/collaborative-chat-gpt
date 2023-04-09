@@ -31,13 +31,12 @@ export default function MyPage() {
     });
     messages.push({ role: "user", content: prompt });
 
-    console.log(AIstate);
     let options = {
       engine: activeEngine.key,
       messages: messages,
       ...AIstate,
     };
-    console.log(options);
+    // console.log(options);
     try {
       const response = await fetch("/api/get-chat", {
         method: "POST",
@@ -71,7 +70,7 @@ export default function MyPage() {
         ).toFixed(5),
       });
 
-      console.log(chatHistory);
+      // console.log(chatHistory);
       setPrompt("");
     } catch {
       (err) => console.log(err);

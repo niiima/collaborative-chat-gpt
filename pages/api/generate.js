@@ -27,7 +27,7 @@ const handler = async (req) => {
     n: 1,
     // stop: "\n",
   };
-
+  console.log(prompt);
   const stream = await OpenAIStream(payload);
   return new Response(stream);
 };

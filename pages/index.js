@@ -40,7 +40,7 @@ export default function MyPage() {
         engine: activeEngine.key,
         // max_tokens: activeEngine.maxTokens,
       };
-      console.log(options);
+      // console.log(options);
       const response = await fetch("/api/generate", {
         method: "POST",
         headers: {
@@ -49,7 +49,7 @@ export default function MyPage() {
         },
         body: JSON.stringify(options),
       });
-      console.log(response);
+      // console.log(response);
       if (!response.ok) {
         throw new Error(response.statusText);
       }
@@ -103,7 +103,7 @@ export default function MyPage() {
       });
 
       setStream("");
-      console.log(chatHistory);
+      // console.log(chatHistory);
       setPrompt("");
     } catch {
       (err) => console.log(err);

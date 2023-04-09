@@ -65,7 +65,7 @@ export default function MyPage() {
     try {
       const messages = [{ role: "system", content: systemPrompt }];
       chatHistory.forEach((h) => {
-        console.log(h);
+        // console.log(h);
         messages.push({ role: "user", content: h.prompt });
         messages.push({ role: "assistant", content: h.completion });
       });
@@ -92,7 +92,6 @@ export default function MyPage() {
       }
 
       const data = response.body;
-      console.log(data);
       if (!data) {
         return;
       }
@@ -198,7 +197,7 @@ export default function MyPage() {
           <select
             onChange={(e) => {
               let engineType = e.currentTarget.value;
-              console.log(engineType);
+              // console.log(engineType);
               setActiveEngine(engines.find((eng) => eng.key === engineType));
             }}>
             {engines.map((eng) => (
