@@ -1,0 +1,26 @@
+.root {
+    border: 0;
+    padding: 0.25rem;
+    margin: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.left,
+.right {
+    border-top: 1px solid #333;
+    height: 0.5rem;
+    width: 0.5rem;
+}
+
+.left {
+    border-left: 1px solid #333;
+    transform: rotate(-45deg);
+}
+
+.right {
+    border-right: 1px solid #333;
+    transform: rotate(45deg);
+}

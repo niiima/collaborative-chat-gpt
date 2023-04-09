@@ -10,6 +10,7 @@ import Header from "../components/Header/Header.js";
 import UIContext from "../context/UIContext.js";
 import { FlexItem } from "../components/Atoms/FlexItem.js";
 import { v4 as uuidv4 } from "uuid";
+// import RangeField from "../components/controls/RangeField.js";
 
 export default function MyPage() {
   const { asideExpanded, setAsideExpand } = useContext(UIContext);
@@ -125,7 +126,7 @@ export default function MyPage() {
         <title>Messaging</title>
       </Head>
       <Sidebar show={asideExpanded}>
-        {" "}
+        {/* <RangeField val={150} min={0} max={4000} step={1}></RangeField> */}
         <ChatSettingsControl aiType='classic' />
         {/* <ColorBoxSelector></ColorBoxSelector> */}
       </Sidebar>
