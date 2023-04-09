@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from "react";
+import Head from "next/head";
 import { engines } from "../model/model.js";
 import ChatComponent from "../components/ChatComponent";
 import ChatContext from "../context/ChatContext.js";
@@ -120,6 +121,9 @@ export default function MyPage() {
 
   return (
     <div>
+      <Head>
+        <title>Messaging</title>
+      </Head>
       <Sidebar show={asideExpanded}>
         {" "}
         <ChatSettingsControl aiType='classic' />

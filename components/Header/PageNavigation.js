@@ -28,11 +28,11 @@ const PageNavigation = () => {
           <MdAirlineStops color='white' size={ICON_SIZE} />
         </Link>
       </LinkItem>
-      <LinkItem>
+      {/* <LinkItem>
         <Link href='/art'>
           <FcPicture color='white' size={ICON_SIZE} />
         </Link>
-      </LinkItem>
+      </LinkItem> */}
       <LinkItem>
         <Link href='/stream'>
           <MdMultipleStop color='white' size={ICON_SIZE} />

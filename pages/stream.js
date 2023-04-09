@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from "react";
+import Head from "next/head";
 import { experimentalEngines as engines } from "../model/model.js";
 import { modes, colorArray } from "../model/Content";
 import ChatComponent from "../components/ChatComponent";
@@ -12,7 +13,6 @@ import { FlexItem } from "../components/Atoms/FlexItem.js";
 import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
 import { Typography } from "../components/Atoms/Typography.js";
-import { backgroundColor } from "styled-system";
 import OrdinaryButton from "../components/Buttons/OrdinaryButton.js";
 import { MdDeleteSweep } from "react-icons/md";
 import { GiStopSign } from "react-icons/gi";
@@ -158,6 +158,9 @@ export default function MyPage() {
 
   return (
     <div>
+      <Head>
+        <title>Chatting</title>
+      </Head>
       <Sidebar show={asideExpanded}>
         {" "}
         <ChatSettingsControl aiType='new' />
