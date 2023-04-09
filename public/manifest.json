@@ -1,0 +1,22 @@
+{
+    "dir": "ltr",
+    "lang": "en",
+    "name": "OpenAiApp",
+    "scope": "/",
+    "display": "standalone",
+    "start_url": "https://openai-app-gamma.vercel.app/",
+    "short_name": "GPT Assistant",
+    "theme_color": "#000000",
+    "description": "A GPT Enabled Chat Assistant",
+    "orientation": "any",
+    "background_color": "#FFFFFF",
+    "related_applications": [],
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "/favicon.ico",
+            "sizes": "64x64 32x32 24x24 16x16",
+            "type": "image/x-icon"
+        }
+    ]
+}
