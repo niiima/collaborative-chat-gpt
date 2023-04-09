@@ -63,8 +63,15 @@ const ChatComponent = ({
         <Sidebar position='left' scrollable={true} loading={isLoading}>
           <Search placeholder='Search...' />
           <ConversationList>
-            <Conversation name='Psy' lastSenderName='Bi' info='Community'>
-              <Avatar src={avatarIco} name='Lilly' status='available' />
+            <Conversation
+              name='GPT Assistant'
+              lastSenderName='conversation:'
+              info='Chatting'>
+              <Avatar
+                src={gptAvetarLogo}
+                name='GPT Assistant'
+                status='available'
+              />
             </Conversation>
           </ConversationList>
         </Sidebar>
