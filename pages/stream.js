@@ -81,12 +81,10 @@ export default function MyPage() {
       const response = await fetch("/api/generate-chat", {
         method: "POST",
         headers: {
-          // Accept: "application/json",
           "Content-Type": "application/json",
         },
         body: JSON.stringify(options),
       });
-      //console.log(response);
       if (!response.ok) {
         throw new Error(response.statusText);
       }
@@ -104,9 +102,7 @@ export default function MyPage() {
       while (!done) {
         const { value, done: doneReading } = await reader.read();
         done = doneReading;
-
         const chunkValue = decoder.decode(value);
-
         if (init === false) {
           init = true;
           const substr = chunkValue.slice(9); // remove assistant from the begining of conversation
@@ -119,6 +115,18 @@ export default function MyPage() {
       }
 
       const completion_timestamp = new Date();
+      const completion = streamTextArray.join("");
+
+      const tokenCountResult = await fetch("/api/calculate-tokens", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ prompt, completion }),
+      });
+
+      const { prompt_tokens, completion_tokens } =
+        await tokenCountResult.json();
       addToHistory({
         chatId: uuidv4(), //data.id,
         prompt: prompt,
@@ -126,20 +134,20 @@ export default function MyPage() {
         completion: streamTextArray.join(""), //data.text.trim(),
         completion_timestamp: completion_timestamp, //data.created,
         engine: activeEngine.key,
-        //prompt_tokens: data.usage.prompt_tokens,
-        //completion_tokens: data.usage.completion_tokens,
-        // prompt_price: (
-        //   (data.usage.prompt_tokens / 1000) *
-        //   activeEngine.costPerKiloToken
-        // ).toFixed(5),
-        // completion_price: (
-        //   (data.usage.completion_tokens / 1000) *
-        //   activeEngine.costPerKiloToken
-        // ).toFixed(5),
+        prompt_tokens: prompt_tokens,
+        completion_tokens: completion_tokens,
+        prompt_price: (
+          (prompt_tokens / 1000) *
+          activeEngine.costPerKiloToken
+        ).toFixed(5),
+        completion_price: (
+          (completion_tokens / 1000) *
+          activeEngine.costPerKiloToken
+        ).toFixed(5),
       });
 
       setStream("");
-      console.log(chatHistory);
+
       setPrompt("");
     } catch {
       (err) => console.log(err);
