@@ -18,7 +18,7 @@ content.set("Fa", {
 });
 
 export const colorArray = [
-  "fda085",
+  "#439912",
   "#b490ca",
   "#03c0e2",
   "#123699",
@@ -26,6 +26,7 @@ export const colorArray = [
   "#f5576c",
   "#5ee7df",
   "#c3cfe2",
+  "fda085",
 ];
 
 export const modes = [
