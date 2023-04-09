@@ -77,19 +77,7 @@ const ChatComponent = ({
           {/* <Avatar src={avatarIco} name='Zoe' /> */}
           <MessageList
             typingIndicator={
-              isLoading ? (
-                <TypingIndicator
-                  // style={{
-                  //   height: 100,
-                  //   width: "400px",
-                  //   position: "absolute",
-                  //   whiteSpace: "pre-wrap",
-                  // }}
-                  content={stream}
-                />
-              ) : (
-                ""
-              )
+              isLoading ? <TypingIndicator content={"GPT is responding"} /> : ""
             }>
             {chatList.map((msg, i) => {
               const start = moment(msg.sentTime);
@@ -148,7 +136,6 @@ const ChatComponent = ({
             {stream !== "" ? (
               <Message>
                 <Message.CustomContent>
-                  {/* <ReactMarkdown> */}
                   <Typography
                     style={{
                       fontSize: ".8rem",
@@ -165,7 +152,7 @@ const ChatComponent = ({
             )}
           </MessageList>
           <MessageInput
-            placeholder="What's in your mind?"
+            placeholder="What's on your mind?"
             // value={messageInputValue}
             onChange={(val) => handlePromptTextChange(val)}
             onSend={(val) => handleSendMessage(val)}
