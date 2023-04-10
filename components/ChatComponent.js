@@ -96,31 +96,41 @@ const ChatComponent = ({
                   </Message.CustomContent>
 
                   <Message.Footer
-                    sender={msg.engine}
+                    sender={msg.sender}
                     sentTime={start.fromNow()}>
                     {i % 2 !== 0 && (
-                      <span
-                        style={{
-                          color: "AppWorkspace",
-                          backgroundColor: "silver",
-                          borderRadius: 3,
-                          fontSize: ".5rem",
-                        }}>
-                        {start.fromNow()}
-                        {"  by "}
-                        {msg.engine}
-                      </span>
+                      <>
+                        <span
+                          style={{
+                            color: "rgba(21,162,127,1)",
+                            borderRadius: 3,
+                            fontSize: ".5rem",
+                          }}>
+                          {start.fromNow()}
+                        </span>
+                        <span
+                          style={{
+                            color: "orange",
+                            borderRadius: 3,
+                            textAlign: "right",
+                            fontSize: ".5rem",
+                            paddingLeft: 10,
+                          }}>
+                          {"By"} {msg.engine}
+                        </span>
+                      </>
                     )}
                     <span
                       style={{
                         color: "rosybrown",
-                        backgroundColor: "silver",
+                        // backgroundColor: "silver",
                         borderRadius: 3,
                         textAlign: "right",
                         fontSize: ".5rem",
-                        // marginLeft: 100,
+                        paddingLeft: 10,
                       }}>
-                      {msg.tokens}T = {msg.price}$
+                      {" "}
+                      {msg.tokens}Tokens = {msg.price}$
                     </span>
                   </Message.Footer>
 
