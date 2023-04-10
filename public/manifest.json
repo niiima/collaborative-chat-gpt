@@ -1,10 +1,10 @@
 {
     "dir": "ltr",
     "lang": "en",
-    "name": "OpenAiApp",
+    "name": "CollaborativeChatGpt",
     "scope": "/",
     "display": "standalone",
-    "start_url": "https://openai-app-gamma.vercel.app/",
+    "start_url": "https://mygpt-nima.vercel.app/",
     "short_name": "GPT Assistant",
     "theme_color": "#000000",
     "description": "A GPT Enabled Chat Assistant",
