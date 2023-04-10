@@ -58,7 +58,7 @@ const ChatComponent = ({
   });
 
   return (
-    <div style={{ position: "relative", height: "90svh" }}>
+    <div style={{ position: "relative", height: "92svh" }}>
       <MainContainer responsive>
         <Sidebar position='left' scrollable={true} loading={isLoading}>
           <Search placeholder='Search...' />

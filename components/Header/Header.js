@@ -17,7 +17,7 @@ export const HeaderBar = styled.header`
   background: linear-gradient(135deg, #11e7df 0%, #39f 50%, #b490ca 100%);
   /* flex: 0 0 1; */
   /* flex: 0 0 1; */
-  height: 60px;
+  height: 8svh;
 `;
 
 const Header = ({ children }) => {
