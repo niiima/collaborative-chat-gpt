@@ -6,7 +6,7 @@
     "display": "standalone",
     "start_url": "https://mygpt-nima.vercel.app/",
     "short_name": "GPT Assistant",
-    "theme_color": "#000000",
+    "theme_color": "#294594",
     "description": "A GPT Enabled Chat Assistant",
     "orientation": "any",
     "background_color": "#FFFFFF",
@@ -14,8 +14,18 @@
     "prefer_related_applications": false,
     "icons": [
         {
+            "src": "/ChatGPT-Logo-blue-64.png",
+            "sizes": "64x64",
+            "type": "image/png"
+        },
+        {
+            "src": "/ChatGPT-Logo-blue-128.png",
+            "sizes": "128x128",
+            "type": "image/png"
+        },
+        {
             "src": "/favicon.ico",
-            "sizes": "64x64 32x32 24x24 16x16",
+            "sizes": "64x64",
             "type": "image/x-icon"
         }
     ]

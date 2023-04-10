@@ -18,8 +18,11 @@ import {
 import ChatContext from "../context/ChatContext";
 import { Typography } from "./Atoms/Typography";
 import moment from "moment";
-import { userAvetarLogo, gptAvetarLogo } from "../model/icons";
-
+import {
+  userAvatarLogo,
+  gptAvatarLogo,
+  gptBlueAvatarLogo,
+} from "../model/icons";
 const ChatComponent = ({
   handlePromptTextChange,
   handleSendMessage,
@@ -65,7 +68,7 @@ const ChatComponent = ({
               lastSenderName='conversation:'
               info='Chatting'>
               <Avatar
-                src={gptAvetarLogo}
+                src={gptAvatarLogo}
                 name='GPT Assistant'
                 status='available'
               />
@@ -135,7 +138,7 @@ const ChatComponent = ({
                   </Message.Footer>
 
                   <Avatar
-                    src={i % 2 === 0 ? userAvetarLogo : gptAvetarLogo}
+                    src={i % 2 === 0 ? userAvatarLogo : gptBlueAvatarLogo}
                     name='GPT'
                   />
                 </Message>

@@ -23,7 +23,7 @@ const ButtonContainer = styled.div`
   transform-origin: 50% 50% 0px;
   border-radius: 5px;
   color: white;
-  line-height: 30px; /* this define height of objects*/
+  line-height: 15px; /* this define height of objects*/
   padding-left: 32px;
   font-size: 14.5px;
   background: lightblue;
@@ -68,7 +68,7 @@ function ColorfulButtonSet({ items }) {
   return (
     <ButtonWrapper>
       {/* <ButtonContainer> */}
-      <ButtonContent style={{ height: `${itemsArray.length * 40}px` }}>
+      <ButtonContent style={{ height: `${itemsArray.length * 28}px` }}>
         {[...Object.keys(items)].map((item, i) => (
           <ButtonContainer key={`item-${itemsArray[i]}`}>
             <div>
