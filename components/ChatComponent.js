@@ -27,6 +27,7 @@ const ChatComponent = ({
   handlePromptTextChange,
   handleSendMessage,
   stream,
+  prompt,
 }) => {
   const { chatHistory, isLoading } = useContext(ChatContext);
 
@@ -146,19 +147,35 @@ const ChatComponent = ({
             })}
 
             {stream !== "" ? (
-              <Message>
-                <Message.CustomContent>
-                  <Typography
-                    style={{
-                      fontSize: ".8rem",
-                      lineHeight: "1.4em",
-                      color: "white",
-                      fontWeight: 500,
-                    }}>
-                    {stream}
-                  </Typography>
-                </Message.CustomContent>
-              </Message>
+              <>
+                <Message model={{ direction: "incoming" }}>
+                  <Message.CustomContent>
+                    <Typography
+                      style={{
+                        fontSize: ".8rem",
+                        lineHeight: "1.4em",
+                        color: "white",
+                        fontWeight: 500,
+                      }}>
+                      {prompt}
+                    </Typography>
+                  </Message.CustomContent>
+                  <Avatar src={userAvatarLogo} name='User' />
+                </Message>
+                <Message model={{ direction: "outgoing" }}>
+                  <Message.CustomContent>
+                    <Typography
+                      style={{
+                        fontSize: ".8rem",
+                        lineHeight: "1.4em",
+                        color: "white",
+                        fontWeight: 500,
+                      }}>
+                      {stream}
+                    </Typography>
+                  </Message.CustomContent>
+                </Message>
+              </>
             ) : (
               ""
             )}

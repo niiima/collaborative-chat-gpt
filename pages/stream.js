@@ -217,6 +217,7 @@ export default function MyPage() {
       </Header>
       <ChatComponent
         stream={stream}
+        prompt={prompt}
         handleSendMessage={handleSubmit}
         handlePromptTextChange={handlePromptChange}
       />

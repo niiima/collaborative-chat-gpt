@@ -151,7 +151,7 @@ export default function MyPage() {
         </FlexItem>
       </Header>
       <ChatComponent
-        //
+        prompt={prompt}
         stream={stream}
         handleSendMessage={handleSubmit}
         handlePromptTextChange={handlePromptChange}
