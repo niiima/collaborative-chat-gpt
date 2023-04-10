@@ -28,7 +28,7 @@ export default function ChatSettingsControl({ aiType = "basic" }) {
       onChange: (value) => setAIState({ temperature: value }),
     },
     top_p: {
-      value: 1,
+      value: 0,
       step: 0.01,
       max: 1,
       min: 0,
@@ -42,7 +42,7 @@ export default function ChatSettingsControl({ aiType = "basic" }) {
       onChange: (value) => setAIState({ frequency_penalty: value }),
     },
     presence_penalty: {
-      value: 0.6,
+      value: 0.0,
       step: 0.01,
       max: 2,
       min: -2,
