@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import Head from "next/head";
 import { engines } from "../model/model.js";
-import ChatComponent from "../components/ChatComponent";
+//import ChatComponent from "../components/ChatComponent";
 import ChatContext from "../context/ChatContext.js";
 import AIContext from "../context/AIContext.js";
 import Sidebar from "../components/Sidebar/Sidebar.js";
@@ -11,7 +11,15 @@ import UIContext from "../context/UIContext.js";
 import { FlexItem } from "../components/Atoms/FlexItem.js";
 import { v4 as uuidv4 } from "uuid";
 // import RangeField from "../components/controls/RangeField.js";
+import dynamic from "next/dynamic";
 
+const ChatComponent = dynamic(() => import("../components/ChatComponent"), {
+  loading: () => (
+    <div
+      style={{ position: "absolute", left: "43%", top: "48%" }}
+      className='loading-spinner'></div>
+  ),
+});
 export default function MyPage() {
   const { asideExpanded, setAsideExpand } = useContext(UIContext);
 

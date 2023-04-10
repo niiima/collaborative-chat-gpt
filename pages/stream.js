@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import Head from "next/head";
 import { experimentalEngines as engines } from "../model/model.js";
 import { modes, colorArray } from "../model/Content";
-import ChatComponent from "../components/ChatComponent";
+// import ChatComponent from "../components/ChatComponent";
 import ChatContext from "../context/ChatContext.js";
 import AIContext from "../context/AIContext.js";
 import Sidebar from "../components/Sidebar/Sidebar.js";
@@ -16,7 +16,15 @@ import { Typography } from "../components/Atoms/Typography.js";
 import OrdinaryButton from "../components/Buttons/OrdinaryButton.js";
 import { MdDeleteSweep } from "react-icons/md";
 import { GiStopSign } from "react-icons/gi";
+import dynamic from "next/dynamic";
 
+const ChatComponent = dynamic(() => import("../components/ChatComponent"), {
+  loading: () => (
+    <div
+      style={{ position: "absolute", left: "43%", top: "48%" }}
+      className='loading-spinner'></div>
+  ),
+});
 const StopGeneratePromptButton = styled(OrdinaryButton)`
   /* color: red; */
 `;
