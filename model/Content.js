@@ -42,7 +42,7 @@ export const modes = [
   {
     icon: <FaLanguage></FaLanguage>,
     name: "دستیار فارسی",
-    prompt: `I want you to speak in Farsi. I will speak to you in any language and you will reply to me in Farsi, but use the words that can't translate or translating them might break the point in their original language.`,
+    prompt: `I want you to speak in Farsi. keep the vocabulary and speaking form of Iranian recent literature. keep the words that can't be translated or translating them might break the point in their original language.`,
   },
   {
     icon: <MdOutlineTempleBuddhist></MdOutlineTempleBuddhist>,
