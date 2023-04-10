@@ -6,7 +6,7 @@ import styled from "styled-components";
 const ButtonWrapper = styled.button`
   margin: auto;
   font-weight: bolder;
-  background-color: orange;
+  background-color: #b490ca;
   border: none;
   cursor: pointer;
   padding: 8px 6px;
@@ -14,7 +14,7 @@ const ButtonWrapper = styled.button`
   box-shadow: 1px 1px #03c0e2;
 
   &:hover {
-    background-color: #b490ca;
+    background-color: #03c0e2;
   }
 `;
 

@@ -191,7 +191,7 @@ export default function MyPage() {
         <FlexItem>
           <OrdinaryButton
             text={""}
-            icon={<MdDeleteSweep size='20' />}
+            icon={<MdDeleteSweep size='20' color='orange' />}
             handleOnClick={() => clearChatHistory()}></OrdinaryButton>
           {/* <StopGeneratePromptButton
             text={""}
