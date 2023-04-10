@@ -21,7 +21,7 @@ export default function ChatSettingsControl({ aiType = "basic" }) {
       onChange: (value) => setAIState({ max_tokens: value }),
     },
     temperature: {
-      value: 0.9,
+      value: 1,
       step: 0.01,
       max: 2,
       min: 0,
