@@ -18,7 +18,6 @@ import {
 import ChatContext from "../context/ChatContext";
 import { Typography } from "./Atoms/Typography";
 import moment from "moment";
-import { useEffect } from "react";
 import { userAvetarLogo, gptAvetarLogo } from "../model/icons";
 
 const ChatComponent = ({
@@ -54,8 +53,6 @@ const ChatComponent = ({
       position: i === len ? "last" : "normal",
     });
   });
-
-  useEffect(() => {}, [stream]);
 
   return (
     <div style={{ position: "relative", height: "90svh" }}>

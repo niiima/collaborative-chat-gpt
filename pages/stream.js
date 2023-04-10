@@ -65,7 +65,6 @@ export default function MyPage() {
     try {
       const messages = [{ role: "system", content: systemPrompt }];
       chatHistory.forEach((h) => {
-        // console.log(h);
         messages.push({ role: "user", content: h.prompt });
         messages.push({ role: "assistant", content: h.completion });
       });
@@ -105,7 +104,7 @@ export default function MyPage() {
         const chunkValue = decoder.decode(value);
         if (init === false) {
           init = true;
-          const substr = chunkValue.slice(9); // remove assistant from the begining of conversation
+          const substr = chunkValue.slice(9); // remove assistant from the beginning of conversation
           setStream((prev) => prev + substr);
           streamTextArray.push(substr);
         } else {
@@ -127,12 +126,13 @@ export default function MyPage() {
 
       const { prompt_tokens, completion_tokens } =
         await tokenCountResult.json();
+      console.log(prompt_tokens, completion_tokens);
       addToHistory({
-        chatId: uuidv4(), //data.id,
+        chatId: uuidv4(),
         prompt: prompt,
         prompt_timestamp: prompt_timestamp,
-        completion: streamTextArray.join(""), //data.text.trim(),
-        completion_timestamp: completion_timestamp, //data.created,
+        completion: streamTextArray.join(""),
+        completion_timestamp: completion_timestamp,
         engine: activeEngine.key,
         prompt_tokens: prompt_tokens,
         completion_tokens: completion_tokens,
@@ -145,9 +145,8 @@ export default function MyPage() {
           activeEngine.costPerKiloToken
         ).toFixed(5),
       });
-
+      console.log(chatHistory);
       setStream("");
-
       setPrompt("");
     } catch {
       (err) => console.log(err);

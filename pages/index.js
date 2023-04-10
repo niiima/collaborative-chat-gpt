@@ -39,12 +39,10 @@ export default function MyPage() {
       const response = await fetch("/api/generate", {
         method: "POST",
         headers: {
-          // Accept: "application/json",
           "Content-Type": "application/json",
         },
         body: JSON.stringify(options),
       });
-      // console.log(response);
       if (!response.ok) {
         throw new Error(response.statusText);
       }
@@ -68,7 +66,7 @@ export default function MyPage() {
 
         if (init === false) {
           init = true;
-          const substr = chunkValue.slice(9); // remove assistant from the begining of conversation
+          const substr = chunkValue.slice(9); // remove assistant from the beginning of conversation
           setStream((prev) => prev + substr);
           streamTextArray.push(substr);
         } else {
@@ -129,7 +127,7 @@ export default function MyPage() {
   return (
     <div>
       <Head>
-        <title>Messaging</title>
+        <title>Messaging Mode</title>
       </Head>
       <Sidebar show={asideExpanded}>
         {/* <RangeField val={150} min={0} max={4000} step={1}></RangeField> */}
