@@ -228,6 +228,7 @@ export default function MyPage() {
         prompt={prompt}
         handleSendMessage={handleSubmit}
         handlePromptTextChange={handlePromptChange}
+        handleOnClick={() => setAsideExpand(false)}
       />
     </div>
   );

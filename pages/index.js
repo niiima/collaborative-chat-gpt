@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext, useRef, useEffect } from "react";
 import Head from "next/head";
 import { engines } from "../model/model.js";
 //import ChatComponent from "../components/ChatComponent";
@@ -132,6 +132,8 @@ export default function MyPage() {
     }
   }
 
+  useEffect(() => {}, [setAsideExpand]);
+
   return (
     <div>
       <Head>
@@ -163,6 +165,7 @@ export default function MyPage() {
         stream={stream}
         handleSendMessage={handleSubmit}
         handlePromptTextChange={handlePromptChange}
+        handleOnClick={() => setAsideExpand(false)}
       />
     </div>
   );

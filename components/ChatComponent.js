@@ -28,6 +28,7 @@ const ChatComponent = ({
   handleSendMessage,
   stream,
   prompt,
+  handleOnClick,
 }) => {
   const { chatHistory, isLoading } = useContext(ChatContext);
 
@@ -59,7 +60,9 @@ const ChatComponent = ({
   });
 
   return (
-    <div style={{ position: "relative", height: "92svh" }}>
+    <div
+      style={{ position: "relative", height: "92svh" }}
+      onClick={handleOnClick}>
       <MainContainer responsive>
         <Sidebar position='left' scrollable={true} loading={isLoading}>
           <Search placeholder='Search...' />
