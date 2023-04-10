@@ -6,7 +6,7 @@ import styled from "styled-components";
 const ButtonWrapper = styled.button`
   margin: auto;
   font-weight: bolder;
-  background-color: #03c0e2;
+  background-color: orange;
   border: none;
   cursor: pointer;
   padding: 8px 6px;
