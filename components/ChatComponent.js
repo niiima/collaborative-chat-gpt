@@ -62,7 +62,7 @@ const ChatComponent = ({
   return (
     <div
       style={{ position: "relative", height: "92svh" }}
-      onClick={handleOnClick}>
+      onClick={() => handleOnClick()}>
       <MainContainer responsive>
         <Sidebar position='left' scrollable={true} loading={isLoading}>
           <Search placeholder='Search...' />

@@ -132,7 +132,7 @@ export default function MyPage() {
     }
   }
 
-  useEffect(() => {}, [setAsideExpand]);
+  // useEffect(() => {}, [setAsideExpand]);
 
   return (
     <div>
