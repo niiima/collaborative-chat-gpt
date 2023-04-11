@@ -1,12 +1,6 @@
 // import react from "react";
 import { createGlobalStyle } from "styled-components";
-// @font-face {
-//   font-family: 'Chivo Mono';
-//   src: url('../assets/ChivoMono-VariableFont_wght.ttf');
-//   src: url('../assets/ChivoMono-VariableFont_wght.ttf');
-//   font-weight: 400;
-//   font-style: normal;
-// }
+
 const GlobalStyles = createGlobalStyle`
 
 #root {
@@ -22,22 +16,6 @@ const GlobalStyles = createGlobalStyle`
 }
 
 
-@media (prefers-color-scheme: light) {
-    :root {
-        --text-primary: #24292e;
-        --background: white;
-        --shadow: rgba(0, 0, 0, 0.15) 0px 2px 5px 0px;
-    }
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --text-primary: white;
-        --background: #24292e;
-        --shadow: rgba(0, 0, 0, 0.35) 0px 2px 5px 0px;
-    }
-}
-
 html, body, #root {
     height: '100%';
     width: '100%'; margin: 0;
@@ -50,13 +28,9 @@ body{
   overflow: hidden;
   user-select: none;
   font-family: 'Chivo Mono', sans-serif;
-
-  /* font-family: Abel, system-ui;   */
   justify-content: center;
   align-items: center;
   background: #f0f0f0;
-  /* cursor: url('https://uploads.codesandbox.io/uploads/user/b3e56831-8b98-4fee-b941-0e27f39883ab/Ad1_-cursor.png') 39 39,
-    auto; */
   }
 
 *,
@@ -64,11 +38,6 @@ body{
 *:before {
   box-sizing: border-box;
   font-family: 'Chivo Mono', sans-serif;
-}
-
-.flex {
-  display: flex;
-  align-items: center;
 }
 
 .flex.fill {
@@ -79,9 +48,6 @@ body{
   justify-content: center;
 }
 
-.typo {
-  /* font-family: 'IranNastaliq' !important; */
-}
 `;
 
 export default GlobalStyles;

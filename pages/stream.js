@@ -1,7 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import Head from "next/head";
 import { experimentalEngines as engines } from "../model/model.js";
-import { modes, colorArray } from "../model/Content";
 // import ChatComponent from "../components/ChatComponent";
 import ChatContext from "../context/ChatContext.js";
 import AIContext from "../context/AIContext.js";
@@ -13,11 +12,12 @@ import { FlexItem } from "../components/Atoms/FlexItem.js";
 import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
 import { Typography } from "../components/Atoms/Typography.js";
-import OrdinaryButton from "../components/Buttons/OrdinaryButton.js";
+import OrdinaryButton from "../components/Buttons/OrdinaryButton";
 import { MdDeleteSweep } from "react-icons/md";
 import { GiStopSign } from "react-icons/gi";
+import ModeSelector from "../components/AIManipulatingComponents/ModeSelector.js";
 import dynamic from "next/dynamic";
-
+import SystemPromptTextArea from "../components/AIManipulatingComponents/SystemPromptTextArea";
 const ChatComponent = dynamic(() => import("../components/ChatComponent"), {
   loading: () => (
     <div
@@ -25,26 +25,20 @@ const ChatComponent = dynamic(() => import("../components/ChatComponent"), {
       className='loading-spinner'></div>
   ),
 });
+const ActSelector = dynamic(
+  () => import("../components/AIManipulatingComponents/ActSelector.js"),
+  {
+    loading: () => (
+      <div
+        style={{ position: "absolute", left: "43%", top: "48%" }}
+        className='loading-spinner'></div>
+    ),
+  }
+);
 const StopGeneratePromptButton = styled(OrdinaryButton)`
   /* color: red; */
 `;
-const TextArea = styled.textarea`
-  margin: 2px;
-  box-sizing: border-box;
-  flex-grow: 1;
-  /* background-color: #c6e3fa; */
-  //font-family: Helvetica Neue, Segoe UI, Helvetica, Arial, sans-serif;
-  outline: 0;
-  border-top: 0 none;
-  border-right: 0 none;
-  border-bottom: 0 none;
-  border-left: 0 none;
-  overflow: visible;
-  border: 2px solid gold;
-  color: rgba(0, 0, 0, 0.87);
-  overflow-wrap: anywhere;
-  word-break: break-word;
-`;
+
 export default function MyPage() {
   const { asideExpanded, setAsideExpand } = useContext(UIContext);
 
@@ -61,7 +55,7 @@ export default function MyPage() {
 
   const [prompt, setPrompt] = useState("");
   const [systemPrompt, setSystemPrompt] = useState(
-    modes[modes.length - 1].prompt
+    ` "Assist user for what they might ask, get involve in the conversation and try to provide accurate answers for their questions.",`
   );
   const [stream, setStream] = useState("");
 
@@ -176,26 +170,21 @@ export default function MyPage() {
         <title>Chatting</title>
       </Head>
       <Sidebar show={asideExpanded}>
-        {" "}
         <ChatSettingsControl aiType='new' />
-        <ul style={{ margin: 0, zIndex: 100, backgroundColor: "white" }}>
-          {modes.map((mode, i) => (
-            <li key={mode.name} style={{ listStyle: "none" }}>
-              <Typography
-                color={colorArray[i]}
-                onClick={() => setSystemPrompt(mode.prompt)}>
-                {mode.icon ? mode.icon : "⌫"} {mode.name}
-              </Typography>
-            </li>
-          ))}
-        </ul>
-        <TextArea
+        <ModeSelector
+          handleChange={(prompt) => setSystemPrompt(prompt)}></ModeSelector>
+        <ActSelector
+          color={"#439912"}
+          bgColor={"white"}
+          onChangeHandler={(prompt) => setSystemPrompt(prompt)}></ActSelector>
+        <SystemPromptTextArea
           value={systemPrompt}
-          onChange={(e) => setSystemPrompt(e.currentTarget.value)}></TextArea>
+          onChange={(e) =>
+            setSystemPrompt(e.currentTarget.value)
+          }></SystemPromptTextArea>
         {/* <ColorBoxSelector></ColorBoxSelector> */}
       </Sidebar>
       <Header>
-        {" "}
         <FlexItem>
           <OrdinaryButton
             text={""}

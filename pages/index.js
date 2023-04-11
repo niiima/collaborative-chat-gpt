@@ -20,6 +20,7 @@ const ChatComponent = dynamic(() => import("../components/ChatComponent"), {
       className='loading-spinner'></div>
   ),
 });
+
 export default function MyPage() {
   const { asideExpanded, setAsideExpand } = useContext(UIContext);
 

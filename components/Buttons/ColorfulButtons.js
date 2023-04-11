@@ -12,27 +12,29 @@ const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #c3cfe2;
+  background: white;
+  border: 2px solid white;
+  border-radius: 10px;
 `;
 
 const ButtonContainer = styled.div`
   /* width: 320px; */
-
   overflow: visible;
   pointer-events: auto;
   transform-origin: 50% 50% 0px;
+  /* border: 2px solid white; */
   border-radius: 5px;
   color: white;
-  line-height: 15px; /* this define height of objects*/
-  padding-left: 32px;
+  line-height: 18px; /* this define height of objects*/
+  /* padding-left: 32px; */
   font-size: 14.5px;
-  background: lightblue;
+  /* background: lightblue; */
   text-transform: uppercase;
   letter-spacing: 2px;
-  margin: 10px;
-  &:first-of-type {
+  margin: 5px;
+  /* &:first-of-type {
     margin-top: 50px;
-  }
+  } */
 `;
 
 const ButtonContent = styled.div`
@@ -68,7 +70,7 @@ function ColorfulButtonSet({ items }) {
   return (
     <ButtonWrapper>
       {/* <ButtonContainer> */}
-      <ButtonContent style={{ height: `${itemsArray.length * 28}px` }}>
+      <ButtonContent style={{ height: `${itemsArray.length * 20}px` }}>
         {[...Object.keys(items)].map((item, i) => (
           <ButtonContainer key={`item-${itemsArray[i]}`}>
             <div>

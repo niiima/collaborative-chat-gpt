@@ -5,13 +5,17 @@ import { useSpring, animated } from "react-spring";
 import { AnimatedBox } from "../Atoms/AnimatedBox";
 const Wrapper = styled(AnimatedBox)`
   /* background-color: #65f9c1; */
+
   position: fixed;
-  top: 0;
-  width: 20rem;
-  height: 100%;
+  top: 8svh;
   display: flex;
+  width: 20em;
+  height: 92svh;
+  /* border-radius: 2px; */
+  background-color: lightskyblue;
   flex-direction: column;
   padding: 0;
+  margin-left: 10;
   z-index: 100;
 `;
 const Sidebar = ({ show, children }) => {
