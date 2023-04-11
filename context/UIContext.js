@@ -6,7 +6,7 @@ export function UIContextProvider({ children }) {
   const setAsideExpand = (status = true) => {
     if (asideExpanded && status) setAsideExpanded(false);
     else if (asideExpanded === false && status) setAsideExpanded(true);
-    else setAsideExpanded(false);
+    else setAsideExpanded(true);
   };
 
   return (

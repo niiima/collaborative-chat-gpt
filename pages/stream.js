@@ -1,7 +1,7 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext, useRef, useEffect } from "react";
 import Head from "next/head";
-import { experimentalEngines as engines } from "../model/model.js";
-// import ChatComponent from "../components/ChatComponent";
+import { engines } from "../model/model.js";
+//import ChatComponent from "../components/ChatComponent";
 import ChatContext from "../context/ChatContext.js";
 import AIContext from "../context/AIContext.js";
 import Sidebar from "../components/Sidebar/Sidebar.js";
@@ -10,14 +10,9 @@ import Header from "../components/Header/Header.js";
 import UIContext from "../context/UIContext.js";
 import { FlexItem } from "../components/Atoms/FlexItem.js";
 import { v4 as uuidv4 } from "uuid";
-import styled from "styled-components";
-import { Typography } from "../components/Atoms/Typography.js";
-import OrdinaryButton from "../components/Buttons/OrdinaryButton";
-import { MdDeleteSweep } from "react-icons/md";
-import { GiStopSign } from "react-icons/gi";
-import ModeSelector from "../components/AIManipulatingComponents/ModeSelector.js";
+// import RangeField from "../components/controls/RangeField.js";
 import dynamic from "next/dynamic";
-import SystemPromptTextArea from "../components/AIManipulatingComponents/SystemPromptTextArea";
+
 const ChatComponent = dynamic(() => import("../components/ChatComponent"), {
   loading: () => (
     <div
@@ -25,38 +20,18 @@ const ChatComponent = dynamic(() => import("../components/ChatComponent"), {
       className='loading-spinner'></div>
   ),
 });
-const ActSelector = dynamic(
-  () => import("../components/AIManipulatingComponents/ActSelector.js"),
-  {
-    loading: () => (
-      <div
-        style={{ position: "absolute", left: "43%", top: "48%" }}
-        className='loading-spinner'></div>
-    ),
-  }
-);
-const StopGeneratePromptButton = styled(OrdinaryButton)`
-  /* color: red; */
-`;
 
 export default function MyPage() {
   const { asideExpanded, setAsideExpand } = useContext(UIContext);
 
-  const {
-    chatHistory,
-    addToHistory,
-    isLoading,
-    setIsLoading,
-    clearChatHistory,
-  } = useContext(ChatContext);
+  const { chatHistory, addToHistory, isLoading, setIsLoading } =
+    useContext(ChatContext);
 
   const { AIstate, setAIState } = useContext(AIContext);
-  const [activeEngine, setActiveEngine] = useState(engines[0]);
 
+  const [activeEngine, setActiveEngine] = useState(engines[0]);
   const [prompt, setPrompt] = useState("");
-  const [systemPrompt, setSystemPrompt] = useState(
-    ` "Assist user for what they might ask, get involve in the conversation and try to provide accurate answers for their questions.",`
-  );
+
   const [stream, setStream] = useState("");
 
   async function handleSubmit(e) {
@@ -65,21 +40,12 @@ export default function MyPage() {
     setIsLoading(true);
 
     try {
-      const messages = [{ role: "system", content: systemPrompt }];
-      chatHistory.forEach((h) => {
-        messages.push({ role: "user", content: h.prompt });
-        messages.push({ role: "assistant", content: h.completion });
-      });
-      messages.push({ role: "user", content: prompt });
-
-      //console.log(AIstate);
       let options = {
-        engine: activeEngine.key,
-        messages: messages,
+        prompt,
         ...AIstate,
+        engine: activeEngine.key,
       };
-      //console.log(options);
-      const response = await fetch("/api/generate-chat", {
+      const response = await fetch("/api/generate", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -90,7 +56,8 @@ export default function MyPage() {
         throw new Error(response.statusText);
       }
 
-      const data = response.body;
+      const data = response.body; //await response.json();
+
       if (!data) {
         return;
       }
@@ -103,7 +70,9 @@ export default function MyPage() {
       while (!done) {
         const { value, done: doneReading } = await reader.read();
         done = doneReading;
+
         const chunkValue = decoder.decode(value);
+
         if (init === false) {
           init = true;
           const substr = chunkValue.slice(9); // remove assistant from the beginning of conversation
@@ -128,13 +97,13 @@ export default function MyPage() {
 
       const { prompt_tokens, completion_tokens } =
         await tokenCountResult.json();
-      console.log(prompt_tokens, completion_tokens);
+
       addToHistory({
         chatId: uuidv4(),
         prompt: prompt,
         prompt_timestamp: prompt_timestamp,
-        completion: streamTextArray.join(""),
-        completion_timestamp: completion_timestamp,
+        completion: streamTextArray.join(""), //data.text.trim(),
+        completion_timestamp: completion_timestamp, //data.created,
         engine: activeEngine.key,
         prompt_tokens: prompt_tokens,
         completion_tokens: completion_tokens,
@@ -147,7 +116,7 @@ export default function MyPage() {
           activeEngine.costPerKiloToken
         ).toFixed(5),
       });
-      console.log(chatHistory);
+
       setStream("");
       setPrompt("");
     } catch {
@@ -164,44 +133,24 @@ export default function MyPage() {
     }
   }
 
+  // useEffect(() => {}, [setAsideExpand]);
+
   return (
     <div>
       <Head>
-        <title>Chatting</title>
+        <title>Messaging Mode</title>
       </Head>
       <Sidebar show={asideExpanded}>
-        <ChatSettingsControl aiType='new' />
-        <ModeSelector
-          handleChange={(prompt) => setSystemPrompt(prompt)}></ModeSelector>
-        <ActSelector
-          color={"#439912"}
-          bgColor={"white"}
-          onChangeHandler={(prompt) => setSystemPrompt(prompt)}></ActSelector>
-        <SystemPromptTextArea
-          value={systemPrompt}
-          onChange={(e) =>
-            setSystemPrompt(e.currentTarget.value)
-          }></SystemPromptTextArea>
+        {/* <RangeField val={150} min={0} max={4000} step={1}></RangeField> */}
+        <ChatSettingsControl aiType='classic' />
         {/* <ColorBoxSelector></ColorBoxSelector> */}
       </Sidebar>
       <Header>
-        <FlexItem>
-          <OrdinaryButton
-            text={""}
-            icon={<MdDeleteSweep size='20' color='orange' />}
-            handleOnClick={() => clearChatHistory()}></OrdinaryButton>
-          {/* <StopGeneratePromptButton
-            text={""}
-            icon={<GiStopSign size='30' />}
-            handleOnClick={() => clearChatHistory()}
-          /> */}
-        </FlexItem>
         <FlexItem>
           Models:{" "}
           <select
             onChange={(e) => {
               let engineType = e.currentTarget.value;
-              // console.log(engineType);
               setActiveEngine(engines.find((eng) => eng.key === engineType));
             }}>
             {engines.map((eng) => (
@@ -213,8 +162,8 @@ export default function MyPage() {
         </FlexItem>
       </Header>
       <ChatComponent
-        stream={stream}
         prompt={prompt}
+        stream={stream}
         handleSendMessage={handleSubmit}
         handlePromptTextChange={handlePromptChange}
         handleOnClick={() => setAsideExpand(false)}
