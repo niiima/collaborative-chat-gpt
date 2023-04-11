@@ -55,7 +55,7 @@ export default function MyPage() {
 
   const [prompt, setPrompt] = useState("");
   const [systemPrompt, setSystemPrompt] = useState(
-    ` "Assist user for what they might ask, get involve in the conversation and try to provide accurate answers for their questions.",`
+    `Assist user for what they might ask, get involve in the conversation and try to provide accurate answers for their questions.`
   );
   const [stream, setStream] = useState("");
 
@@ -172,11 +172,17 @@ export default function MyPage() {
       <Sidebar show={asideExpanded}>
         <ChatSettingsControl aiType='new' />
         <ModeSelector
-          handleChange={(prompt) => setSystemPrompt(prompt)}></ModeSelector>
+          handleChange={(prompt) => {
+            clearChatHistory();
+            setSystemPrompt(prompt);
+          }}></ModeSelector>
         <ActSelector
           color={"#439912"}
           bgColor={"white"}
-          onChangeHandler={(prompt) => setSystemPrompt(prompt)}></ActSelector>
+          onChangeHandler={(prompt) => {
+            clearChatHistory();
+            setSystemPrompt(prompt);
+          }}></ActSelector>
         <SystemPromptTextArea
           value={systemPrompt}
           onChange={(e) =>
