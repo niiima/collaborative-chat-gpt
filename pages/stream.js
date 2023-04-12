@@ -1,15 +1,14 @@
 import { useState, useContext, useRef, useEffect } from "react";
 import Head from "next/head";
 import { engines } from "../model/model.js";
-//import ChatComponent from "../components/ChatComponent";
 import ChatContext from "../context/ChatContext.js";
 import AIContext from "../context/AIContext.js";
 import Sidebar from "../components/Sidebar/Sidebar.js";
 import ChatSettingsControl from "../components/controls/AISettingsControl";
 import Header from "../components/Header/Header.js";
 import UIContext from "../context/UIContext.js";
-import { FlexItem } from "../components/Atoms/FlexItem.js";
 import { v4 as uuidv4 } from "uuid";
+import EngineSelector from "../components/AIManipulatingComponents/EngineSelector.js";
 // import RangeField from "../components/controls/RangeField.js";
 import dynamic from "next/dynamic";
 
@@ -143,20 +142,12 @@ export default function MyPage() {
       <Sidebar show={asideExpanded}>
         {/* <RangeField val={150} min={0} max={4000} step={1}></RangeField> */}
         <ChatSettingsControl aiType='classic' />
-        <FlexItem>
-          Models:{" "}
-          <select
-            onChange={(e) => {
-              let engineType = e.currentTarget.value;
-              setActiveEngine(engines.find((eng) => eng.key === engineType));
-            }}>
-            {engines.map((eng) => (
-              <option key={eng.id} value={eng.key}>
-                {eng.name}
-              </option>
-            ))}
-          </select>
-        </FlexItem>
+        <EngineSelector
+          engines={engines}
+          changeEngineHandler={(e) => {
+            let engineType = e.currentTarget.value;
+            setActiveEngine(engines.find((eng) => eng.key === engineType));
+          }}></EngineSelector>
         {/* <ColorBoxSelector></ColorBoxSelector> */}
       </Sidebar>
       <Header></Header>
