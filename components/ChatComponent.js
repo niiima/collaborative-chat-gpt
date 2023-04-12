@@ -149,7 +149,7 @@ const ChatComponent = ({
               );
             })}
 
-            {prompt !== "" ? (
+            {prompt !== "" && stream !== "" ? (
               <Message model={{ direction: "incoming" }}>
                 <Message.CustomContent>
                   <Typography

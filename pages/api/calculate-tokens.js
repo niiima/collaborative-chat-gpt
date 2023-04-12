@@ -1,7 +1,7 @@
 import { encode, decode } from "gpt-3-encoder";
 
 export default async function handler(req, res) {
-  console.log(req.body.completion);
+  console.log(req.body);
   if (
     typeof req.body.prompt === "string" &&
     typeof req.body.completion === "string"

@@ -27,7 +27,7 @@ const handler = async (req) => {
     n: 1,
     stop: ["assistant", "user"],
   };
-  console.log(messages[messages.length - 1]);
+  //console.log(messages[messages.length - 1]);
 
   const stream = await OpenAIChatStream(payload);
   return new Response(stream);
