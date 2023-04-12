@@ -138,7 +138,7 @@ export default function MyPage() {
   return (
     <div>
       <Head>
-        <title>Messaging Mode</title>
+        <title>GPT 3 Models</title>
       </Head>
       <Sidebar show={asideExpanded}>
         {/* <RangeField val={150} min={0} max={4000} step={1}></RangeField> */}

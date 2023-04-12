@@ -167,7 +167,7 @@ export default function MyPage() {
   return (
     <div>
       <Head>
-        <title>Chatting</title>
+        <title>GPT knows the whole Conversation</title>
       </Head>
       <Sidebar show={asideExpanded}>
         <ChatSettingsControl aiType='new' />
