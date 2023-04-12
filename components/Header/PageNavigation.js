@@ -19,15 +19,15 @@ const NavigationWrapper = styled(Flex)`
 `;
 
 const LinkItem = styled(FlexItem)`
-  max-width: 100px;
+  max-width: 110px;
   @media only screen and (max-width: 780px) {
     /* your CSS here */
-    max-width: 90px;
+    max-width: 100px;
   }
 
   @media only screen and (max-width: 480px) {
     /* your CSS here */
-    max-width: 80px;
+    max-width: 90px;
   }
   margin: 0;
   margin-top: -5px;
