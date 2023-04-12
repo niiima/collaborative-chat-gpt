@@ -5,6 +5,7 @@ const AIContext = createContext({});
 
 export function AIProvider({ children }) {
   const [AIstate, setState] = useState({ ...AISettings });
+  const [activeRoute, setActiveRoute] = useState(0);
 
   const setAIState = (s) => {
     setState((prevState) => {
@@ -13,7 +14,8 @@ export function AIProvider({ children }) {
   };
 
   return (
-    <AIContext.Provider value={{ AIstate, setAIState }}>
+    <AIContext.Provider
+      value={{ AIstate, setAIState, activeRoute, setActiveRoute }}>
       {children}
     </AIContext.Provider>
   );

@@ -1,6 +1,6 @@
 import { MdAirlineStops } from "react-icons/md";
 // import { FcPicture } from "react-icons/fc";
-import { useState, useEffect } from "react";
+import { useContext } from "react";
 import { Flex } from "../Atoms/Flex";
 import { FlexItem } from "../Atoms/FlexItem";
 import { BsArrowLeftRight } from "react-icons/bs";
@@ -8,6 +8,7 @@ import { VscGithubAction } from "react-icons/vsc";
 import { GiAbstract037 } from "react-icons/gi";
 import styled from "styled-components";
 import Link from "next/link";
+import AIContext from "../../context/AIContext";
 const ICON_SIZE = 20;
 const NavigationWrapper = styled(Flex)`
   width: 90%;
@@ -79,15 +80,15 @@ const routes = [
   // },
 ];
 const PageNavigation = () => {
-  const [active, setActive] = useState(0);
-  useEffect(() => {}, [active]);
+  const { activeRoute, setActiveRoute } = useContext(AIContext);
+
   return (
     <NavigationWrapper>
       {routes.map((route) => (
         <LinkItem
-          className={`${active === route.id ? "active" : ""}`}
+          className={`${activeRoute === route.id ? "active" : ""}`}
           key={route.url}>
-          <Link href={route.url} onClick={() => setActive(route.id)}>
+          <Link href={route.url} onClick={() => setActiveRoute(route.id)}>
             {route.icon}
           </Link>
           <span>{route.text}</span>
