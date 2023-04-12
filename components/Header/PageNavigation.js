@@ -1,5 +1,6 @@
 import { MdAirlineStops } from "react-icons/md";
 // import { FcPicture } from "react-icons/fc";
+import { useState } from "react";
 import { Flex } from "../Atoms/Flex";
 import { FlexItem } from "../Atoms/FlexItem";
 import { BsArrowLeftRight } from "react-icons/bs";
@@ -9,53 +10,88 @@ import styled from "styled-components";
 import Link from "next/link";
 const ICON_SIZE = 20;
 const NavigationWrapper = styled(Flex)`
-  width: 100%;
+  width: 90%;
   height: 8svh;
+  margin: 0;
+  padding: 0;
   /* margin-top: 5px; */
 `;
 
 const LinkItem = styled(FlexItem)`
   max-width: 100px;
+  @media only screen and (max-width: 780px) {
+    /* your CSS here */
+    max-width: 90px;
+  }
+
+  @media only screen and (max-width: 480px) {
+    /* your CSS here */
+    max-width: 80px;
+  }
   margin: 0;
   margin-top: -5px;
+  & * {
+    color: white;
+  }
+  &.active {
+    & * {
+      text-decoration: underline;
+      color: darkviolet;
+    }
+  }
   & span {
     position: absolute;
     margin-top: 30px;
     color: white;
   }
 `;
+
+const routes = [
+  {
+    id: 0,
+    url: "/",
+    icon: <BsArrowLeftRight size={ICON_SIZE} />,
+    text: "Conversation",
+  },
+  {
+    id: 1,
+    url: "/single",
+    icon: <MdAirlineStops size={ICON_SIZE} />,
+    text: "Single Messaging",
+  },
+  {
+    id: 2,
+    url: "/acts",
+    icon: <VscGithubAction size={ICON_SIZE} />,
+    text: "Instant Act",
+  },
+  {
+    id: 3,
+    url: "/stream",
+    icon: <GiAbstract037 size={ICON_SIZE} />,
+    text: "GPT 3",
+  },
+  // {
+  //   id: 4,
+  //   url: "/art",
+  //   icon: <FcPicture color='white' size={ICON_SIZE} />,
+  //   text: "Painting",
+  // },
+];
 const PageNavigation = () => {
+  const [active, setActive] = useState(0);
   return (
     <NavigationWrapper>
-      <LinkItem>
-        <Link href='/'>
-          <BsArrowLeftRight color='white' size={ICON_SIZE} />
-        </Link>
-        <span>Conversation</span>
-      </LinkItem>
-      {/* <LinkItem>
-        <Link href='/art'>
-          <FcPicture color='white' size={ICON_SIZE} />
-        </Link>
-      </LinkItem> */}
-      <LinkItem>
-        <Link href='/single'>
-          <MdAirlineStops color='white' size={ICON_SIZE} />
-        </Link>
-        <span>Single Messaging</span>
-      </LinkItem>
-      <LinkItem>
-        <Link href='/acts'>
-          <VscGithubAction color='white' size={ICON_SIZE} />
-        </Link>{" "}
-        <span>Instant Act</span>
-      </LinkItem>
-      <LinkItem>
-        <Link href='/stream'>
-          <GiAbstract037 color='white' size={ICON_SIZE} />
-        </Link>
-        <span>GPT 3</span>
-      </LinkItem>
+      {routes.map((route) => (
+        <LinkItem
+          className={`${active === route.id ? "active" : ""}`}
+          key={route.url}>
+          <Link href={route.url} onClick={() => setActive(route.id)}>
+            {route.icon}
+          </Link>
+          <span>{route.text}</span>
+        </LinkItem>
+      ))}{" "}
     </NavigationWrapper>
   );
 };
