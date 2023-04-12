@@ -11,6 +11,7 @@ import { v4 as uuidv4 } from "uuid";
 import EngineSelector from "../components/AIManipulatingComponents/EngineSelector.js";
 // import RangeField from "../components/controls/RangeField.js";
 import ColorfulButtonSet from "../components/Buttons/ColorfulButtons.js";
+import GroupRadioButtons from "../components/Inputs/GroupRadio/GroupRadioButtons";
 
 import dynamic from "next/dynamic";
 
@@ -144,12 +145,21 @@ export default function MyPage() {
       <Sidebar show={asideExpanded}>
         {/* <RangeField val={150} min={0} max={4000} step={1}></RangeField> */}
         <ChatSettingsControl aiType='classic' />
-        <EngineSelector
+        {/* <EngineSelector
           engines={engines}
           changeEngineHandler={(e) => {
             let engineType = e.currentTarget.value;
             setActiveEngine(engines.find((eng) => eng.key === engineType));
-          }}></EngineSelector>
+          }}></EngineSelector> */}
+        <GroupRadioButtons
+          items={[
+            ...engines.map((engine) => {
+              return { text: engine.name, value: engine.key };
+            }),
+          ]}
+          changeHandler={(e) =>
+            setActiveEngine(engines.find((eng) => eng.key === e))
+          }></GroupRadioButtons>
         <ColorfulButtonSet items={AIstate}></ColorfulButtonSet>
       </Sidebar>
       <Header></Header>

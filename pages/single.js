@@ -9,7 +9,8 @@ import Header from "../components/Header/Header.js";
 import UIContext from "../context/UIContext.js";
 import { FlexItem } from "../components/Atoms/FlexItem.js";
 import { v4 as uuidv4 } from "uuid";
-import EngineSelector from "../components/AIManipulatingComponents/EngineSelector.js";
+// import EngineSelector from "../components/AIManipulatingComponents/EngineSelector.js";
+import GroupRadioButtons from "../components/Inputs/GroupRadio/GroupRadioButtons.js";
 import OrdinaryButton from "../components/Buttons/OrdinaryButton";
 import { MdDeleteSweep } from "react-icons/md";
 // import { GiStopSign } from "react-icons/gi";
@@ -154,12 +155,21 @@ export default function MyPage() {
       </Head>
       <Sidebar show={asideExpanded}>
         <ChatSettingsControl aiType='new' />
-        <EngineSelector
+        {/* <EngineSelector
           engines={engines}
           changeEngineHandler={(e) => {
             let engineType = e.currentTarget.value;
             setActiveEngine(engines.find((eng) => eng.key === engineType));
-          }}></EngineSelector>
+          }}></EngineSelector> */}
+        <GroupRadioButtons
+          items={[
+            ...engines.map((engine) => {
+              return { text: engine.name, value: engine.key };
+            }),
+          ]}
+          changeHandler={(e) =>
+            setActiveEngine(engines.find((eng) => eng.key === e))
+          }></GroupRadioButtons>
         <ColorfulButtonSet items={AIstate}></ColorfulButtonSet>
       </Sidebar>
       <Header>

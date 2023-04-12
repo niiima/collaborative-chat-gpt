@@ -21,9 +21,6 @@ const SelectBoxWrapper = styled.div`
   }
 `;
 const ActsSelectBox = styled.select`
-  /* background-color: "${(props) =>
-    props.bgColor ? props.bgColor : "white"}";
-  color: "${(props) => (props.color ? props.color : "gray")}"; */
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -32,26 +29,16 @@ const ActsSelectBox = styled.select`
   box-shadow: none;
   border: 0 !important;
   background: linear-gradient(135deg, #11e7df 0%, #39f 50%, #b490ca 100%);
-  color: black;
-  /* background: #ef3c39; */
-  /* background-image: none; */
   flex: 1;
   height: 30px;
   vertical-align: middle;
   padding: -10px 0 0 10px;
-  color: #333;
   cursor: pointer;
 `;
-const ActSelector = ({ color, bgColor, onChangeHandler }) => {
-  // useEffect(() => {
-  //   console.log(acts);
-  // }, []);
+const ActSelector = ({ onChangeHandler }) => {
   return (
     <SelectBoxWrapper>
-      <ActsSelectBox
-        color={color}
-        bgColor={bgColor}
-        onChange={(e) => onChangeHandler(e.currentTarget.value)}>
+      <ActsSelectBox onChange={(e) => onChangeHandler(e.currentTarget.value)}>
         {acts.map((act, i) => (
           <option key={`act_${i}`} value={act.prompt}>
             {act.act}

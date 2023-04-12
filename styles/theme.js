@@ -1,6 +1,6 @@
-const black = "#222222";
+const black = "#333";
 const blue = "#00C0F2";
-const red = "#ccc";
+const red = "#ef3c39";
 const yellow = "#F8BF95";
 const orange = "orange";
 const active = "rgb(0, 127, 212)";
@@ -60,7 +60,7 @@ const fontWeights = {
 
 const breakpoints = ["288px", "608px", "1024px", "1504px"];
 
-const fontStack = "'Kosugi Maru', sans-serif"; // "sans-serif,Comic Sans, -apple-system, BlinkMacSystemFont,";
+const fontStack = "'Chivo Mono', sans-serif;"; // "sans-serif,Comic Sans, -apple-system, BlinkMacSystemFont,";
 const fontFamilies = {
   body: fontStack,
   heading: fontStack,

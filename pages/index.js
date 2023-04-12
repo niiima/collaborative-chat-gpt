@@ -17,8 +17,9 @@ import { GiStopSign } from "react-icons/gi";
 import ModeSelector from "../components/AIManipulatingComponents/ModeSelector.js";
 import dynamic from "next/dynamic";
 import SystemPromptTextArea from "../components/AIManipulatingComponents/SystemPromptTextArea";
-import EngineSelector from "../components/AIManipulatingComponents/EngineSelector.js";
+// import EngineSelector from "../components/AIManipulatingComponents/EngineSelector.js";
 import ColorfulButtonSet from "../components/Buttons/ColorfulButtons.js";
+import GroupRadioButtons from "../components/Inputs/GroupRadio/GroupRadioButtons.js";
 const ChatComponent = dynamic(() => import("../components/ChatComponent"), {
   loading: () => (
     <div
@@ -173,12 +174,21 @@ export default function MyPage() {
       </Head>
       <Sidebar show={asideExpanded}>
         <ChatSettingsControl aiType='new' />
-        <EngineSelector
+        {/* <EngineSelector
           engines={engines}
           changeEngineHandler={(e) => {
             let engineType = e.currentTarget.value;
             setActiveEngine(engines.find((eng) => eng.key === engineType));
-          }}></EngineSelector>
+          }}></EngineSelector> */}
+        <GroupRadioButtons
+          items={[
+            ...engines.map((engine) => {
+              return { text: engine.name, value: engine.key };
+            }),
+          ]}
+          changeHandler={(e) =>
+            setActiveEngine(engines.find((eng) => eng.key === e))
+          }></GroupRadioButtons>
         <ModeSelector
           handleChange={(prompt) => {
             clearChatHistory();
