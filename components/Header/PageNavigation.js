@@ -16,37 +16,37 @@ const NavigationWrapper = styled(Flex)`
   height: 8svh;
   margin: 0;
   padding: 0;
-  /* margin-top: 5px; */
 `;
 
 const LinkItem = styled(FlexItem)`
   max-width: 110px;
-  font-size: 10px;
+  font-size: 11px;
+  font-weight: 500;
   @media only screen and (max-width: 780px) {
-    /* your CSS here */
     max-width: 100px;
     font-size: 9px;
+    font-weight: 400;
   }
 
   @media only screen and (max-width: 480px) {
-    /* your CSS here */
     max-width: 90px;
     font-size: 8px;
+    font-weight: 300;
   }
   margin: 0;
-  margin-top: -5px;
+  margin-top: -2svh;
   & * {
     color: white;
   }
   &.active {
     & * {
       text-decoration: underline;
-      color: darkviolet;
+      color: #ef3c39;
     }
   }
   & span {
     position: absolute;
-    margin-top: 30px;
+    margin-top: 5svh;
     color: white;
   }
 `;

@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-// "fda085",
-// "#b490ca",
-// "#03c0e2",
+
 const ButtonWrapper = styled.button`
   margin: auto;
   font-weight: bolder;
@@ -14,7 +12,7 @@ const ButtonWrapper = styled.button`
   box-shadow: 1px 1px #b490ca;
 
   &:hover {
-    /* background-color: #b490ca; */
+    background-color: #b490ca;
   }
 `;
 
