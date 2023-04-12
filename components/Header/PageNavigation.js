@@ -60,12 +60,12 @@ const routes = [
     icon: <MdAirlineStops size={ICON_SIZE} />,
     text: "Single Messaging",
   },
-  {
-    id: 2,
-    url: "/acts",
-    icon: <VscGithubAction size={ICON_SIZE} />,
-    text: "Instant Act",
-  },
+  // {
+  //   id: 2,
+  //   url: "/acts",
+  //   icon: <VscGithubAction size={ICON_SIZE} />,
+  //   text: "Instant Act",
+  // },
   {
     id: 3,
     url: "/stream",
