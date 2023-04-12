@@ -14,7 +14,7 @@ const SystemPromptTextArea = styled.textarea`
   font-weight: 500;
   font-size: 11px;
   overflow-wrap: anywhere;
-  word-break: break-word;
+  /* word-break: break-word; */
   padding: 9px;
   text-align: justify;
 `;
