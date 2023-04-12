@@ -1,5 +1,6 @@
 import styled from "styled-components";
 const SystemPromptTextArea = styled.textarea`
+  /* height: 10svh; */
   box-sizing: border-box;
   flex-grow: 1;
   outline: 0;
@@ -17,5 +18,6 @@ const SystemPromptTextArea = styled.textarea`
   /* word-break: break-word; */
   padding: 9px;
   text-align: justify;
+  max-height: 32svh;
 `;
 export default SystemPromptTextArea;

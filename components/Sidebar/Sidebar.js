@@ -12,7 +12,8 @@ const Wrapper = styled(AnimatedBox)`
   width: 20em;
   height: 92svh;
   /* border-radius: 2px; */
-  background-color: lightskyblue;
+  /* background-color: lightskyblue; */
+  background: linear-gradient(135deg, #11e7df 0%, #39f 50%, #b490ca 100%);
   flex-direction: column;
   padding: 0;
   margin-left: 10;

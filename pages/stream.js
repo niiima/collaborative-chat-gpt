@@ -10,6 +10,8 @@ import UIContext from "../context/UIContext.js";
 import { v4 as uuidv4 } from "uuid";
 import EngineSelector from "../components/AIManipulatingComponents/EngineSelector.js";
 // import RangeField from "../components/controls/RangeField.js";
+import ColorfulButtonSet from "../components/Buttons/ColorfulButtons.js";
+
 import dynamic from "next/dynamic";
 
 const ChatComponent = dynamic(() => import("../components/ChatComponent"), {
@@ -148,7 +150,7 @@ export default function MyPage() {
             let engineType = e.currentTarget.value;
             setActiveEngine(engines.find((eng) => eng.key === engineType));
           }}></EngineSelector>
-        {/* <ColorBoxSelector></ColorBoxSelector> */}
+        <ColorfulButtonSet items={AIstate}></ColorfulButtonSet>
       </Sidebar>
       <Header></Header>
       <ChatComponent

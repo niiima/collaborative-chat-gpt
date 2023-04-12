@@ -92,12 +92,10 @@ const ChatComponent = ({
                 <Message key={msg.id} model={msg} avatarPosition='cl'>
                   <Message.CustomContent>
                     <Typography
-                      style={{
-                        fontSize: ".8rem",
-                        lineHeight: "1.4em",
-                        color: i % 2 ? "white" : "black",
-                        fontWeight: i % 2 ? 500 : 400,
-                      }}>
+                      fontSize='.8rem'
+                      lineHeight='1.4em'
+                      color={i % 2 ? "white" : "black"}
+                      fontWeight={i % 2 ? 500 : 400}>
                       {msg.message}
                     </Typography>
                   </Message.CustomContent>

@@ -13,6 +13,8 @@ import EngineSelector from "../components/AIManipulatingComponents/EngineSelecto
 import OrdinaryButton from "../components/Buttons/OrdinaryButton";
 import { MdDeleteSweep } from "react-icons/md";
 // import { GiStopSign } from "react-icons/gi";
+import ColorfulButtonSet from "../components/Buttons/ColorfulButtons.js";
+
 import dynamic from "next/dynamic";
 const ChatComponent = dynamic(() => import("../components/ChatComponent"), {
   loading: () => (
@@ -158,6 +160,7 @@ export default function MyPage() {
             let engineType = e.currentTarget.value;
             setActiveEngine(engines.find((eng) => eng.key === engineType));
           }}></EngineSelector>
+        <ColorfulButtonSet items={AIstate}></ColorfulButtonSet>
       </Sidebar>
       <Header>
         <FlexItem>

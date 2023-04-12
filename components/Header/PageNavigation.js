@@ -41,7 +41,7 @@ const LinkItem = styled(FlexItem)`
   &.active {
     & * {
       text-decoration: underline;
-      color: #ef3c39;
+      color: fuchsia;
     }
   }
   & span {

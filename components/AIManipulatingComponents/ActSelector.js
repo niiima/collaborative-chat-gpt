@@ -3,10 +3,8 @@ import styled from "styled-components";
 const acts = require("/public/acts.json");
 const SelectBoxWrapper = styled.div`
   position: relative;
-  /* height: 60px; */
-  /* line-height: 3; */
-  /* background: #5c6664; */
-  background: #ef3c39;
+  margin: 2px;
+  background: linear-gradient(135deg, #11e7df 0%, #39f 50%, #b490ca 100%);
   overflow: hidden;
   border-radius: 0.25em;
   &:after {
@@ -17,14 +15,15 @@ const SelectBoxWrapper = styled.div`
     width: 0;
     height: 0;
     margin-top: -2px;
-    border-top: 5px solid #aaa;
+    border-top: 5px solid #11e7df;
     border-right: 5px solid transparent;
     border-left: 5px solid transparent;
   }
 `;
 const ActsSelectBox = styled.select`
-  background-color: "${(props) => (props.bgColor ? props.bgColor : "white")}";
-  color: "${(props) => (props.color ? props.color : "gray")}";
+  /* background-color: "${(props) =>
+    props.bgColor ? props.bgColor : "white"}";
+  color: "${(props) => (props.color ? props.color : "gray")}"; */
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -32,13 +31,15 @@ const ActsSelectBox = styled.select`
   outline: 0;
   box-shadow: none;
   border: 0 !important;
-  background: #ef3c39;
+  background: linear-gradient(135deg, #11e7df 0%, #39f 50%, #b490ca 100%);
+  color: black;
+  /* background: #ef3c39; */
   /* background-image: none; */
   flex: 1;
   height: 30px;
   vertical-align: middle;
   padding: -10px 0 0 10px;
-  color: #fff;
+  color: #333;
   cursor: pointer;
 `;
 const ActSelector = ({ color, bgColor, onChangeHandler }) => {

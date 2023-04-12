@@ -37,6 +37,9 @@ export const colorArray = [
   "#98614a",
   // "#294594",
   "#aa3617",
+  "#11e7df",
+  "#39f",
+  "#b490ca",
 ];
 
 export const modes = [

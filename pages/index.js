@@ -18,7 +18,7 @@ import ModeSelector from "../components/AIManipulatingComponents/ModeSelector.js
 import dynamic from "next/dynamic";
 import SystemPromptTextArea from "../components/AIManipulatingComponents/SystemPromptTextArea";
 import EngineSelector from "../components/AIManipulatingComponents/EngineSelector.js";
-
+import ColorfulButtonSet from "../components/Buttons/ColorfulButtons.js";
 const ChatComponent = dynamic(() => import("../components/ChatComponent"), {
   loading: () => (
     <div
@@ -168,7 +168,8 @@ export default function MyPage() {
   return (
     <div>
       <Head>
-        <title>GPT knows the whole Conversation</title>
+        {/* Make Conversation GPT knows the whole  */}
+        <title>GPT Continues Conversation</title>
       </Head>
       <Sidebar show={asideExpanded}>
         <ChatSettingsControl aiType='new' />
@@ -184,8 +185,6 @@ export default function MyPage() {
             setSystemPrompt(prompt);
           }}></ModeSelector>
         <ActSelector
-          color={"#439912"}
-          bgColor={"white"}
           onChangeHandler={(prompt) => {
             clearChatHistory();
             setSystemPrompt(prompt);
@@ -196,6 +195,7 @@ export default function MyPage() {
             setSystemPrompt(e.currentTarget.value)
           }></SystemPromptTextArea>
         {/* <ColorBoxSelector></ColorBoxSelector> */}
+        <ColorfulButtonSet items={AIstate}></ColorfulButtonSet>
       </Sidebar>
       <Header>
         <FlexItem>

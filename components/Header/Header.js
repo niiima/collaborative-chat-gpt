@@ -18,6 +18,7 @@ export const HeaderBar = styled.header`
   /* flex: 0 0 1; */
   /* flex: 0 0 1; */
   height: 8svh;
+  width: 99%;
 `;
 
 const Header = ({ children }) => {

@@ -9,8 +9,8 @@ export const MenuLabel = styled.label`
   z-index: 1000;
   text-align: center;
   transform: scale(0.5);
-  margin-top: 1rem;
-  margin-left: 10px;
+  margin-top: 3svh;
+  /* margin-left: 10px; */
 `;
 
 export const Icon = styled.span`
@@ -19,7 +19,7 @@ export const Icon = styled.span`
     props.clicked
       ? "transparent"
       : `${props["color"] ? props.color : "white"}`};
-  width: 3rem;
+  width: 2rem;
   height: 3px;
   display: inline-block;
   transition: all 0.3s;
@@ -32,7 +32,7 @@ export const Icon = styled.span`
     display: inline-block;
     position: absolute;
     left: 0;
-    transition: all 0.3s;
+    transition: all 0.6s;
   }
   &::before {
     top: ${(props) => (props.clicked ? "0" : "-0.8rem")};
