@@ -1,7 +1,9 @@
 import { modes, colorArray } from "../../model/Content";
 import { Typography } from "../Atoms/Typography";
 import styled from "styled-components";
-const TypoItems = styled(Typography)``;
+const TypoItems = styled(Typography)`
+  margin-bottom: 5px;
+`;
 const UlWrapper = styled.ul`
   border: 2px solid lightskyblue;
   background-color: white;

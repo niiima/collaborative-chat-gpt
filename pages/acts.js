@@ -181,12 +181,6 @@ export default function MyPage() {
       </Head>
       <Sidebar show={asideExpanded}>
         <ChatSettingsControl aiType='new' />
-        <ModeSelector
-          handleChange={(txt) => {
-            clearChatHistory();
-            setSystemPrompt(txt);
-            //handleSubmit();
-          }}></ModeSelector>
         <FlexItem>
           Models:{" "}
           <select
@@ -202,6 +196,13 @@ export default function MyPage() {
             ))}
           </select>
         </FlexItem>
+        <ModeSelector
+          handleChange={(txt) => {
+            clearChatHistory();
+            setSystemPrompt(txt);
+            //handleSubmit();
+          }}></ModeSelector>
+
         <ActSelector
           color={"#439912"}
           bgColor={"white"}
