@@ -3,9 +3,11 @@ import { FlexItem } from "../Atoms/FlexItem";
 import { Typography } from "../Atoms/Typography";
 import { Flex } from "../Atoms/Flex";
 const ModelSelectBox = styled(Flex)`
+  /* font-size: 10px; */
   padding: 0 !important;
   margin: 0;
-  width: 200px;
+  width: 300px;
+  /* font-family: Verdana, Geneva, Tahoma, sans-serif !important; */
 `;
 
 const SelectBoxWrapper = styled(FlexItem)`
@@ -16,7 +18,7 @@ const EngineSelector = ({ engines, changeEngineHandler }) => {
   return (
     <ModelSelectBox>
       <FlexItem>
-        <Typography fontSize={20} lineHeight={1}>
+        <Typography fontSize={15} fontFamily={"Verdana"} lineHeight={1}>
           Models:{" "}
         </Typography>
       </FlexItem>

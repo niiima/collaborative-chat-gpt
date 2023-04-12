@@ -4,7 +4,7 @@ import AIContext from "../../context/AIContext";
 // import ColorfulButtonSet from "../Buttons/ColorfulButtons";
 
 export default function ChatSettingsControl() {
-  const { AIstate, setAIState, activeEngine } = useContext(AIContext);
+  const { setAIState } = useContext(AIContext);
 
   const {
     max_tokens,
@@ -51,14 +51,16 @@ export default function ChatSettingsControl() {
   });
 
   return (
-    <Leva
-      // theme={myTheme}
-      fill={"white"}
-      // color={"red"}
-      flat={false}
-      oneLineLabels={true}
-      hideTitleBar={false} // default = false, hides the GUI header
-      collapsed={true} // default = false, when true the GUI is collpased
-      hidden={false}></Leva>
+    <div style={{ marginTop: 2 }}>
+      <Leva
+        // theme={myTheme}
+        fill={"white"}
+        // color={"red"}
+        flat={false}
+        oneLineLabels={true}
+        hideTitleBar={false} // default = false, hides the GUI header
+        collapsed={true} // default = false, when true the GUI is collpased
+        hidden={false}></Leva>
+    </div>
   ); //<ColorfulButtonSet items={AIstate}></ColorfulButtonSet>;
 }
