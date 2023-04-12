@@ -1,7 +1,7 @@
 import { createContext, useState } from "react";
 const UIContext = createContext({});
 export function UIContextProvider({ children }) {
-  const [asideExpanded, setAsideExpanded] = useState(true);
+  const [asideExpanded, setAsideExpanded] = useState(false);
   //const [asideExpanded, setAsideExpanded] = useState(false);
   const setAsideExpand = (status = true) => {
     if (asideExpanded && status) setAsideExpanded(false);
