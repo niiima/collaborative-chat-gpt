@@ -3,6 +3,7 @@ import { MdAirlineStops, MdMultipleStop } from "react-icons/md";
 import { Flex } from "../Atoms/Flex";
 import { FlexItem } from "../Atoms/FlexItem";
 import { BsArrowLeftRight } from "react-icons/bs";
+import { VscGithubAction } from "react-icons/vsc";
 import styled from "styled-components";
 import Link from "next/link";
 const ICON_SIZE = 20;
@@ -32,6 +33,11 @@ const PageNavigation = () => {
       <LinkItem>
         <Link href='/single'>
           <MdAirlineStops color='white' size={ICON_SIZE} />
+        </Link>
+      </LinkItem>
+      <LinkItem>
+        <Link href='/acts'>
+          <VscGithubAction color='white' size={ICON_SIZE} />
         </Link>
       </LinkItem>
       <LinkItem>

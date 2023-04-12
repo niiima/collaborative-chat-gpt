@@ -1,5 +1,4 @@
 import { modes, colorArray } from "../../model/Content";
-import { FlexItem } from "../Atoms/FlexItem";
 import { Typography } from "../Atoms/Typography";
 import styled from "styled-components";
 const TypoItems = styled(Typography)``;

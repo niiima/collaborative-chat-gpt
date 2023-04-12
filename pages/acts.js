@@ -53,23 +53,23 @@ export default function MyPage() {
   const [activeEngine, setActiveEngine] = useState(engines[0]);
 
   const [prompt, setPrompt] = useState("");
-  const [systemPrompt, setSystemPrompt] = useState(
-    `Assist user for what they might ask, get involve in the conversation and try to provide accurate answers for their questions.`
-  );
+  const [systemPrompt, setSystemPrompt] = useState("");
   const [stream, setStream] = useState("");
 
   async function handleSubmit(e) {
     const streamTextArray = [];
     const prompt_timestamp = new Date();
     setIsLoading(true);
-
+    // console.log({ systemPrompt, prompt });
     try {
-      const messages = [{ role: "system", content: systemPrompt }];
-      chatHistory.forEach((h) => {
-        messages.push({ role: "user", content: h.prompt });
-        messages.push({ role: "assistant", content: h.completion });
-      });
-      messages.push({ role: "user", content: prompt });
+      const messages = [
+        { role: "system", content: systemPrompt + " " + prompt },
+      ];
+      //   chatHistory.forEach((h) => {
+      //     messages.push({ role: "user", content: h.prompt });
+      //     messages.push({ role: "assistant", content: h.completion });
+      //   });
+      //   messages.push({ role: "user", content: prompt });
 
       //console.log(AIstate);
       let options = {
@@ -122,7 +122,10 @@ export default function MyPage() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ prompt, completion }),
+        body: JSON.stringify({
+          prompt: prompt === "" ? systemPrompt : systemPrompt + prompt,
+          completion,
+        }),
       });
 
       const { prompt_tokens, completion_tokens } =
@@ -130,7 +133,7 @@ export default function MyPage() {
 
       addToHistory({
         chatId: uuidv4(),
-        prompt: prompt,
+        prompt: prompt === "" ? systemPrompt : prompt,
         prompt_timestamp: prompt_timestamp,
         completion: streamTextArray.join(""),
         completion_timestamp: completion_timestamp,
@@ -163,24 +166,34 @@ export default function MyPage() {
     }
   }
 
+  useEffect(() => {
+    if (systemPrompt !== "") {
+      setAsideExpand(false);
+      handleSubmit();
+      //if (prompt === "") setPrompt(systemPrompt);
+    }
+  }, [systemPrompt]);
+
   return (
     <div>
       <Head>
-        <title>GPT knows the whole Conversation</title>
+        <title>GPT respond as role define it</title>
       </Head>
       <Sidebar show={asideExpanded}>
         <ChatSettingsControl aiType='new' />
         <ModeSelector
-          handleChange={(prompt) => {
+          handleChange={(txt) => {
             clearChatHistory();
-            setSystemPrompt(prompt);
+            setSystemPrompt(txt);
+            //handleSubmit();
           }}></ModeSelector>
         <ActSelector
           color={"#439912"}
           bgColor={"white"}
-          onChangeHandler={(prompt) => {
+          onChangeHandler={(txt) => {
             clearChatHistory();
-            setSystemPrompt(prompt);
+            setSystemPrompt(txt);
+            //handleSubmit();
           }}></ActSelector>
         <SystemPromptTextArea
           value={systemPrompt}
@@ -219,7 +232,7 @@ export default function MyPage() {
       </Header>
       <ChatComponent
         stream={stream}
-        prompt={prompt}
+        prompt={prompt === "" ? systemPrompt : prompt}
         handleSendMessage={handleSubmit}
         handlePromptTextChange={handlePromptChange}
         handleOnClick={() => setAsideExpand(false)}
