@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import { useControls } from "leva";
+import { useControls, Leva } from "leva";
 import AIContext from "../../context/AIContext";
-import ColorfulButtonSet from "../Buttons/ColorfulButtons";
+// import ColorfulButtonSet from "../Buttons/ColorfulButtons";
 
-export default function ChatSettingsControl({ aiType = "basic" }) {
+export default function ChatSettingsControl() {
   const { AIstate, setAIState, activeEngine } = useContext(AIContext);
 
   const {
@@ -50,5 +50,15 @@ export default function ChatSettingsControl({ aiType = "basic" }) {
     },
   });
 
-  return <ColorfulButtonSet items={AIstate}></ColorfulButtonSet>;
+  return (
+    <Leva
+      // theme={myTheme}
+      fill={"white"}
+      // color={"red"}
+      flat={true}
+      oneLineLabels={true}
+      hideTitleBar={false} // default = false, hides the GUI header
+      collapsed={true} // default = false, when true the GUI is collpased
+      hidden={false}></Leva>
+  ); //<ColorfulButtonSet items={AIstate}></ColorfulButtonSet>;
 }
