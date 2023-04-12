@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { Box } from "./Box";
 
-import { compose, lineHeight } from "styled-system";
+import { compose, lineHeight, fontSize } from "styled-system";
 
-const composedHelpers = compose(lineHeight);
+const composedHelpers = compose(lineHeight, fontSize);
 
 export const Typography = styled(Box)`
   ${composedHelpers}
@@ -11,6 +11,6 @@ export const Typography = styled(Box)`
 
 Typography.defaultProps = {
   // as: 'p',
-  fontWeight: 1,
+  fontWeight: 2,
   // color: 'text500',
 };

@@ -17,6 +17,8 @@ import { GiStopSign } from "react-icons/gi";
 import ModeSelector from "../components/AIManipulatingComponents/ModeSelector.js";
 import dynamic from "next/dynamic";
 import SystemPromptTextArea from "../components/AIManipulatingComponents/SystemPromptTextArea";
+import EngineSelector from "../components/AIManipulatingComponents/EngineSelector.js";
+
 const ChatComponent = dynamic(() => import("../components/ChatComponent"), {
   loading: () => (
     <div
@@ -170,21 +172,12 @@ export default function MyPage() {
       </Head>
       <Sidebar show={asideExpanded}>
         <ChatSettingsControl aiType='new' />
-        <FlexItem>
-          Models:{" "}
-          <select
-            onChange={(e) => {
-              let engineType = e.currentTarget.value;
-              // console.log(engineType);
-              setActiveEngine(engines.find((eng) => eng.key === engineType));
-            }}>
-            {engines.map((eng) => (
-              <option key={eng.id} value={eng.key}>
-                {eng.name}
-              </option>
-            ))}
-          </select>
-        </FlexItem>
+        <EngineSelector
+          engines={engines}
+          changeEngineHandler={(e) => {
+            let engineType = e.currentTarget.value;
+            setActiveEngine(engines.find((eng) => eng.key === engineType));
+          }}></EngineSelector>
         <ModeSelector
           handleChange={(prompt) => {
             clearChatHistory();

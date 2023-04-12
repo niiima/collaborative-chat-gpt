@@ -9,8 +9,7 @@ import Header from "../components/Header/Header.js";
 import UIContext from "../context/UIContext.js";
 import { FlexItem } from "../components/Atoms/FlexItem.js";
 import { v4 as uuidv4 } from "uuid";
-//import styled from "styled-components";
-// import { Flex } from "../components/Atoms/Flex";
+import EngineSelector from "../components/AIManipulatingComponents/EngineSelector.js";
 import OrdinaryButton from "../components/Buttons/OrdinaryButton";
 import { MdDeleteSweep } from "react-icons/md";
 // import { GiStopSign } from "react-icons/gi";
@@ -153,21 +152,12 @@ export default function MyPage() {
       </Head>
       <Sidebar show={asideExpanded}>
         <ChatSettingsControl aiType='new' />
-        <FlexItem>
-          Models:{" "}
-          <select
-            onChange={(e) => {
-              let engineType = e.currentTarget.value;
-              // console.log(engineType);
-              setActiveEngine(engines.find((eng) => eng.key === engineType));
-            }}>
-            {engines.map((eng) => (
-              <option key={eng.id} value={eng.key}>
-                {eng.name}
-              </option>
-            ))}
-          </select>
-        </FlexItem>
+        <EngineSelector
+          engines={engines}
+          changeEngineHandler={(e) => {
+            let engineType = e.currentTarget.value;
+            setActiveEngine(engines.find((eng) => eng.key === engineType));
+          }}></EngineSelector>
       </Sidebar>
       <Header>
         <FlexItem>
