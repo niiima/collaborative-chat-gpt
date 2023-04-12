@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const MenuLabel = styled.label`
   background-color: transparent;
-
   border-radius: 50%;
   height: 7rem;
   width: 7rem;
