@@ -149,36 +149,38 @@ const ChatComponent = ({
               );
             })}
 
+            {prompt !== "" ? (
+              <Message model={{ direction: "incoming" }}>
+                <Message.CustomContent>
+                  <Typography
+                    style={{
+                      fontSize: ".8rem",
+                      lineHeight: "1.4em",
+                      color: "white",
+                      fontWeight: 500,
+                    }}>
+                    {prompt}
+                  </Typography>
+                </Message.CustomContent>
+                <Avatar src={userAvatarLogo} name='User' />
+              </Message>
+            ) : (
+              ""
+            )}
             {stream !== "" ? (
-              <>
-                <Message model={{ direction: "incoming" }}>
-                  <Message.CustomContent>
-                    <Typography
-                      style={{
-                        fontSize: ".8rem",
-                        lineHeight: "1.4em",
-                        color: "white",
-                        fontWeight: 500,
-                      }}>
-                      {prompt}
-                    </Typography>
-                  </Message.CustomContent>
-                  <Avatar src={userAvatarLogo} name='User' />
-                </Message>
-                <Message model={{ direction: "outgoing" }}>
-                  <Message.CustomContent>
-                    <Typography
-                      style={{
-                        fontSize: ".8rem",
-                        lineHeight: "1.4em",
-                        color: "white",
-                        fontWeight: 500,
-                      }}>
-                      {stream}
-                    </Typography>
-                  </Message.CustomContent>
-                </Message>
-              </>
+              <Message model={{ direction: "outgoing" }}>
+                <Message.CustomContent>
+                  <Typography
+                    style={{
+                      fontSize: ".8rem",
+                      lineHeight: "1.4em",
+                      color: "white",
+                      fontWeight: 500,
+                    }}>
+                    {stream}
+                  </Typography>
+                </Message.CustomContent>
+              </Message>
             ) : (
               ""
             )}

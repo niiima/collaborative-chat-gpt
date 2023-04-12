@@ -128,7 +128,7 @@ export default function MyPage() {
 
       const { prompt_tokens, completion_tokens } =
         await tokenCountResult.json();
-      console.log(prompt_tokens, completion_tokens);
+
       addToHistory({
         chatId: uuidv4(),
         prompt: prompt,
@@ -147,7 +147,7 @@ export default function MyPage() {
           activeEngine.costPerKiloToken
         ).toFixed(5),
       });
-      console.log(chatHistory);
+      //console.log(chatHistory);
       setStream("");
       setPrompt("");
     } catch {

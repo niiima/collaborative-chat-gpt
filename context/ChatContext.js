@@ -8,7 +8,6 @@ export function ChatProvider({ children }) {
   const [isLoading, setIsLoading] = useState(false);
 
   const addToHistory = (messageItem) => {
-    console.log(messageItem);
     setChatHistory((prevChatHistory) => [
       ...prevChatHistory,
       {
@@ -16,7 +15,7 @@ export function ChatProvider({ children }) {
         ...messageItem,
       },
     ]);
-    console.log(chatHistory);
+    //console.log(chatHistory);
   };
 
   const clearChatHistory = () => {
