@@ -10,8 +10,9 @@ const GroupRadioWrapper = styled.div`
   --button-group-border-color: #fff;
   --button-group-selected-background-color: #39f;
   --button-group-selected-font-color: #fff;
-  --button-group-selected-border-color: #666;
-  margin: 1px 2px;
+  --button-group-selected-border-color: #fff;
+
+  margin: 2px 2px;
   &.button-group {
     display: table;
 
@@ -91,6 +92,7 @@ const GroupRadioButtons = ({ items, changeHandler }) => {
             type='radio'
             name='group'
             value={item.value}
+            checked={item.isActive ? true : false}
             onChange={() => changeHandler(item.value)}
           />{" "}
           <span className='button-group__label'>{item.text}</span>

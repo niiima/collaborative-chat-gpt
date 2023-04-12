@@ -183,7 +183,11 @@ export default function MyPage() {
         <GroupRadioButtons
           items={[
             ...engines.map((engine) => {
-              return { text: engine.name, value: engine.key };
+              return {
+                text: engine.name,
+                value: engine.key,
+                isActive: engine.key === activeEngine.key,
+              };
             }),
           ]}
           changeHandler={(e) =>
