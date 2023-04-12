@@ -3,13 +3,24 @@ import styled from "styled-components";
 const acts = require("/public/acts.json");
 const SelectBoxWrapper = styled.div`
   position: relative;
-  /* display: flex; */
-  /* width: 5m; */
-  height: 3em;
-  line-height: 3;
-  background: #5c6664;
+  /* height: 60px; */
+  /* line-height: 3; */
+  /* background: #5c6664; */
+  background: #ef3c39;
   overflow: hidden;
   border-radius: 0.25em;
+  &:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    width: 0;
+    height: 0;
+    margin-top: -2px;
+    border-top: 5px solid #aaa;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+  }
 `;
 const ActsSelectBox = styled.select`
   background-color: "${(props) => (props.bgColor ? props.bgColor : "white")}";
@@ -21,13 +32,14 @@ const ActsSelectBox = styled.select`
   outline: 0;
   box-shadow: none;
   border: 0 !important;
-  background: #5c6664;
+  background: #ef3c39;
   /* background-image: none; */
   flex: 1;
-  padding: 0 0.5em;
+  height: 30px;
+  vertical-align: middle;
+  padding: -10px 0 0 10px;
   color: #fff;
   cursor: pointer;
-  font-size: 1em;
 `;
 const ActSelector = ({ color, bgColor, onChangeHandler }) => {
   // useEffect(() => {

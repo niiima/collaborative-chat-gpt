@@ -2,8 +2,6 @@ import styled from "styled-components";
 const SystemPromptTextArea = styled.textarea`
   box-sizing: border-box;
   flex-grow: 1;
-  /* background-color: #c6e3fa; */
-  //font-family: Helvetica Neue, Segoe UI, Helvetica, Arial, sans-serif;
   outline: 0;
   border-top: 0 none;
   border-right: 0 none;
@@ -14,8 +12,10 @@ const SystemPromptTextArea = styled.textarea`
   border-radius: 10px;
   font-style: italic;
   font-weight: 500;
-  /* color: rgba(0, 0, 0, 0.87); */
+  font-size: 11px;
   overflow-wrap: anywhere;
   word-break: break-word;
+  padding: 9px;
+  text-align: justify;
 `;
 export default SystemPromptTextArea;

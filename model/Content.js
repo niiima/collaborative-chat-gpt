@@ -24,6 +24,7 @@ content.set("Fa", {
 });
 
 export const colorArray = [
+  "#ef3c39",
   "#439912",
   "#b490ca",
   "#03c0e2",

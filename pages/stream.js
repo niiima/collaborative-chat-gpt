@@ -4,7 +4,7 @@ import { engines } from "../model/model.js";
 import ChatContext from "../context/ChatContext.js";
 import AIContext from "../context/AIContext.js";
 import Sidebar from "../components/Sidebar/Sidebar.js";
-import ChatSettingsControl from "../components/controls/AISettingsControl";
+import ChatSettingsControl from "../components/AIManipulatingComponents/AISettingsControl.js";
 import Header from "../components/Header/Header.js";
 import UIContext from "../context/UIContext.js";
 import { v4 as uuidv4 } from "uuid";

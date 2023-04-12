@@ -51,7 +51,7 @@ export default function ChatSettingsControl() {
   });
 
   return (
-    <div style={{ marginTop: 2 }}>
+    <div style={{ marginTop: 2, width: "99%", marginLeft: 1 }}>
       <Leva
         // theme={myTheme}
         fill={"white"}
