@@ -55,7 +55,7 @@ export default function ChatSettingsControl() {
       // theme={myTheme}
       fill={"white"}
       // color={"red"}
-      flat={true}
+      flat={false}
       oneLineLabels={true}
       hideTitleBar={false} // default = false, hides the GUI header
       collapsed={true} // default = false, when true the GUI is collpased

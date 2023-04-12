@@ -1,10 +1,11 @@
-import { MdAirlineStops } from "react-icons/md";
+import { MdAirlineStops, MdMultipleStop } from "react-icons/md";
 // import { FcPicture } from "react-icons/fc";
 import { useContext } from "react";
 import { Flex } from "../Atoms/Flex";
 import { FlexItem } from "../Atoms/FlexItem";
-import { BsArrowLeftRight } from "react-icons/bs";
-import { VscGithubAction } from "react-icons/vsc";
+// import { BsArrowLeftRight } from "react-icons/bs";
+// import { VscGithubAction } from "react-icons/vsc";
+
 import { GiAbstract037 } from "react-icons/gi";
 import styled from "styled-components";
 import Link from "next/link";
@@ -20,14 +21,17 @@ const NavigationWrapper = styled(Flex)`
 
 const LinkItem = styled(FlexItem)`
   max-width: 110px;
+  font-size: 10px;
   @media only screen and (max-width: 780px) {
     /* your CSS here */
     max-width: 100px;
+    font-size: 9px;
   }
 
   @media only screen and (max-width: 480px) {
     /* your CSS here */
     max-width: 90px;
+    font-size: 8px;
   }
   margin: 0;
   margin-top: -5px;
@@ -51,7 +55,7 @@ const routes = [
   {
     id: 0,
     url: "/",
-    icon: <BsArrowLeftRight size={ICON_SIZE} />,
+    icon: <MdMultipleStop size={ICON_SIZE} />,
     text: "Conversation",
   },
   {
