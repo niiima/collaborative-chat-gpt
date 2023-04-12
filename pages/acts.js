@@ -187,6 +187,21 @@ export default function MyPage() {
             setSystemPrompt(txt);
             //handleSubmit();
           }}></ModeSelector>
+        <FlexItem>
+          Models:{" "}
+          <select
+            onChange={(e) => {
+              let engineType = e.currentTarget.value;
+              // console.log(engineType);
+              setActiveEngine(engines.find((eng) => eng.key === engineType));
+            }}>
+            {engines.map((eng) => (
+              <option key={eng.id} value={eng.key}>
+                {eng.name}
+              </option>
+            ))}
+          </select>
+        </FlexItem>
         <ActSelector
           color={"#439912"}
           bgColor={"white"}
@@ -213,21 +228,6 @@ export default function MyPage() {
             icon={<GiStopSign size='30' />}
             handleOnClick={() => clearChatHistory()}
           /> */}
-        </FlexItem>
-        <FlexItem>
-          Models:{" "}
-          <select
-            onChange={(e) => {
-              let engineType = e.currentTarget.value;
-              // console.log(engineType);
-              setActiveEngine(engines.find((eng) => eng.key === engineType));
-            }}>
-            {engines.map((eng) => (
-              <option key={eng.id} value={eng.key}>
-                {eng.name}
-              </option>
-            ))}
-          </select>
         </FlexItem>
       </Header>
       <ChatComponent

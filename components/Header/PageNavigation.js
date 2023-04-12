@@ -14,7 +14,7 @@ const NavigationWrapper = styled(Flex)`
 `;
 
 const LinkItem = styled(FlexItem)`
-  max-width: 30px;
+  max-width: 60px;
   margin: 0;
 `;
 const PageNavigation = () => {

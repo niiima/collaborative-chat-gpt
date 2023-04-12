@@ -138,14 +138,11 @@ export default function MyPage() {
   return (
     <div>
       <Head>
-        <title>GPT 3 Models</title>
+        <title>GPT 3 Models are super fast</title>
       </Head>
       <Sidebar show={asideExpanded}>
         {/* <RangeField val={150} min={0} max={4000} step={1}></RangeField> */}
         <ChatSettingsControl aiType='classic' />
-        {/* <ColorBoxSelector></ColorBoxSelector> */}
-      </Sidebar>
-      <Header>
         <FlexItem>
           Models:{" "}
           <select
@@ -160,7 +157,9 @@ export default function MyPage() {
             ))}
           </select>
         </FlexItem>
-      </Header>
+        {/* <ColorBoxSelector></ColorBoxSelector> */}
+      </Sidebar>
+      <Header></Header>
       <ChatComponent
         prompt={prompt}
         stream={stream}

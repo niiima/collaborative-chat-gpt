@@ -153,19 +153,6 @@ export default function MyPage() {
       </Head>
       <Sidebar show={asideExpanded}>
         <ChatSettingsControl aiType='new' />
-      </Sidebar>
-      <Header>
-        <FlexItem>
-          <OrdinaryButton
-            text={""}
-            icon={<MdDeleteSweep size='20' color='orange' />}
-            handleOnClick={() => clearChatHistory()}></OrdinaryButton>
-          {/* <StopGeneratePromptButton
-            text={""}
-            icon={<GiStopSign size='30' />}
-            handleOnClick={() => clearChatHistory()}
-          /> */}
-        </FlexItem>
         <FlexItem>
           Models:{" "}
           <select
@@ -180,6 +167,19 @@ export default function MyPage() {
               </option>
             ))}
           </select>
+        </FlexItem>
+      </Sidebar>
+      <Header>
+        <FlexItem>
+          <OrdinaryButton
+            text={""}
+            icon={<MdDeleteSweep size='20' color='orange' />}
+            handleOnClick={() => clearChatHistory()}></OrdinaryButton>
+          {/* <StopGeneratePromptButton
+            text={""}
+            icon={<GiStopSign size='30' />}
+            handleOnClick={() => clearChatHistory()}
+          /> */}
         </FlexItem>
       </Header>
       <ChatComponent
