@@ -12,7 +12,7 @@ import { v4 as uuidv4 } from "uuid";
 //import styled from "styled-components";
 // import { Flex } from "../components/Atoms/Flex";
 import OrdinaryButton from "../components/Buttons/OrdinaryButton";
-//import { MdDeleteSweep } from "react-icons/md";
+import { MdDeleteSweep } from "react-icons/md";
 // import { GiStopSign } from "react-icons/gi";
 import dynamic from "next/dynamic";
 const ChatComponent = dynamic(() => import("../components/ChatComponent"), {
