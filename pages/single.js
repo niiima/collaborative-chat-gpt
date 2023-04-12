@@ -9,10 +9,10 @@ import Header from "../components/Header/Header.js";
 import UIContext from "../context/UIContext.js";
 import { FlexItem } from "../components/Atoms/FlexItem.js";
 import { v4 as uuidv4 } from "uuid";
-import styled from "styled-components";
+//import styled from "styled-components";
 // import { Flex } from "../components/Atoms/Flex";
 import OrdinaryButton from "../components/Buttons/OrdinaryButton";
-import { MdDeleteSweep } from "react-icons/md";
+//import { MdDeleteSweep } from "react-icons/md";
 // import { GiStopSign } from "react-icons/gi";
 import dynamic from "next/dynamic";
 const ChatComponent = dynamic(() => import("../components/ChatComponent"), {
@@ -22,19 +22,10 @@ const ChatComponent = dynamic(() => import("../components/ChatComponent"), {
       className='loading-spinner'></div>
   ),
 });
-const ActSelector = dynamic(
-  () => import("../components/AIManipulatingComponents/ActSelector.js"),
-  {
-    loading: () => (
-      <div
-        style={{ position: "absolute", left: "43%", top: "48%" }}
-        className='loading-spinner'></div>
-    ),
-  }
-);
-const StopGeneratePromptButton = styled(OrdinaryButton)`
-  /* color: red; */
-`;
+
+// const StopGeneratePromptButton = styled(OrdinaryButton)`
+//   /* color: red; */
+// `;
 
 export default function MyPage() {
   const { asideExpanded, setAsideExpand } = useContext(UIContext);
