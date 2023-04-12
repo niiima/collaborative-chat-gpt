@@ -1,6 +1,6 @@
 import { MdAirlineStops } from "react-icons/md";
 // import { FcPicture } from "react-icons/fc";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Flex } from "../Atoms/Flex";
 import { FlexItem } from "../Atoms/FlexItem";
 import { BsArrowLeftRight } from "react-icons/bs";
@@ -80,6 +80,7 @@ const routes = [
 ];
 const PageNavigation = () => {
   const [active, setActive] = useState(0);
+  useEffect(() => {}, [active]);
   return (
     <NavigationWrapper>
       {routes.map((route) => (
