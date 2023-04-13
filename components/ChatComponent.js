@@ -100,7 +100,7 @@ const ChatComponent = ({
                     <Typography
                       fontSize='.8rem'
                       lineHeight='1.4em'
-                      color={i % 2 ? "white" : "black"}
+                      color={i % 2 ? "white" : "#333"}
                       fontWeight={i % 2 ? 500 : 400}>
                       {msg.message}
                     </Typography>
@@ -179,7 +179,7 @@ const ChatComponent = ({
                     style={{
                       fontSize: ".8rem",
                       lineHeight: "1.4em",
-                      color: "white",
+                      color: "#333",
                       fontWeight: 500,
                     }}>
                     {prompt}
