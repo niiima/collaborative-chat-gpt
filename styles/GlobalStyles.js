@@ -48,6 +48,22 @@ body{
   justify-content: center;
 }
 
+
+/* .cs-message--incoming .cs-message__content{
+  background-color:#f6d365 !important;
+} */
+
+.cs-message--outgoing .cs-message__content{
+  background-color:rgba(61,153,251,1) !important;
+  /* color:#333; */
+}
+
+/* .cs-message--outgoing .cs-message__avatar{
+  margin: -4px 5px 0 8px !important;
+}
+.cs-message--incoming .cs-message__avatar{
+  margin: -4px 5px 0 8px !important;
+} */
 `;
 
 export default GlobalStyles;
