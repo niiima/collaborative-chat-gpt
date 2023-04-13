@@ -17,12 +17,18 @@ import {
 } from "@chatscope/chat-ui-kit-react";
 import ChatContext from "../context/ChatContext";
 import { Typography } from "./Atoms/Typography";
+import { AiOutlineCopy } from "react-icons/ai";
 import moment from "moment";
 import {
   userAvatarLogo,
   gptAvatarLogo,
   gptBlueAvatarLogo,
 } from "../model/icons";
+
+const copyToClipboard = (text) => {
+  navigator.clipboard.writeText(text);
+};
+
 const ChatComponent = ({
   handlePromptTextChange,
   handleSendMessage,
@@ -128,7 +134,6 @@ const ChatComponent = ({
                     <span
                       style={{
                         color: "rosybrown",
-                        // backgroundColor: "silver",
                         borderRadius: 3,
                         textAlign: "right",
                         fontSize: ".5rem",
@@ -136,6 +141,26 @@ const ChatComponent = ({
                       }}>
                       {" "}
                       {msg.tokens}Tokens = {msg.price}$
+                      <span
+                        style={{
+                          position: "absolute",
+                          marginTop: -1,
+                          marginLeft: 5,
+                          // right: 0,
+                        }}
+                        onClick={() => copyToClipboard(msg.message)}>
+                        <AiOutlineCopy size={12} color={"blue"}></AiOutlineCopy>
+                        <span
+                          style={{
+                            position: "absolute",
+                            marginTop: 2,
+                            marginLeft: 0,
+                            width: 45,
+                            // right: 0,
+                          }}>
+                          Copy Text
+                        </span>
+                      </span>
                     </span>
                   </Message.Footer>
 
