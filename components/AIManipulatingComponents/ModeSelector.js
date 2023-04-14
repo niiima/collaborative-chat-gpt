@@ -18,8 +18,9 @@ const ModeSelector = ({ handleChange }) => {
       {modes.map((mode, i) => (
         <li key={mode.name} style={{ listStyle: "none" }}>
           <TypoItems
-            fontSize={12}
-            lineHeight={1}
+            fontSize={2}
+            lineHeight={2}
+            fontWeight={"bold"}
             color={colorArray[i]}
             onClick={() => handleChange(mode.prompt)}>
             {mode.icon ? mode.icon : "⌫"} {mode.name}

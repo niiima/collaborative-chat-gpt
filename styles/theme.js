@@ -48,14 +48,14 @@ const space = [
   300,
 ];
 
-const fontSizes = [12, 14, 16, 18];
+const fontSizes = [10, 12, 14, 16, 18];
 
 const fontWeights = {
   light: 200,
   thin: 300,
   normal: 400,
-  bold: 700,
-  black: 900,
+  bold: 600,
+  black: 800,
 };
 
 const breakpoints = ["288px", "608px", "1024px", "1504px"];
@@ -66,6 +66,7 @@ const fontFamilies = {
   heading: fontStack,
 };
 const lineHeights = [
+  "16px",
   "20px",
   "24px",
   "28px",
