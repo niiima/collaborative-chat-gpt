@@ -11,27 +11,35 @@ import { GiDoctorFace, GiDreamCatcher, GiThreeFriends } from "react-icons/gi";
 import { TbPrompt } from "react-icons/tb";
 
 export const colorArray = [
-  "#ef3c39",
-  "#439912",
-  "#b490ca",
-  "#03c0e2",
-  "#123699",
-  "#f6d365",
+  "#5ee7df", // skyblue
+  "#11e7df", // cyan
+  "#03c0e2", // light blue
+  "#39f", // default blue
+  "#3265a4", // gasoline dark blue 2
+  "#123699", // darkblue
+  "#c3cfe2", // pale violate
+  "#b490ca", // violet
+  "#9e29a1", // purple
+  "#f6d365", // light orange
+  "#f5576c", // another red
+  "#ef3c39", // logo red
+  "#aa3617", // red brown
+  "#98614a", // brown
+  "#439912", // nuts green
+  "#14e236", // green
+  "#61f085", // grass green
+  "#fda085",
   "#f5576c",
-  "#5ee7df",
-  "#c3cfe2",
-  "#61f085",
-  "#98614a",
-  // "#294594",
-  "#aa3617",
-  "#11e7df",
-  "#39f",
   "#b490ca",
+  "#c3cfe2",
+  "#123699",
+  "#0d20e3",
+  "#16a2b6",
 ];
 
 export const modes = [
   {
-    icon: <MdAbc color={colorArray[1]}></MdAbc>,
+    icon: <MdAbc></MdAbc>,
     name: "English Teacher",
     prompt: `I want you to act as a spoken English teacher and improver. I will speak to you in English and you will reply to me in English to practice my spoken English. I want you to keep your reply neat. I want you to strictly correct my grammar mistakes, typos, and factual errors. I want you to ask me a question in your reply. Now let's start practicing, you could ask me a question first. Remember, I want you to strictly correct my grammar mistakes, typos, and factual errors.`,
   },
