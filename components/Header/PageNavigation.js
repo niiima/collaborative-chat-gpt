@@ -22,15 +22,19 @@ const NavigationWrapper = styled(Flex)`
 `;
 
 const LinkItem = styled(FlexItem)`
+  /* max-width: 18%; */
   @media only screen and (max-width: 780px) {
     font-size: 12px;
   }
 
   @media only screen and (max-width: 480px) {
     font-size: 10px;
+    & > :first-of-type {
+      padding-left: 9vw;
+    }
   }
   @media only screen and (min-width: 1260px) {
-    font-size: 25px;
+    font-size: 15px;
   }
   & * {
     color: white;
@@ -81,13 +85,17 @@ const PageNavigation = () => {
     <NavigationWrapper>
       {routes.map((route) => (
         <LinkItem
-          lineHeight={0.5}
+          lineHeight={2}
           fontWeight={"normal"}
           fontSize={2}
           className={`${activeRoute === route.id ? "active" : ""}`}
           key={route.url}>
           <Link href={route.url} onClick={() => setActiveRoute(route.id)}>
-            <i style={{ position: "absolute", marginLeft: -30, marginTop: -8 }}>
+            <i
+              style={{
+                position: "absolute",
+                marginLeft: -27,
+              }}>
               {route.icon}
             </i>
             <span
