@@ -12,12 +12,12 @@ import Link from "next/link";
 import AIContext from "../../context/AIContext";
 const ICON_SIZE = 20;
 const NavigationWrapper = styled(Flex)`
-  max-width: 70%;
-  height: 8svh;
+  max-width: 80%;
+  height: 9svh;
   margin: 0;
-  margin-left: 30px;
+  /* margin-left: 5px; */
   padding: 0;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   /* background: #f0f0f0; */
 `;
@@ -26,7 +26,7 @@ const LinkItem = styled(FlexItem)`
   /* font-size: 14px; */
   /* font-weight: 30%; */
   margin: 0;
-  padding-left: -10px;
+  /* padding-left: -10px; */
   /* margin-top: -2svh; */
   /* @media only screen and (max-width: 780px) {
     max-width: 100px;
