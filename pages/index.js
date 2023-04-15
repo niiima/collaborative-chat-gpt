@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import Head from "next/head";
 import { experimentalEngines as engines } from "../model/model.js";
-// import ChatComponent from "../components/ChatComponent";
+import ChatComponent from "../components/ChatComponent";
 import ChatContext from "../context/ChatContext.js";
 import AIContext from "../context/AIContext.js";
 import Sidebar from "../components/Sidebar/Sidebar.js";
@@ -15,28 +15,11 @@ import OrdinaryButton from "../components/Buttons/OrdinaryButton";
 import { MdDeleteSweep } from "react-icons/md";
 import { GiStopSign } from "react-icons/gi";
 import ModeSelector from "../components/AIManipulatingComponents/ModeSelector.js";
-import dynamic from "next/dynamic";
 import SystemPromptTextArea from "../components/AIManipulatingComponents/SystemPromptTextArea";
 // import EngineSelector from "../components/AIManipulatingComponents/EngineSelector.js";
 import ColorfulButtonSet from "../components/Buttons/ColorfulButtons.js";
 import GroupRadioButtons from "../components/Inputs/GroupRadio/GroupRadioButtons.js";
-const ChatComponent = dynamic(() => import("../components/ChatComponent"), {
-  loading: () => (
-    <div
-      style={{ position: "absolute", left: "43%", top: "48%" }}
-      className='loading-spinner'></div>
-  ),
-});
-const ActSelector = dynamic(
-  () => import("../components/AIManipulatingComponents/ActSelector.js"),
-  {
-    loading: () => (
-      <div
-        style={{ position: "absolute", left: "43%", top: "48%" }}
-        className='loading-spinner'></div>
-    ),
-  }
-);
+import ActSelector from "../components/AIManipulatingComponents/ActSelector.js";
 const StopGeneratePromptButton = styled(OrdinaryButton)`
   /* color: red; */
 `;

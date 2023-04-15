@@ -1,6 +1,7 @@
 import { useState, useContext, useRef, useEffect } from "react";
 import Head from "next/head";
 import { engines } from "../model/model.js";
+import ChatComponent from "../components/ChatComponent";
 import ChatContext from "../context/ChatContext.js";
 import AIContext from "../context/AIContext.js";
 import Sidebar from "../components/Sidebar/Sidebar.js";
@@ -12,15 +13,6 @@ import ColorfulButtonSet from "../components/Buttons/ColorfulButtons.js";
 import GroupRadioButtons from "../components/Inputs/GroupRadio/GroupRadioButtons";
 //import EngineSelector from "../components/AIManipulatingComponents/EngineSelector.js";
 // import RangeField from "../components/controls/RangeField.js";
-import dynamic from "next/dynamic";
-
-const ChatComponent = dynamic(() => import("../components/ChatComponent"), {
-  loading: () => (
-    <div
-      style={{ position: "absolute", left: "43%", top: "48%" }}
-      className='loading-spinner'></div>
-  ),
-});
 
 export default function MyPage() {
   const { asideExpanded, setAsideExpand } = useContext(UIContext);

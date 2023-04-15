@@ -12,25 +12,25 @@ import AIContext from "../../context/AIContext";
 
 const ICON_SIZE = 26;
 const NavigationWrapper = styled(Flex)`
-  max-width: 90%;
+  max-width: 95%;
   height: 8svh;
   margin: 0;
-  margin-left: 0.5rem;
+  margin-left: 1rem;
   padding: 0;
   padding-top: -1svh;
   justify-content: space-evenly;
   align-items: center;
+  /* background: white; */
 `;
 
 const LinkItem = styled(FlexItem)`
-  margin: 0;
   @media only screen and (max-width: 780px) {
     max-width: 130px;
     font-size: 12px;
   }
 
   @media only screen and (max-width: 480px) {
-    max-width: 90px;
+    max-width: 100px;
     font-size: 10px;
   }
 
