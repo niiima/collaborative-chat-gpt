@@ -94,7 +94,7 @@ const GroupRadioButtons = ({ items, changeHandler }) => {
             value={item.value}
             checked={item.isActive ? true : false}
             onChange={() => changeHandler(item.value)}
-          />{" "}
+          />
           <span className='button-group__label'>{item.text}</span>
         </label>
       ))}

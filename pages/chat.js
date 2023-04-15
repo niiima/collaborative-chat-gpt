@@ -89,7 +89,6 @@ export default function MyPage() {
   return (
     <div>
       <Sidebar show={asideExpanded}>
-        {" "}
         <ChatSettingsControl aiType='new' />
         {/* <ColorBoxSelector></ColorBoxSelector> */}
       </Sidebar>
