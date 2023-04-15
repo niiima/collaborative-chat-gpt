@@ -12,10 +12,13 @@ import AIContext from "../../context/AIContext";
 
 const ICON_SIZE = 26;
 const NavigationWrapper = styled(Flex)`
-  min-width: 85vw;
-  padding-left: 2vw;
+  min-width: 80vw;
+
   justify-content: space-evenly;
   align-items: center;
+  & > :first-of-type {
+    padding-left: 5vw;
+  }
 `;
 
 const LinkItem = styled(FlexItem)`
@@ -78,13 +81,13 @@ const PageNavigation = () => {
     <NavigationWrapper>
       {routes.map((route) => (
         <LinkItem
-          // width={400}
+          lineHeight={0.5}
           fontWeight={"normal"}
           fontSize={2}
           className={`${activeRoute === route.id ? "active" : ""}`}
           key={route.url}>
           <Link href={route.url} onClick={() => setActiveRoute(route.id)}>
-            <i style={{ position: "absolute", marginLeft: -30, marginTop: -6 }}>
+            <i style={{ position: "absolute", marginLeft: -30, marginTop: -8 }}>
               {route.icon}
             </i>
             <span

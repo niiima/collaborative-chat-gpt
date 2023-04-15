@@ -3,14 +3,14 @@ import styled from "styled-components";
 export const MenuLabel = styled.label`
   background-color: transparent;
   border-radius: 10px;
-  height: 30px;
-  width: 30px;
+  height: 25px;
+  width: 25px;
   cursor: pointer;
   z-index: 100000;
   /* text-align: center; */
   /* transform: scale(0.5); */
-  margin-top: 4svh;
-  margin-left: 1vw;
+  padding-top: 4svh;
+  padding-left: 1vw;
 `;
 
 export const Icon = styled.span`
