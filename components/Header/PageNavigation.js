@@ -12,42 +12,41 @@ import Link from "next/link";
 import AIContext from "../../context/AIContext";
 const ICON_SIZE = 20;
 const NavigationWrapper = styled(Flex)`
-  width: 90%;
+  max-width: 70%;
   height: 8svh;
   margin: 0;
+  margin-left: 30px;
   padding: 0;
+  justify-content: center;
+  align-items: center;
+  /* background: #f0f0f0; */
 `;
 
 const LinkItem = styled(FlexItem)`
-  max-width: 110px;
-  font-size: 11px;
-  font-weight: 500;
-  @media only screen and (max-width: 780px) {
+  /* font-size: 14px; */
+  /* font-weight: 30%; */
+  margin: 0;
+  padding-left: -10px;
+  /* margin-top: -2svh; */
+  /* @media only screen and (max-width: 780px) {
     max-width: 100px;
-    font-size: 9px;
+    font-size: 10px;
     font-weight: 400;
   }
 
   @media only screen and (max-width: 480px) {
     max-width: 90px;
-    font-size: 8px;
+    font-size: 9px;
     font-weight: 300;
-  }
-  margin: 0;
-  margin-top: -2svh;
+  } */
+
   & * {
     color: white;
   }
   &.active {
     & * {
-      text-decoration: underline;
-      color: #333;
+      color: #123699;
     }
-  }
-  & span {
-    position: absolute;
-    margin-top: 5svh;
-    color: white;
   }
 `;
 
@@ -62,7 +61,7 @@ const routes = [
     id: 1,
     url: "/single",
     icon: <MdAirlineStops size={ICON_SIZE} />,
-    text: "Single Messaging",
+    text: "Messaging",
   },
   // {
   //   id: 2,
@@ -90,12 +89,16 @@ const PageNavigation = () => {
     <NavigationWrapper>
       {routes.map((route) => (
         <LinkItem
+          width={400}
+          fontWeight={"normal"}
+          fontSize={2}
           className={`${activeRoute === route.id ? "active" : ""}`}
           key={route.url}>
           <Link href={route.url} onClick={() => setActiveRoute(route.id)}>
+            {" "}
             {route.icon}
-          </Link>
-          <span>{route.text}</span>
+          </Link>{" "}
+          <span style={{ display: "absolute" }}>{route.text}</span>
         </LinkItem>
       ))}{" "}
     </NavigationWrapper>

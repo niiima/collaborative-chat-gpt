@@ -26,7 +26,7 @@ body{
   margin: 0;
   padding: 0;
   overflow: hidden;
-  user-select: none;
+  /* user-select: none; */
   font-family: 'Chivo Mono', sans-serif;
   justify-content: center;
   align-items: center;

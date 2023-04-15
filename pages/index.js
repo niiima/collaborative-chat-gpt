@@ -212,7 +212,7 @@ export default function MyPage() {
         {/* <ColorBoxSelector></ColorBoxSelector> */}
       </Sidebar>
       <Header>
-        <FlexItem>
+        <FlexItem width={60}>
           <OrdinaryButton
             text={""}
             icon={<MdDeleteSweep size='20' color='#ef3c39' />}
