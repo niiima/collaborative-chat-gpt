@@ -10,7 +10,7 @@ import AIContext from "../../context/AIContext";
 // import { BsArrowLeftRight } from "react-icons/bs";
 // import { VscGithubAction } from "react-icons/vsc";
 
-const ICON_SIZE = 20;
+const ICON_SIZE = 26;
 const NavigationWrapper = styled(Flex)`
   max-width: 80%;
   height: 8svh;
@@ -72,7 +72,7 @@ const routes = [
     id: 3,
     url: "/stream",
     icon: <GiAbstract037 size={ICON_SIZE} />,
-    text: "GPT 3",
+    text: "GPT-3",
   },
   // {
   //   id: 4,
@@ -94,13 +94,15 @@ const PageNavigation = () => {
           className={`${activeRoute === route.id ? "active" : ""}`}
           key={route.url}>
           <Link href={route.url} onClick={() => setActiveRoute(route.id)}>
-            {route.icon}
+            <i style={{ position: "absolute", marginLeft: -30, marginTop: -6 }}>
+              {route.icon}
+            </i>
+            <span
+              style={{ display: "absolute", cursor: "pointer" }}
+              onClick={() => setActiveRoute(route.id)}>
+              {route.text}
+            </span>
           </Link>
-          <span
-            style={{ display: "absolute", cursor: "pointer" }}
-            onClick={() => setActiveRoute(route.id)}>
-            {route.text}
-          </span>
         </LinkItem>
       ))}
     </NavigationWrapper>
