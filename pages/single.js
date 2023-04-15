@@ -177,7 +177,7 @@ export default function MyPage() {
           }></GroupRadioButtons>
       </Sidebar>
       <Header>
-        <FlexItem>
+        <FlexItem width={50}>
           <OrdinaryButton
             text={""}
             icon={<MdDeleteSweep size='20' color='orange' />}

@@ -1,25 +1,24 @@
 import { MdAirlineStops, MdMultipleStop } from "react-icons/md";
-// import { FcPicture } from "react-icons/fc";
 import { useContext } from "react";
 import { Flex } from "../Atoms/Flex";
 import { FlexItem } from "../Atoms/FlexItem";
-// import { BsArrowLeftRight } from "react-icons/bs";
-// import { VscGithubAction } from "react-icons/vsc";
-
 import { GiAbstract037 } from "react-icons/gi";
 import styled from "styled-components";
 import Link from "next/link";
 import AIContext from "../../context/AIContext";
+// import { FcPicture } from "react-icons/fc";
+// import { BsArrowLeftRight } from "react-icons/bs";
+// import { VscGithubAction } from "react-icons/vsc";
+
 const ICON_SIZE = 20;
 const NavigationWrapper = styled(Flex)`
   max-width: 80%;
-  height: 9svh;
+  height: 8svh;
   margin: 0;
-  /* margin-left: 5px; */
   padding: 0;
+  padding-top: -1svh;
   justify-content: space-evenly;
   align-items: center;
-  /* background: #f0f0f0; */
 `;
 
 const LinkItem = styled(FlexItem)`
@@ -95,12 +94,15 @@ const PageNavigation = () => {
           className={`${activeRoute === route.id ? "active" : ""}`}
           key={route.url}>
           <Link href={route.url} onClick={() => setActiveRoute(route.id)}>
-            {" "}
             {route.icon}
-          </Link>{" "}
-          <span style={{ display: "absolute" }}>{route.text}</span>
+          </Link>
+          <span
+            style={{ display: "absolute", cursor: "pointer" }}
+            onClick={() => setActiveRoute(route.id)}>
+            {route.text}
+          </span>
         </LinkItem>
-      ))}{" "}
+      ))}
     </NavigationWrapper>
   );
 };
