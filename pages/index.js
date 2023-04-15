@@ -173,6 +173,7 @@ export default function MyPage() {
         <title>GPT Continues Conversation</title>
       </Head>
       <Sidebar show={asideExpanded}>
+        <ColorfulButtonSet items={AIstate}></ColorfulButtonSet>
         <ChatSettingsControl aiType='new' />
         {/* <EngineSelector
           engines={engines}
@@ -209,7 +210,6 @@ export default function MyPage() {
             setSystemPrompt(e.currentTarget.value)
           }></SystemPromptTextArea>
         {/* <ColorBoxSelector></ColorBoxSelector> */}
-        <ColorfulButtonSet items={AIstate}></ColorfulButtonSet>
       </Sidebar>
       <Header>
         <FlexItem>

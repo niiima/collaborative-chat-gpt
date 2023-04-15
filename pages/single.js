@@ -154,6 +154,7 @@ export default function MyPage() {
         <title>GPT only knows your last question</title>
       </Head>
       <Sidebar show={asideExpanded}>
+        <ColorfulButtonSet items={AIstate}></ColorfulButtonSet>
         <ChatSettingsControl aiType='new' />
         {/* <EngineSelector
           engines={engines}
@@ -174,7 +175,6 @@ export default function MyPage() {
           changeHandler={(e) =>
             setActiveEngine(engines.find((eng) => eng.key === e))
           }></GroupRadioButtons>
-        <ColorfulButtonSet items={AIstate}></ColorfulButtonSet>
       </Sidebar>
       <Header>
         <FlexItem>

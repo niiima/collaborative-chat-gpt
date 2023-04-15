@@ -32,6 +32,7 @@ const ButtonContainer = styled.div`
   text-transform: uppercase;
   letter-spacing: 2px;
   margin: 5px;
+  padding: 2px;
   /* &:first-of-type {
     margin-top: 50px;
   } */

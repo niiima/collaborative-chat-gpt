@@ -143,6 +143,7 @@ export default function MyPage() {
       </Head>
       <Sidebar show={asideExpanded}>
         {/* <RangeField val={150} min={0} max={4000} step={1}></RangeField> */}
+        <ColorfulButtonSet items={AIstate}></ColorfulButtonSet>
         <ChatSettingsControl aiType='classic' />
         {/* <EngineSelector
           engines={engines}
@@ -163,7 +164,6 @@ export default function MyPage() {
           changeHandler={(e) =>
             setActiveEngine(engines.find((eng) => eng.key === e))
           }></GroupRadioButtons>
-        <ColorfulButtonSet items={AIstate}></ColorfulButtonSet>
       </Sidebar>
       <Header></Header>
       <ChatComponent
