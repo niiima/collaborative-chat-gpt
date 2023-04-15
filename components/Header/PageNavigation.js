@@ -12,7 +12,7 @@ import AIContext from "../../context/AIContext";
 
 const ICON_SIZE = 26;
 const NavigationWrapper = styled(Flex)`
-  max-width: 80%;
+  max-width: 90%;
   height: 8svh;
   margin: 0;
   padding: 0;
@@ -22,22 +22,16 @@ const NavigationWrapper = styled(Flex)`
 `;
 
 const LinkItem = styled(FlexItem)`
-  /* font-size: 14px; */
-  /* font-weight: 30%; */
   margin: 0;
-  /* padding-left: -10px; */
-  /* margin-top: -2svh; */
-  /* @media only screen and (max-width: 780px) {
-    max-width: 100px;
-    font-size: 10px;
-    font-weight: 400;
+  @media only screen and (max-width: 780px) {
+    max-width: 130px;
+    font-size: 12px;
   }
 
   @media only screen and (max-width: 480px) {
     max-width: 90px;
-    font-size: 9px;
-    font-weight: 300;
-  } */
+    font-size: 10px;
+  }
 
   & * {
     color: white;
@@ -88,7 +82,7 @@ const PageNavigation = () => {
     <NavigationWrapper>
       {routes.map((route) => (
         <LinkItem
-          width={400}
+          // width={400}
           fontWeight={"normal"}
           fontSize={2}
           className={`${activeRoute === route.id ? "active" : ""}`}
