@@ -3,14 +3,14 @@ import styled from "styled-components";
 export const MenuLabel = styled.label`
   background-color: transparent;
   border-radius: 10px;
-  height: 1.5rem;
-  width: 2rem;
+  height: 30px;
+  width: 30px;
   cursor: pointer;
   z-index: 100000;
   /* text-align: center; */
   /* transform: scale(0.5); */
   margin-top: 4svh;
-  margin-left: 2vw;
+  margin-left: 1vw;
 `;
 
 export const Icon = styled.span`
@@ -19,7 +19,7 @@ export const Icon = styled.span`
     props.clicked
       ? "transparent"
       : `${props["color"] ? props.color : "white"}`};
-  width: 1.2rem;
+  width: 25px;
   height: 3px;
   display: inline-block;
   transition: all 0.3s;
@@ -28,7 +28,7 @@ export const Icon = styled.span`
     content: "";
     background-color: ${(props) =>
       props["background="] ? props.background : "white"};
-    width: 1.5rem;
+    width: 28px;
     height: 3px;
     display: inline-block;
     position: absolute;
