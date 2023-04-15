@@ -2,17 +2,19 @@ import React from "react";
 import styled from "styled-components";
 
 const ButtonWrapper = styled.div`
+  min-height: 150px;
   padding: 0;
   margin-right: 1px;
   margin-left: 1px;
+  margin-top: 2px;
   width: 99%;
   overflow: hidden;
   user-select: none;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: white;
-  border: 2px solid white;
+  background: linear-gradient(135deg, #11e7df 0%, #39f 70%, #b490ca 100%);
+  border: 1px solid white;
   border-radius: 10px;
 `;
 

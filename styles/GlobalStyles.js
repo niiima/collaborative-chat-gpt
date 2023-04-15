@@ -64,6 +64,7 @@ body{
 .cs-message--incoming .cs-message__avatar{
   margin: -4px 5px 0 8px !important;
 } */
+
 `;
 
 export default GlobalStyles;
