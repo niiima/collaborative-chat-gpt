@@ -2,11 +2,10 @@ import React from "react";
 import styled from "styled-components";
 
 const ButtonWrapper = styled.div`
-  /* height: 500px; */
-  margin: 0;
   padding: 0;
-  /* height: 100%; */
-  width: 100%;
+  margin-right: 1px;
+  margin-left: 1px;
+  width: 99%;
   overflow: hidden;
   user-select: none;
   display: flex;
@@ -31,15 +30,24 @@ const ButtonContainer = styled.div`
   /* background: lightblue; */
   text-transform: uppercase;
   letter-spacing: 2px;
-  margin: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
   padding: 2px;
+  &:not(last-child) {
+    margin-bottom: 5px;
+  }
+  &:last-child {
+    margin-bottom: 0 !important;
+  }
   /* &:first-of-type {
     margin-top: 50px;
   } */
 `;
 
 const ButtonContent = styled.div`
-  padding-top: 10px;
+  padding-top: 3px;
+  padding-bottom: 0;
+  margin-bottom: 0;
   position: relative;
   width: 100%;
   //height: 40px;
