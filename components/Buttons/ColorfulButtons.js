@@ -14,7 +14,7 @@ const ButtonWrapper = styled.div`
   justify-content: center;
   align-items: center;
   background: linear-gradient(135deg, #11e7df 0%, #39f 70%, #b490ca 100%);
-  border: 1px solid white;
+  border: 1px solid lightblue;
   border-radius: 10px;
 `;
 

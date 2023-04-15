@@ -1,6 +1,11 @@
 import styled from "styled-components";
 const SystemPromptTextArea = styled.textarea`
-  /* height: 10svh; */
+  background-color: rgba(60, 60, 60, 0.6);
+  color: white;
+  padding: 4px;
+  margin: 0 1px;
+  width: 99%;
+  max-width: 99%;
   box-sizing: border-box;
   flex-grow: 1;
   outline: 0;
@@ -8,16 +13,15 @@ const SystemPromptTextArea = styled.textarea`
   border-right: 0 none;
   border-bottom: 0 none;
   border-left: 0 none;
-  overflow: visible;
-  border: 2px solid lightblue;
+  overflow-x: hidden;
+  user-select: none;
+  border: 1px solid lightblue;
   border-radius: 10px;
-  font-style: italic;
   font-weight: 500;
-  font-size: 11px;
+  font-size: 0.8em;
   overflow-wrap: anywhere;
-  /* word-break: break-word; */
-  padding: 9px;
+  word-break: keep-all;
   text-align: justify;
-  max-height: 32svh;
+  min-height: 30svh;
 `;
 export default SystemPromptTextArea;
