@@ -15,6 +15,7 @@ const NavigationWrapper = styled(Flex)`
   max-width: 90%;
   height: 8svh;
   margin: 0;
+  margin-left: 0.5rem;
   padding: 0;
   padding-top: -1svh;
   justify-content: space-evenly;
