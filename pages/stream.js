@@ -11,6 +11,7 @@ import UIContext from "../context/UIContext.js";
 import { v4 as uuidv4 } from "uuid";
 import ColorfulButtonSet from "../components/Buttons/ColorfulButtons.js";
 import GroupRadioButtons from "../components/Inputs/GroupRadio/GroupRadioButtons";
+import { FlexItem } from "../components/Atoms/FlexItem.js";
 //import EngineSelector from "../components/AIManipulatingComponents/EngineSelector.js";
 // import RangeField from "../components/controls/RangeField.js";
 
@@ -157,7 +158,9 @@ export default function MyPage() {
             setActiveEngine(engines.find((eng) => eng.key === e))
           }></GroupRadioButtons>
       </Sidebar>
-      <Header></Header>
+      <Header>
+        <FlexItem width={50}></FlexItem>
+      </Header>
       <ChatComponent
         prompt={prompt}
         stream={stream}
