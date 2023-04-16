@@ -91,7 +91,7 @@ const ChatComponent = ({
               isLoading ? <TypingIndicator content={"GPT is responding"} /> : ""
             }>
             {chatList.map((msg, i) => {
-              const start = moment(msg.sentTime);
+              const start = moment(new Date(msg.sentTime));
 
               return (
                 <Message key={msg.id} model={msg} avatarPosition='cl'>
