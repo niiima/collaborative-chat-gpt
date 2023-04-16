@@ -4,7 +4,7 @@ import styles from "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
 import { ChatProvider } from "../context/ChatContext";
 import { UIContextProvider } from "../context/UIContext";
 import { AIProvider } from "../context/AIContext";
-import { AuthProvider } from "../context/AuthProvider";
+import { AuthProvider } from "../context/AuthContext";
 import { ThemeProvider } from "styled-components";
 import theme from "../styles/theme";
 import GlobalStyles from "../styles/GlobalStyles";

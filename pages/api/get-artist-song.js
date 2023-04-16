@@ -1,21 +1,21 @@
 export default async function handler(req, res) {
   //const { name, artist } = { name: "lady in red", artist: "chris de burgh" }; //
-  const { name, artist } = req.body;
+  const { access_token, name, artist } = req.body;
   console.log(name, artist);
   try {
     // First, get an access token from the Spotify API
-    const response = await fetch("https://accounts.spotify.com/api/token", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        Authorization: `Basic ${Buffer.from(
-          `${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`
-        ).toString("base64")}`,
-      },
-      body: "grant_type=client_credentials",
-    });
+    // const response = await fetch("https://accounts.spotify.com/api/token", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/x-www-form-urlencoded",
+    //     Authorization: `Basic ${Buffer.from(
+    //       `${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`
+    //     ).toString("base64")}`,
+    //   },
+    //   body: "grant_type=client_credentials",
+    // });
 
-    const { access_token } = await response.json();
+    //const { access_token } = await response.json();
 
     // Use the access token to search for the track on the Spotify API
     const searchResponse = await fetch(

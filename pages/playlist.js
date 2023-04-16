@@ -1,6 +1,7 @@
 import { useState, useContext, useRef, useEffect } from "react";
 import Head from "next/head";
 import { engines } from "../model/model.js";
+import AuthContext from "../context/AuthContext.js";
 import ChatContext from "../context/ChatContext.js";
 import AIContext from "../context/AIContext.js";
 import Sidebar from "../components/Sidebar/Sidebar.js";
@@ -24,6 +25,7 @@ export default function MyPage() {
     useContext(ChatContext);
 
   const { AIstate, setAIState } = useContext(AIContext);
+  const { spotifyAccessToken, setSpotifyAccessToken } = useContext(AuthContext);
 
   const [activeEngine, setActiveEngine] = useState(engines[0]);
   const [playlist, setPlaylist] = useState(null);
@@ -36,19 +38,44 @@ export default function MyPage() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ name: songName, artist: artistName }),
+      body: JSON.stringify({
+        access_token: spotifyAccessToken,
+        name: songName,
+        artist: artistName,
+      }),
     });
     if (response.status === 404) {
       return;
     }
-    if (!response.ok) {
-      throw new Error(response.statusText);
-    }
-
+    // if (!response.ok) {
+    //   throw new Error(response.statusText);
+    // }
     const res = await response.json();
     console.log(res);
     setPlaylist(res);
   }
+
+  const handleSearch = async () => {
+    if (spotifyAccessToken.length === 0) {
+      const response = await fetch("/api/get-spotify-access-token", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.status === 404) {
+        console.log(response);
+        return;
+      }
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      const res = await response.json();
+      console.log(res);
+      setSpotifyAccessToken(res.data);
+    }
+    await getPlaylist();
+  };
 
   // useEffect(() => getModels(), []);
   return (
@@ -83,7 +110,7 @@ export default function MyPage() {
       <Box>
         <OrdinaryButton
           text={"get models"}
-          handleOnClick={() => getPlaylist()}
+          handleOnClick={() => handleSearch()}
           icon={
             <MdOutlineFileDownload size={20} color={"lightskyblue"} />
           }></OrdinaryButton>
