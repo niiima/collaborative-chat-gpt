@@ -15,6 +15,8 @@ import GroupRadioButtons from "../components/Inputs/GroupRadio/GroupRadioButtons
 import { Box } from "../components/Atoms/Box.js";
 import OrdinaryButton from "../components/Buttons/OrdinaryButton.js";
 import ResponsiveTable from "../components/Lists/ResponsiveTable.js";
+import { MdOutlineFileDownload } from "react-icons/md";
+
 export default function MyPage() {
   const { asideExpanded, setAsideExpand } = useContext(UIContext);
 
@@ -79,7 +81,9 @@ export default function MyPage() {
         <OrdinaryButton
           text={"get models"}
           handleOnClick={() => getModels()}
-          icon={"æ"}></OrdinaryButton>
+          icon={
+            <MdOutlineFileDownload size={20} color={"lightskyblue"} />
+          }></OrdinaryButton>
         {models.length > 0 && <ResponsiveTable data={models}></ResponsiveTable>}
       </Box>
     </div>

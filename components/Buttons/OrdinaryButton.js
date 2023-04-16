@@ -19,8 +19,11 @@ const ButtonWrapper = styled.button`
 export default function OrdinaryButton({ text, handleOnClick, icon }) {
   return (
     <ButtonWrapper type='button' onClick={() => handleOnClick()}>
-      {icon}
-      {text}
+      <span style={{ display: "flex" }}>
+        {" "}
+        {icon}
+        {text}
+      </span>
     </ButtonWrapper>
   );
 }
