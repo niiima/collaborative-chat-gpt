@@ -24,9 +24,9 @@ export default function MyPage() {
   const { asideExpanded, setAsideExpand } = useContext(UIContext);
 
   const {
-    chatHistory,
+    //chatHistory,
     addToHistory,
-    isLoading,
+    //isLoading,
     setIsLoading,
     clearChatHistory,
   } = useContext(ChatContext);
@@ -35,9 +35,9 @@ export default function MyPage() {
   const [activeEngine, setActiveEngine] = useState(engines[0]);
 
   const [prompt, setPrompt] = useState("");
-  const [systemPrompt, setSystemPrompt] = useState(
-    `Assist user for what they might ask, get involve in the conversation and try to provide accurate answers for their questions.`
-  );
+  // const [systemPrompt, setSystemPrompt] = useState(
+  //   `Assist user for what they might ask, get involve in the conversation and try to provide accurate answers for their questions.`
+  // );
   const [stream, setStream] = useState("");
 
   async function handleSubmit(e) {
