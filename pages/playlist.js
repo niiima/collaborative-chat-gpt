@@ -1,6 +1,6 @@
 import { useState, useContext, useRef, useEffect } from "react";
 import Head from "next/head";
-import { engines } from "../model/model.js";
+import { experimentalEngines as engines } from "../model/model.js";
 import AuthContext from "../context/AuthContext.js";
 import ChatContext from "../context/ChatContext.js";
 import AIContext from "../context/AIContext.js";
@@ -28,56 +28,102 @@ export default function MyPage() {
   const { spotifyAccessToken, setSpotifyAccessToken } = useContext(AuthContext);
 
   const [activeEngine, setActiveEngine] = useState(engines[0]);
-  const [playlist, setPlaylist] = useState(null);
-  const [songName, setSongName] = useState("");
-  const [artistName, setArtistName] = useState("");
+  const [playlist, setPlaylist] = useState([]);
 
-  async function getPlaylist() {
+  const [playlistDescription, setPlaylistDescription] = useState("");
+  const [playlistObject, setPlaylistObject] = useState([]);
+  async function getSongInfo(song) {
+    const options = {
+      access_token: song.access_token, //spotifyAccessToken,
+      name: song.name,
+      artist: song.artist,
+    };
+    console.log(options);
     const response = await fetch("/api/get-artist-song", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        access_token: spotifyAccessToken,
-        name: songName,
-        artist: artistName,
-      }),
+      body: JSON.stringify(options),
     });
     if (response.status === 404) {
       return;
     }
-    // if (!response.ok) {
-    //   throw new Error(response.statusText);
-    // }
+
     const res = await response.json();
     console.log(res);
-    setPlaylist(res);
+    return res; //setPlaylist(res);
   }
 
-  const handleSearch = async () => {
-    if (spotifyAccessToken.length === 0) {
-      const response = await fetch("/api/get-spotify-access-token", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      if (response.status === 404) {
-        console.log(response);
-        return;
-      }
-      if (!response.ok) {
-        throw new Error(response.statusText);
-      }
-      const res = await response.json();
-      console.log(res);
-      setSpotifyAccessToken(res.data);
+  const getAccessToken = async () => {
+    const response = await fetch("/api/get-spotify-access-token", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (response.status === 404) {
+      //   console.log(response);
+      return;
     }
-    await getPlaylist();
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+    const res = await response.json();
+    // console.log(res);
+    setSpotifyAccessToken(res.data);
+    return res.data;
   };
 
-  // useEffect(() => getModels(), []);
+  const handleGeneratePlaylist = async () => {
+    try {
+      let options = {
+        engine: activeEngine.key,
+        message: playlistDescription,
+        ...AIstate,
+      };
+      console.log(options);
+      const response = await fetch("/api/generate-playlist", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(options),
+      });
+      console.log(response);
+
+      const res = await response.json();
+      console.log(res);
+      setPlaylistObject(res);
+      console.log(playlistObject);
+      const accessToken = await getAccessToken();
+      //try {
+      const songsInfo = res.map(async (song) => {
+        //console.log(song);
+        const songInfo = await getSongInfo({
+          name: song.name,
+          artist: song.artist,
+          access_token: accessToken,
+        });
+        console.log(songInfo);
+        return songInfo;
+      });
+
+      const resolvedList = (await Promise.all(songsInfo)).filter((el) => el);
+      console.log(resolvedList);
+      //if (songsInfo.length) {
+      setPlaylist(resolvedList);
+      //}
+      //} catch (error) {
+
+      //}
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  //   useEffect(() => {}, [playlist]);
   return (
     <div>
       <Head>
@@ -108,22 +154,55 @@ export default function MyPage() {
       </Sidebar>
       <Header></Header>
       <Box>
-        <OrdinaryButton
+        {/* <OrdinaryButton
           text={"get models"}
           handleOnClick={() => handleSearch()}
           icon={
             <MdOutlineFileDownload size={20} color={"lightskyblue"} />
-          }></OrdinaryButton>
-        <input
+          }></OrdinaryButton> */}
+        {/* song: <input
           value={songName}
           onChange={(e) => setSongName(e.currentTarget.value)}></input>
+        artist:
         <input
           value={artistName}
-          onChange={(e) => setArtistName(e.currentTarget.value)}></input>
-        {
-          playlist && JSON.stringify(playlist)
+          onChange={(e) => setArtistName(e.currentTarget.value)}></input> */}
+        What playlist should we make? <br />
+        <input
+          style={{ width: "85vw" }}
+          value={playlistDescription}
+          onChange={(e) =>
+            setPlaylistDescription(e.currentTarget.value)
+          }></input>
+        <OrdinaryButton
+          text={"get Playlist"}
+          handleOnClick={() => handleGeneratePlaylist()}
+          icon={
+            <MdOutlineFileDownload size={20} color={"lightskyblue"} />
+          }></OrdinaryButton>
+        {/* {
+          playlist && <pre>{JSON.stringify(playlist)}</pre>
           //   <ResponsiveTable data={playlist}></ResponsiveTable>
         }
+        {playlistObject && JSON.stringify(playlistObject)} */}
+        <div>
+          {playlist &&
+            playlist.map((track) => (
+              <div key={track.id}>
+                {track && track["artists"] && track.artists[0] && (
+                  <iframe
+                    src={`https://open.spotify.com/embed?uri=${track.artists[0].uri}`}
+                    width='100%'
+                    height='80'
+                    frameborder='0'
+                    allowTransparency='true'></iframe>
+                )}
+              </div>
+            ))}
+        </div>
+        {/* {playlistObject && JSON.stringify(playlistObject)} */}
+        {/* {playlistObject &&
+          playlistObject.map((song) => <span>{song.name}</span><a href={}></a>)} */}
       </Box>
     </div>
   );

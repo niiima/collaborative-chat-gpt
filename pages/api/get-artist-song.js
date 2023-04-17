@@ -1,6 +1,7 @@
 export default async function handler(req, res) {
+  console.log(req);
   //const { name, artist } = { name: "lady in red", artist: "chris de burgh" }; //
-  const { access_token, name, artist } = req.body;
+  const { name, artist, access_token } = req.body;
   console.log(name, artist);
   try {
     // First, get an access token from the Spotify API
@@ -27,8 +28,10 @@ export default async function handler(req, res) {
       }
     );
 
+    // console.log(searchResponse);
+
     const { tracks } = await searchResponse.json();
-    console.log(tracks);
+    //console.log(tracks);
     if (tracks.items.length === 0) {
       return res.status(404).json({ message: "Track not found" });
     }

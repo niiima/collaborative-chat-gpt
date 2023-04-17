@@ -10,11 +10,11 @@ export default async function handler(req, res) {
     const msgs = [
       {
         role: "system",
-        content: `I want you to act as JSON generator. add nothing to your response except forwhat that can to parse using JSON function in JavaScript environment without any error. so only replay in JSON format and add nothing to your response. when I will ask for a playlist of music's with or without specific attributes and you will generate an array of objects with "name" and "artist" properties includes 10 tracks with given attributes or random tracks if none specified.`,
+        content: `I want you to act as JSON generator. just replay in javascript syntax. your response must parse using JSON function without any error. when I will ask for a playlist of music's with or without specific attributes and you will generate an array of objects only contain "name" and "artist" properties. create a list with just 10 tracks. remember you should always have "[" and "]" in your replay even if nothing found. I will use two command: "next" or you will make 10 more, "continue" you will create 10 more at the beginning of the current list. `,
       },
-      ...req.body.messages,
+      { role: "user", content: `${req.body.message}` },
     ];
-    //console.log(msgs);
+    console.log(msgs);
 
     try {
       const response = await openai.createChatCompletion({
@@ -40,9 +40,7 @@ export default async function handler(req, res) {
         const jsonObject = JSON.parse(jsonPart);
 
         console.log(jsonObject);
-        res.status(200).json({
-          json: jsonObject,
-        });
+        res.status(200).json(jsonObject);
       } catch (error) {
         console.log(error);
       }
