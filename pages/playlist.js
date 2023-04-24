@@ -1,89 +1,73 @@
 import { useState, useContext, useRef, useEffect } from "react";
 import Head from "next/head";
-import { experimentalEngines as engines } from "../model/model.js";
+import { engines } from "../model/model.js";
 import AuthContext from "../context/AuthContext.js";
-import ChatContext from "../context/ChatContext.js";
+// import ChatContext from "../context/ChatContext.js";
 import AIContext from "../context/AIContext.js";
 import Sidebar from "../components/Sidebar/Sidebar.js";
 import ChatSettingsControl from "../components/AIManipulatingComponents/AISettingsControl.js";
 import Header from "../components/Header/Header.js";
 import UIContext from "../context/UIContext.js";
-// import { v4 as uuidv4 } from "uuid";
 import ColorfulButtonSet from "../components/Buttons/ColorfulButtons.js";
 import GroupRadioButtons from "../components/Inputs/GroupRadio/GroupRadioButtons.js";
-//import EngineSelector from "../components/AIManipulatingComponents/EngineSelector.js";
-// import RangeField from "../components/controls/RangeField.js";
 import { Box } from "../components/Atoms/Box.js";
 import OrdinaryButton from "../components/Buttons/OrdinaryButton.js";
 import ResponsiveTable from "../components/Lists/ResponsiveTable.js";
 import { MdOutlineFileDownload } from "react-icons/md";
-
+import PreLoader from "../components/Loadings/PreLoader.js";
+import { FlexItem } from "../components/Atoms/FlexItem.js";
+import { Flex } from "../components/Atoms/Flex.js";
+import MusicBarLoading from "../components/Loadings//MusicBarLoading.js";
+import InputLine from "../components/Inputs/InputLine.js";
 export default function MyPage() {
-  const { asideExpanded, setAsideExpand } = useContext(UIContext);
-
-  const { chatHistory, addToHistory, isLoading, setIsLoading } =
-    useContext(ChatContext);
+  const {
+    asideExpanded,
+    setAsideExpand,
+    isPageInLoadingState,
+    setIsPageInLoadingState,
+  } = useContext(UIContext);
+  // const { chatHistory, addToHistory, isLoading, setIsLoading } =
+  //   useContext(ChatContext);
 
   const { AIstate, setAIState } = useContext(AIContext);
-  const { spotifyAccessToken, setSpotifyAccessToken } = useContext(AuthContext);
+  // const { spotifyAccessToken, setSpotifyAccessToken } = useContext(AuthContext);
 
   const [activeEngine, setActiveEngine] = useState(engines[0]);
-  const [playlist, setPlaylist] = useState([]);
-
-  const [playlistDescription, setPlaylistDescription] = useState("");
-  const [playlistObject, setPlaylistObject] = useState([]);
-  async function getSongInfo(song) {
-    const options = {
-      access_token: song.access_token, //spotifyAccessToken,
-      name: song.name,
-      artist: song.artist,
-    };
-    console.log(options);
-    const response = await fetch("/api/get-artist-song", {
+  const [playlist, setPlaylist] = useState(null);
+  const [err, setErr] = useState("");
+  const [playlistDescription, setPlaylistDescription] = useState(
+    "Make a Playlist of "
+  );
+  const [playlistObject, setPlaylistObject] = useState(null);
+  async function getPlaylistTracks(jsonPlaylist) {
+    // console.log(jsonPlaylist);
+    // console.log(options);
+    const response = await fetch("/api/playlist/get-playlist-tracks", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(options),
+      body: JSON.stringify(jsonPlaylist),
     });
     if (response.status === 404) {
       return;
     }
 
     const res = await response.json();
-    console.log(res);
+    // console.log(res);
     return res; //setPlaylist(res);
   }
 
-  const getAccessToken = async () => {
-    const response = await fetch("/api/get-spotify-access-token", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    if (response.status === 404) {
-      //   console.log(response);
-      return;
-    }
-    if (!response.ok) {
-      throw new Error(response.statusText);
-    }
-    const res = await response.json();
-    // console.log(res);
-    setSpotifyAccessToken(res.data);
-    return res.data;
-  };
-
-  const handleGeneratePlaylist = async () => {
+  const generateJsonPlaylist = async () => {
+    setIsPageInLoadingState(true);
     try {
       let options = {
         engine: activeEngine.key,
         message: playlistDescription,
         ...AIstate,
       };
-      console.log(options);
-      const response = await fetch("/api/generate-playlist", {
+      // console.log(options);
+      const response = await fetch("/api/playlist/generate-json-playlist", {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -91,52 +75,31 @@ export default function MyPage() {
         },
         body: JSON.stringify(options),
       });
-      console.log(response);
 
+      if (response.status !== 200) {
+        setErr(res.error.message);
+        setIsPageInLoadingState(false);
+        return;
+      }
       const res = await response.json();
-      console.log(res);
+      // console.log(res);
       setPlaylistObject(res);
-      console.log(playlistObject);
-      const accessToken = await getAccessToken();
-      //try {
-      const songsInfo = res.map(async (song) => {
-        //console.log(song);
-        const songInfo = await getSongInfo({
-          name: song.name,
-          artist: song.artist,
-          access_token: accessToken,
-        });
-        console.log(songInfo);
-        return songInfo;
-      });
-
-      const resolvedList = (await Promise.all(songsInfo)).filter((el) => el);
-      console.log(resolvedList);
-      //if (songsInfo.length) {
-      setPlaylist(resolvedList);
-      //}
-      //} catch (error) {
-
-      //}
+      const playlistFetchResult = await getPlaylistTracks(res);
+      setPlaylist(playlistFetchResult || []);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsPageInLoadingState(false);
     }
   };
 
-  //   useEffect(() => {}, [playlist]);
   return (
     <div>
       <Head>
-        <title>Playlist AI Assistant</title>
+        <title>Playlist Generator</title>
       </Head>
       <Sidebar show={asideExpanded}>
         <ChatSettingsControl aiType='classic' />
-        {/* <EngineSelector
-          engines={engines}
-          changeEngineHandler={(e) => {
-            let engineType = e.currentTarget.value;
-            setActiveEngine(engines.find((eng) => eng.key === engineType));
-          }}></EngineSelector> */}
         <GroupRadioButtons
           items={[
             ...engines.map((engine) => {
@@ -153,56 +116,57 @@ export default function MyPage() {
         <ColorfulButtonSet items={AIstate}></ColorfulButtonSet>
       </Sidebar>
       <Header></Header>
-      <Box>
-        {/* <OrdinaryButton
-          text={"get models"}
-          handleOnClick={() => handleSearch()}
-          icon={
-            <MdOutlineFileDownload size={20} color={"lightskyblue"} />
-          }></OrdinaryButton> */}
-        {/* song: <input
-          value={songName}
-          onChange={(e) => setSongName(e.currentTarget.value)}></input>
-        artist:
-        <input
-          value={artistName}
-          onChange={(e) => setArtistName(e.currentTarget.value)}></input> */}
-        What playlist should we make? <br />
-        <input
-          style={{ width: "85vw" }}
-          value={playlistDescription}
-          onChange={(e) =>
-            setPlaylistDescription(e.currentTarget.value)
-          }></input>
-        <OrdinaryButton
-          text={"get Playlist"}
-          handleOnClick={() => handleGeneratePlaylist()}
-          icon={
-            <MdOutlineFileDownload size={20} color={"lightskyblue"} />
-          }></OrdinaryButton>
-        {/* {
-          playlist && <pre>{JSON.stringify(playlist)}</pre>
-          //   <ResponsiveTable data={playlist}></ResponsiveTable>
-        }
-        {playlistObject && JSON.stringify(playlistObject)} */}
-        <div>
-          {playlist &&
-            playlist.map((track) => (
+      <Box
+        background={"#111"}
+        width={"100%"}
+        padding={1}
+        color='white'
+        onClick={() => setAsideExpand(false)}>
+        <Flex padding={0} margin={0} spacing={0}>
+          <FlexItem width={"97%"}>
+            <InputLine
+              value={playlistDescription}
+              handleChange={(e) => setPlaylistDescription(e)}
+            />
+          </FlexItem>
+          <FlexItem width={"3%"}>
+            <MdOutlineFileDownload
+              style={{ position: "absolute", marginTop: 10 }}
+              onClick={() => generateJsonPlaylist()}
+              size={50}
+              color={"lightskyblue"}
+            />
+          </FlexItem>
+        </Flex>
+      </Box>
+      <Box
+        className='scroll-customized'
+        paddingTop={1}
+        background={"#222"}
+        width={"100%"}
+        // paddingLeft={"1rem"}
+        // paddingRight={"1rem"}
+        overflowY='auto'
+        height='85svh'>
+        {/* {isPageInLoadingState && <PreLoader />} */}
+        {isPageInLoadingState && <MusicBarLoading />}
+        {err.length === 0 &&
+          playlist &&
+          playlist.map((track) => {
+            //   console.log(track.artists);
+            return (
               <div key={track.id}>
                 {track && track["artists"] && track.artists[0] && (
                   <iframe
-                    src={`https://open.spotify.com/embed?uri=${track.artists[0].uri}`}
+                    src={`https://open.spotify.com/embed?uri=${track.uri}`}
                     width='100%'
                     height='80'
-                    frameborder='0'
+                    frameBorder='0'
                     allowTransparency='true'></iframe>
                 )}
               </div>
-            ))}
-        </div>
-        {/* {playlistObject && JSON.stringify(playlistObject)} */}
-        {/* {playlistObject &&
-          playlistObject.map((song) => <span>{song.name}</span><a href={}></a>)} */}
+            );
+          })}
       </Box>
     </div>
   );
