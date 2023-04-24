@@ -9,11 +9,14 @@ import {
   compose,
   layout,
   left,
+  overflowY,
   position,
   right,
   space,
   top,
   typography,
+  minHeight,
+  height,
 } from "styled-system";
 
 export const composedHelpers = compose(
@@ -28,7 +31,10 @@ export const composedHelpers = compose(
   left,
   right,
   position,
-  boxShadow
+  boxShadow,
+  overflowY,
+  minHeight,
+  height
 );
 
 export const Box = styled.div`

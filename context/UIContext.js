@@ -2,7 +2,7 @@ import { createContext, useState } from "react";
 const UIContext = createContext({});
 export function UIContextProvider({ children }) {
   const [asideExpanded, setAsideExpanded] = useState(false);
-  //const [asideExpanded, setAsideExpanded] = useState(false);
+  const [isPageInLoadingState, setIsPageInLoadingState] = useState(false);
   const setAsideExpand = (status = true) => {
     if (asideExpanded && status) setAsideExpanded(false);
     else if (asideExpanded === false && status) setAsideExpanded(true);
@@ -10,7 +10,13 @@ export function UIContextProvider({ children }) {
   };
 
   return (
-    <UIContext.Provider value={{ asideExpanded, setAsideExpand }}>
+    <UIContext.Provider
+      value={{
+        asideExpanded,
+        setAsideExpand,
+        isPageInLoadingState,
+        setIsPageInLoadingState,
+      }}>
       {children}
     </UIContext.Provider>
   );

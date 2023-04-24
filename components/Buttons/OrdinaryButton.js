@@ -20,7 +20,6 @@ export default function OrdinaryButton({ text, handleOnClick, icon }) {
   return (
     <ButtonWrapper type='button' onClick={() => handleOnClick()}>
       <span style={{ display: "flex" }}>
-        {" "}
         {icon}
         {text}
       </span>

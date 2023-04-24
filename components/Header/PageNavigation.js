@@ -7,7 +7,7 @@ import styled from "styled-components";
 import Link from "next/link";
 import AIContext from "../../context/AIContext";
 // import { FcPicture } from "react-icons/fc";
-// import { BsArrowLeftRight } from "react-icons/bs";
+import { BsSpotify } from "react-icons/bs";
 // import { VscGithubAction } from "react-icons/vsc";
 
 const ICON_SIZE = 26;
@@ -69,14 +69,20 @@ const routes = [
     id: 3,
     url: "/stream",
     icon: <GiAbstract037 size={ICON_SIZE} />,
-    text: "GPT-3",
+    text: "GPT3",
   },
   // {
   //   id: 4,
   //   url: "/art",
   //   icon: <FcPicture color='white' size={ICON_SIZE} />,
   //   text: "Painting",
-  // },
+  // },BsSpotify
+  {
+    id: 4,
+    url: "/playlist",
+    icon: <BsSpotify color='green' size={ICON_SIZE} />,
+    text: "Playlist",
+  },
 ];
 const PageNavigation = () => {
   const { activeRoute, setActiveRoute } = useContext(AIContext);
