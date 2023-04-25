@@ -86,6 +86,12 @@ body{
       to(transparent)
     );
   }
+
+  .error-message{
+    color:orange;
+    font-weight: 700;
+    padding-left:5px;
+  }
 `;
 
 export default GlobalStyles;

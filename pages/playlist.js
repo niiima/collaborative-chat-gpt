@@ -17,7 +17,9 @@ import { MdOutlineFileDownload } from "react-icons/md";
 import PreLoader from "../components/Loadings/PreLoader.js";
 import { FlexItem } from "../components/Atoms/FlexItem.js";
 import { Flex } from "../components/Atoms/Flex.js";
-import MusicBarLoading from "../components/Loadings//MusicBarLoading.js";
+import MusicBarLoading from "../components/Loadings/MusicBarLoading.js";
+import BoxLoading from "../components/Loadings/BoxLoading/BoxLoading.js";
+
 import InputLine from "../components/Inputs/InputLine.js";
 export default function MyPage() {
   const {
@@ -31,42 +33,25 @@ export default function MyPage() {
 
   const { AIstate, setAIState } = useContext(AIContext);
   // const { spotifyAccessToken, setSpotifyAccessToken } = useContext(AuthContext);
-
+  const [isPlaylistGenerating, setIsPlaylistGenerating] = useState(false);
   const [activeEngine, setActiveEngine] = useState(engines[0]);
   const [playlist, setPlaylist] = useState(null);
-  const [err, setErr] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [playlistDescription, setPlaylistDescription] = useState(
     "Make a Playlist of "
   );
   const [playlistObject, setPlaylistObject] = useState(null);
-  async function getPlaylistTracks(jsonPlaylist) {
-    // console.log(jsonPlaylist);
-    // console.log(options);
-    const response = await fetch("/api/playlist/get-playlist-tracks", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(jsonPlaylist),
-    });
-    if (response.status === 404) {
-      return;
-    }
-
-    const res = await response.json();
-    // console.log(res);
-    return res; //setPlaylist(res);
-  }
 
   const generateJsonPlaylist = async () => {
-    setIsPageInLoadingState(true);
+    setIsPlaylistGenerating(true);
+    setErrorMessage("Generating your playlist . . . ");
     try {
       let options = {
         engine: activeEngine.key,
         message: playlistDescription,
         ...AIstate,
       };
-      console.log(options);
+      // console.log(options);
       const response = await fetch("/api/playlist/generate-json-playlist", {
         method: "POST",
         headers: {
@@ -77,21 +62,54 @@ export default function MyPage() {
       });
 
       if (response.status !== 200) {
-        setErr(res.error.message);
-        setIsPageInLoadingState(false);
-        return;
+        setErrorMessage(res.message);
+        setIsPlaylistGenerating(false);
+        return [];
       }
       const res = await response.json();
       // console.log(res);
       setPlaylistObject(res);
       const playlistFetchResult = await getPlaylistTracks(res);
+      // console.log(playlistFetchResult);
+      if (playlistFetchResult == undefined) {
+        setErrorMessage(
+          "Cant generate playlist base on the given description, Please try again."
+        );
+        setIsPlaylistGenerating(false);
+        return;
+      }
+      setIsPlaylistGenerating(false);
+      setErrorMessage("");
       setPlaylist(playlistFetchResult || []);
     } catch (error) {
       console.log(error);
-    } finally {
-      setIsPageInLoadingState(false);
     }
   };
+
+  async function getPlaylistTracks(jsonPlaylist) {
+    setIsPlaylistGenerating(false);
+    setErrorMessage("Fetching songs from Spotify . . .");
+    setIsPageInLoadingState(true);
+    const response = await fetch("/api/playlist/get-playlist-tracks", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(jsonPlaylist),
+    });
+    if (response.status !== 200) {
+      setIsPageInLoadingState(false);
+      setErrorMessage(response.message);
+      // setErrorMessage("Could't find any of generated tracks on Spotify.");
+      return;
+    }
+
+    const res = await response.json();
+    setIsPageInLoadingState(false);
+    // if (res.message) debugger;
+
+    return res || []; //setPlaylist(res);
+  }
 
   return (
     <div>
@@ -99,7 +117,7 @@ export default function MyPage() {
         <title>Playlist Generator</title>
       </Head>
       <Sidebar show={asideExpanded}>
-        <ChatSettingsControl aiType="classic" />
+        <ChatSettingsControl aiType='classic' />
         <GroupRadioButtons
           items={[
             ...engines.map((engine) => {
@@ -112,8 +130,7 @@ export default function MyPage() {
           ]}
           changeHandler={(e) =>
             setActiveEngine(engines.find((eng) => eng.key === e))
-          }
-        ></GroupRadioButtons>
+          }></GroupRadioButtons>
         <ColorfulButtonSet items={AIstate}></ColorfulButtonSet>
       </Sidebar>
       <Header></Header>
@@ -121,14 +138,16 @@ export default function MyPage() {
         background={"#111"}
         width={"100%"}
         padding={1}
-        color="white"
-        onClick={() => setAsideExpand(false)}
-      >
+        color='white'
+        onClick={() => setAsideExpand(false)}>
         <Flex padding={0} margin={0} spacing={0}>
           <FlexItem width={"95%"}>
             <InputLine
               value={playlistDescription}
-              handleChange={(e) => setPlaylistDescription(e)}
+              handleChange={(e) => {
+                setErrorMessage("");
+                setPlaylistDescription(e);
+              }}
             />
           </FlexItem>
           <FlexItem width={"5%"}>
@@ -142,31 +161,30 @@ export default function MyPage() {
         </Flex>
       </Box>
       <Box
-        className="scroll-customized"
+        className='scroll-customized'
         paddingTop={1}
         background={"#222"}
         width={"100%"}
         // paddingLeft={"1rem"}
         // paddingRight={"1rem"}
-        overflowY="auto"
-        height="85svh"
-      >
-        {/* {isPageInLoadingState && <PreLoader />} */}
+        overflowY='auto'
+        height='85svh'>
+        {isPlaylistGenerating && <BoxLoading />}
         {isPageInLoadingState && <MusicBarLoading />}
-        {err.length === 0 &&
-          playlist &&
+        {errorMessage.length > 0 && (
+          <span className='error-message'>{errorMessage}</span>
+        )}
+        {playlist &&
           playlist.map((track) => {
-            //   console.log(track.artists);
             return (
               <div key={track.id}>
                 {track && track["artists"] && track.artists[0] && (
                   <iframe
                     src={`https://open.spotify.com/embed?uri=${track.uri}`}
-                    width="100%"
-                    height="80"
-                    frameBorder="0"
-                    allowTransparency="true"
-                  ></iframe>
+                    width='100%'
+                    height='80'
+                    frameBorder='0'
+                    allowTransparency='true'></iframe>
                 )}
               </div>
             );

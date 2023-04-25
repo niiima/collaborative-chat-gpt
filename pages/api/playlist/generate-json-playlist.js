@@ -49,7 +49,7 @@ export default async function handler(req, res) {
 
       if (startIndex < 0) {
         return new NextResponse(
-          { error: "There Had been no Array in response" },
+          { message: "There Had been no Array in response" },
           {
             status: 400,
           }
@@ -66,7 +66,7 @@ export default async function handler(req, res) {
         });
 
       return new NextResponse(
-        { error: "Nothing found!" },
+        { message: "Nothing found!" },
         {
           status: 400,
         }
@@ -75,7 +75,7 @@ export default async function handler(req, res) {
     } catch (error) {
       console.log(error);
       return new NextResponse(
-        { error: error.message },
+        { message: error.message },
         {
           status: 400,
         }
