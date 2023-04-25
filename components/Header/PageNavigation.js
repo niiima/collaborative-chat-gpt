@@ -25,6 +25,14 @@ const LinkItem = styled(FlexItem)`
   /* max-width: 18%; */
   @media only screen and (max-width: 780px) {
     font-size: 12px;
+    & .text-container {
+      display: none;
+    }
+    & .icon-container {
+      padding-top: 0 !important ;
+
+      margin-top: -2svh !important ;
+    }
   }
 
   @media only screen and (max-width: 480px) {
@@ -80,7 +88,7 @@ const routes = [
   {
     id: 4,
     url: "/playlist",
-    icon: <BsSpotify color='green' size={ICON_SIZE} />,
+    icon: <BsSpotify color="green" size={ICON_SIZE} />,
     text: "Playlist",
   },
 ];
@@ -95,18 +103,23 @@ const PageNavigation = () => {
           fontWeight={"normal"}
           fontSize={2}
           className={`${activeRoute === route.id ? "active" : ""}`}
-          key={route.url}>
+          key={route.url}
+        >
           <Link href={route.url} onClick={() => setActiveRoute(route.id)}>
             <i
+              className="icon-container"
               style={{
                 position: "absolute",
                 marginLeft: -27,
-              }}>
+              }}
+            >
               {route.icon}
             </i>
             <span
+              className="text-container"
               style={{ display: "absolute", cursor: "pointer" }}
-              onClick={() => setActiveRoute(route.id)}>
+              onClick={() => setActiveRoute(route.id)}
+            >
               {route.text}
             </span>
           </Link>

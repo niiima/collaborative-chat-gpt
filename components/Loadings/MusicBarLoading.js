@@ -6,22 +6,22 @@ const LoadingWrapper = styled.div`
   /* margin: -30px 0 0 -20px; */
   position: absolute;
   top: 50%;
-  width: 100%;
+  width: 40%;
 
   @media screen and (min-width: 748px) {
-    left: 38% !important;
+    left: 40% !important;
   }
 
   @media screen and (max-width: 1024px) {
-    left: 25% !important;
+    left: 20% !important;
   }
 
   .bar {
     background: #b490ca;
     bottom: 1px;
-    height: 6px;
+    height: 5px;
     position: absolute;
-    width: 6px;
+    width: 5px;
     animation: sound 0ms -800ms linear infinite alternate;
   }
 
@@ -86,7 +86,7 @@ export default function MusicBarLoading() {
         <div
           key={`bar_${i}`}
           style={{
-            left: `${index * 9}px`,
+            left: `${index * 8}px`,
             animationDuration: `${randomIntFromInterval(400, 480)}ms`,
           }}
           className='bar'></div>

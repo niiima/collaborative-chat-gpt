@@ -66,7 +66,7 @@ export default function MyPage() {
         message: playlistDescription,
         ...AIstate,
       };
-      // console.log(options);
+      console.log(options);
       const response = await fetch("/api/playlist/generate-json-playlist", {
         method: "POST",
         headers: {
@@ -99,7 +99,7 @@ export default function MyPage() {
         <title>Playlist Generator</title>
       </Head>
       <Sidebar show={asideExpanded}>
-        <ChatSettingsControl aiType='classic' />
+        <ChatSettingsControl aiType="classic" />
         <GroupRadioButtons
           items={[
             ...engines.map((engine) => {
@@ -112,7 +112,8 @@ export default function MyPage() {
           ]}
           changeHandler={(e) =>
             setActiveEngine(engines.find((eng) => eng.key === e))
-          }></GroupRadioButtons>
+          }
+        ></GroupRadioButtons>
         <ColorfulButtonSet items={AIstate}></ColorfulButtonSet>
       </Sidebar>
       <Header></Header>
@@ -120,34 +121,36 @@ export default function MyPage() {
         background={"#111"}
         width={"100%"}
         padding={1}
-        color='white'
-        onClick={() => setAsideExpand(false)}>
+        color="white"
+        onClick={() => setAsideExpand(false)}
+      >
         <Flex padding={0} margin={0} spacing={0}>
-          <FlexItem width={"97%"}>
+          <FlexItem width={"95%"}>
             <InputLine
               value={playlistDescription}
               handleChange={(e) => setPlaylistDescription(e)}
             />
           </FlexItem>
-          <FlexItem width={"3%"}>
+          <FlexItem width={"5%"}>
             <MdOutlineFileDownload
               style={{ position: "absolute", marginTop: 10 }}
               onClick={() => generateJsonPlaylist()}
-              size={50}
+              size={30}
               color={"lightskyblue"}
             />
           </FlexItem>
         </Flex>
       </Box>
       <Box
-        className='scroll-customized'
+        className="scroll-customized"
         paddingTop={1}
         background={"#222"}
         width={"100%"}
         // paddingLeft={"1rem"}
         // paddingRight={"1rem"}
-        overflowY='auto'
-        height='85svh'>
+        overflowY="auto"
+        height="85svh"
+      >
         {/* {isPageInLoadingState && <PreLoader />} */}
         {isPageInLoadingState && <MusicBarLoading />}
         {err.length === 0 &&
@@ -159,10 +162,11 @@ export default function MyPage() {
                 {track && track["artists"] && track.artists[0] && (
                   <iframe
                     src={`https://open.spotify.com/embed?uri=${track.uri}`}
-                    width='100%'
-                    height='80'
-                    frameBorder='0'
-                    allowTransparency='true'></iframe>
+                    width="100%"
+                    height="80"
+                    frameBorder="0"
+                    allowTransparency="true"
+                  ></iframe>
                 )}
               </div>
             );

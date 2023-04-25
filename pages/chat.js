@@ -48,7 +48,7 @@ export default function MyPage() {
         body: JSON.stringify(options),
       });
       const data = await response.json();
-      // console.log(data);
+      console.log(data);
       let completion_timestamp = new Date();
 
       addToHistory({

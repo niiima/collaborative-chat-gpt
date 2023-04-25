@@ -103,7 +103,7 @@ export default function InputLine({ value, handleChange }) {
         value={value}
       />
       <label htmlFor='playlist_description' className='form__label'>
-        Describe your Playlist:
+        Describe your vibe!
       </label>
     </InputWrapper>
   );

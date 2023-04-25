@@ -2,7 +2,7 @@ export default async function handler(req, res) {
   //   console.log(req);
   //const { name, artist } = { name: "lady in red", artist: "chris de burgh" }; //
   const json_playlist = req.body;
-  // console.log(json_playlist);
+  console.log(json_playlist);
   let accessToken = null;
   // console.log(name, artist);
   try {
@@ -24,7 +24,7 @@ export default async function handler(req, res) {
     console.error(error);
     return res.status(500).json({ message: "Can't get Spotify Access Token" });
   }
-  // console.log(accessToken);
+  console.log(accessToken);
 
   // Use the access token to search for the track on the Spotify API
   const playlistPromiseArray = [];
