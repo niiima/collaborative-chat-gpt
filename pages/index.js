@@ -39,9 +39,7 @@ export default function MyPage() {
   const [activeEngine, setActiveEngine] = useState(engines[0]);
 
   const [prompt, setPrompt] = useState("");
-  const [systemPrompt, setSystemPrompt] = useState(
-    `Assist user for what they might ask, get involve in the conversation and try to provide accurate answers for their questions.`
-  );
+  const [systemPrompt, setSystemPrompt] = useState("");
   const [stream, setStream] = useState("");
 
   async function handleSubmit(e) {
@@ -64,7 +62,7 @@ export default function MyPage() {
         ...AIstate,
       };
       //console.log(options);
-      const response = await fetch("/api/generate-chat", {
+      const response = await fetch("/api/generate-chat-completion", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -103,17 +101,6 @@ export default function MyPage() {
       const completion_timestamp = new Date();
       const completion = streamTextArray.join("");
 
-      const tokenCountResult = await fetch("/api/calculate-tokens", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ prompt, completion }),
-      });
-
-      const { prompt_tokens, completion_tokens } =
-        await tokenCountResult.json();
-
       addToHistory({
         chatId: uuidv4(),
         prompt: prompt,
@@ -121,16 +108,6 @@ export default function MyPage() {
         completion: streamTextArray.join(""),
         completion_timestamp: completion_timestamp,
         engine: activeEngine.key,
-        prompt_tokens: prompt_tokens,
-        completion_tokens: completion_tokens,
-        prompt_price: (
-          (prompt_tokens / 1000) *
-          activeEngine.costPerKiloToken
-        ).toFixed(5),
-        completion_price: (
-          (completion_tokens / 1000) *
-          activeEngine.costPerKiloToken
-        ).toFixed(5),
       });
       //console.log(chatHistory);
       setStream("");

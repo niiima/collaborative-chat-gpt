@@ -38,7 +38,7 @@ export default function MyPage() {
     };
     // console.log(options);
     try {
-      const response = await fetch("/api/get-chat", {
+      const response = await fetch("/api/openai/get-chat", {
         method: "POST",
         //timeout: 120000,
         headers: {

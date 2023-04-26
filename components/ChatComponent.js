@@ -46,9 +46,9 @@ const ChatComponent = ({
       message: h.prompt,
       sentTime: h.prompt_timestamp.toLocaleString(),
       direction: "incoming",
-      tokens: h.prompt_tokens,
+      // tokens: h.prompt_tokens,
       engine: h.engine,
-      price: h.prompt_price,
+      // price: h.prompt_price,
       sender: "You",
       position: "normal",
     });
@@ -57,9 +57,9 @@ const ChatComponent = ({
       message: h.completion,
       sentTime: h.completion_timestamp.toLocaleString(),
       direction: "outgoing",
-      tokens: h.completion_tokens,
+      // tokens: h.completion_tokens,
       engine: h.engine,
-      price: h.completion_price,
+      // price: h.completion_price,
       sender: "GPT",
       position: i === len ? "last" : "normal",
     });
@@ -131,16 +131,6 @@ const ChatComponent = ({
                           </span>
                         </>
                       )}
-                      <span
-                        style={{
-                          color: "rosybrown",
-                          borderRadius: 3,
-                          textAlign: "right",
-                          fontSize: ".5rem",
-                          paddingLeft: 10,
-                        }}>
-                        {msg.tokens}Tokens = {msg.price}$
-                      </span>
                       <span
                         style={{
                           marginTop: -2,

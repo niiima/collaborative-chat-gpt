@@ -29,7 +29,7 @@ export default function MyPage() {
   const [models, setModels] = useState([]);
 
   async function getModels() {
-    const response = await fetch("/api/models", {
+    const response = await fetch("/api/openai/get-gpt-models", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

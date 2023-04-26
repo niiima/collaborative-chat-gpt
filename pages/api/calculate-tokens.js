@@ -7,7 +7,7 @@ export default async function handler(req, res) {
     typeof req.body.completion === "string"
   ) {
     //console.log(req.body.text);
-    const promptCount = encode(req.body.prompt); //.length;
+    const promptCount = encode(req.body.prompt);
     const completionCount = encode(req.body.completion);
     //console.log(response);
     res.status(200).json({

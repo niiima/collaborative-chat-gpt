@@ -18,7 +18,7 @@ export default function MyPage() {
     e.preventDefault();
     setIsLoading(true);
 
-    const response = await fetch("/api/get-painting", {
+    const response = await fetch("/api/openai/get-painting", {
       method: "POST",
       headers: {
         Accept: "application/json",

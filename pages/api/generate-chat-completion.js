@@ -1,4 +1,4 @@
-import { OpenAIStream } from "./OpenAIStream";
+import { OpenAIChatStream } from "./OpenAIChatStream";
 
 export const config = {
   runtime: "edge",
@@ -6,7 +6,7 @@ export const config = {
 
 const handler = async (req) => {
   const {
-    prompt,
+    messages,
     engine,
     max_tokens,
     temperature,
@@ -17,7 +17,7 @@ const handler = async (req) => {
 
   const payload = {
     model: engine, //"text-davinci-003",
-    prompt,
+    messages: messages, //prompt,
     temperature: temperature, //0.7,
     top_p: top_p, //1,
     frequency_penalty: frequency_penalty, //0,
@@ -25,10 +25,11 @@ const handler = async (req) => {
     max_tokens: max_tokens, //200, // max_tokens, //200,
     stream: true,
     n: 1,
-    // stop: "\n",
+    stop: ["assistant", "user"],
   };
-  //console.log(prompt);
-  const stream = await OpenAIStream(payload);
+  //console.log(messages[messages.length - 1]);
+
+  const stream = await OpenAIChatStream(payload);
   return new Response(stream);
 };
 

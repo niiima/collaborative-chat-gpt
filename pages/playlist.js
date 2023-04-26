@@ -62,7 +62,7 @@ export default function MyPage() {
       });
 
       if (response.status !== 200) {
-        setErrorMessage(res.message);
+        setErrorMessage(res.error);
         setIsPlaylistGenerating(false);
         return [];
       }
@@ -99,14 +99,13 @@ export default function MyPage() {
     });
     if (response.status !== 200) {
       setIsPageInLoadingState(false);
-      setErrorMessage(response.message);
+      setErrorMessage(response.error);
       // setErrorMessage("Could't find any of generated tracks on Spotify.");
       return;
     }
 
     const res = await response.json();
     setIsPageInLoadingState(false);
-    // if (res.message) debugger;
 
     return res || []; //setPlaylist(res);
   }

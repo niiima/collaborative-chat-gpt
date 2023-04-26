@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 export const config = {
   runtime: "edge",
 };
+
 export default async function handler(req, res) {
   const {
     message,
@@ -16,7 +17,8 @@ export default async function handler(req, res) {
   if (typeof message === "string") {
     //console.log(req.body.messages);
     // const systemPrompt = `I want you to act as JSON generator. just replay in javascript syntax. your response must parse using JSON function without any error. when I will ask for a playlist of music's with or without specific attributes and you will generate an array of objects only contain "name" and "artist" properties. create a list with just 10 tracks. remember you should always have "[" and "]" in your replay even if nothing found. I will use two command: "next" or you will make 10 more, "continue" you will create 10 more at the beginning of the current list. My first task is to generate a playlist of `;
-    const systemPrompt = `"I want you to act as an API endpoint that only returns JSON that starts with '[' and ends with ']' necessarily. It must be contain of objects with 'title' and 'artist' properties and nothing else. If the answer of given prompt was anything other than given syntax means there wasn't any song with given definition or user didn't asked for a playlist at all replay with empty array and don't write any request or struction.  generated songs array at maximum can have 30 songs and all of them must match the given prompt. If no number defined return a default of 10 songs. Check the prompt in an step by step manner and  and stick to your role that is an API endpoint. don't write explanations. Replay only in JSON format, return '[]' if it's not in the given format.". Start and  `;
+    // const systemPrompt = `"I want you to act as an API endpoint that only returns JSON that starts with '[' and ends with ']' necessarily. It must be contain of objects with 'title' and 'artist' properties and nothing else. If the answer of given prompt was anything other than given syntax means there wasn't any song with given definition or user didn't asked for a playlist at all replay with empty array and don't write any request or instruction.  generated songs array at maximum can have 30 songs and all of them must match the given prompt. If no number defined return a default of 10 songs. Check the prompt in an step by step manner and  and stick to your role that is an API endpoint. don't write explanations. Replay only in JSON format, return '[]' if it's not in the given format.". Start and  `;
+    const systemPrompt = `I want you to create a list of songs from given prompt in json format with just "title" and "artist" fields. Don't answer to any question and don't make any explanation, just make the playlist of actual songs or empty array if nothings related found. Try to amaze audience with good taste of music. Now `;
     try {
       const response = await fetch("https://api.openai.com/v1/completions", {
         headers: {
@@ -49,7 +51,7 @@ export default async function handler(req, res) {
 
       if (startIndex < 0) {
         return new NextResponse(
-          { message: "There Had been no Array in response" },
+          { error: "There Had been no Array in response" },
           {
             status: 400,
           }
@@ -66,7 +68,7 @@ export default async function handler(req, res) {
         });
 
       return new NextResponse(
-        { message: "Nothing found!" },
+        { error: "Nothing found!" },
         {
           status: 400,
         }
@@ -75,7 +77,7 @@ export default async function handler(req, res) {
     } catch (error) {
       console.log(error);
       return new NextResponse(
-        { message: error.message },
+        { error: error.message },
         {
           status: 400,
         }

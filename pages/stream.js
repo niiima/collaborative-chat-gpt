@@ -12,8 +12,6 @@ import { v4 as uuidv4 } from "uuid";
 import ColorfulButtonSet from "../components/Buttons/ColorfulButtons.js";
 import GroupRadioButtons from "../components/Inputs/GroupRadio/GroupRadioButtons";
 import { FlexItem } from "../components/Atoms/FlexItem.js";
-//import EngineSelector from "../components/AIManipulatingComponents/EngineSelector.js";
-// import RangeField from "../components/controls/RangeField.js";
 
 export default function MyPage() {
   const { asideExpanded, setAsideExpand } = useContext(UIContext);
@@ -39,7 +37,7 @@ export default function MyPage() {
         ...AIstate,
         engine: activeEngine.key,
       };
-      const response = await fetch("/api/generate", {
+      const response = await fetch("/api/generate-chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -50,7 +48,7 @@ export default function MyPage() {
         throw new Error(response.statusText);
       }
 
-      const data = response.body; //await response.json();
+      const data = response.body;
 
       if (!data) {
         return;
@@ -64,12 +62,11 @@ export default function MyPage() {
       while (!done) {
         const { value, done: doneReading } = await reader.read();
         done = doneReading;
-
         const chunkValue = decoder.decode(value);
 
         if (init === false) {
           init = true;
-          const substr = chunkValue.slice(9); // remove assistant from the beginning of conversation
+          const substr = chunkValue.slice(9); // Remove `assistant` from the first response.
           setStream((prev) => prev + substr);
           streamTextArray.push(substr);
         } else {
@@ -81,17 +78,6 @@ export default function MyPage() {
       const completion_timestamp = new Date();
       const completion = streamTextArray.join("");
 
-      const tokenCountResult = await fetch("/api/calculate-tokens", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ prompt, completion }),
-      });
-
-      const { prompt_tokens, completion_tokens } =
-        await tokenCountResult.json();
-
       addToHistory({
         chatId: uuidv4(),
         prompt: prompt,
@@ -99,22 +85,12 @@ export default function MyPage() {
         completion: streamTextArray.join(""), //data.text.trim(),
         completion_timestamp: completion_timestamp, //data.created,
         engine: activeEngine.key,
-        prompt_tokens: prompt_tokens,
-        completion_tokens: completion_tokens,
-        prompt_price: (
-          (prompt_tokens / 1000) *
-          activeEngine.costPerKiloToken
-        ).toFixed(5),
-        completion_price: (
-          (completion_tokens / 1000) *
-          activeEngine.costPerKiloToken
-        ).toFixed(5),
       });
-
+      console.log(chatHistory);
       setStream("");
       setPrompt("");
     } catch {
-      (err) => console.log(err);
+      (error) => console.log(error);
     } finally {
       setIsLoading(false);
     }
@@ -126,8 +102,6 @@ export default function MyPage() {
       setPrompt(trimPrompt);
     }
   }
-
-  // useEffect(() => {}, [setAsideExpand]);
 
   return (
     <div>

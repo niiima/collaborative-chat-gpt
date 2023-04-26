@@ -10,7 +10,6 @@ import Header from "../components/Header/Header.js";
 import UIContext from "../context/UIContext.js";
 import { FlexItem } from "../components/Atoms/FlexItem.js";
 import { v4 as uuidv4 } from "uuid";
-// import EngineSelector from "../components/AIManipulatingComponents/EngineSelector.js";
 import GroupRadioButtons from "../components/Inputs/GroupRadio/GroupRadioButtons.js";
 import OrdinaryButton from "../components/Buttons/OrdinaryButton";
 import { MdDeleteSweep } from "react-icons/md";
@@ -54,7 +53,7 @@ export default function MyPage() {
         ...AIstate,
       };
 
-      const response = await fetch("/api/generate-chat", {
+      const response = await fetch("/api/generate-chat-completion", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -93,17 +92,6 @@ export default function MyPage() {
       const completion_timestamp = new Date();
       const completion = streamTextArray.join("");
 
-      const tokenCountResult = await fetch("/api/calculate-tokens", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ prompt, completion }),
-      });
-
-      const { prompt_tokens, completion_tokens } =
-        await tokenCountResult.json();
-
       addToHistory({
         chatId: uuidv4(),
         prompt: prompt,
@@ -111,18 +99,7 @@ export default function MyPage() {
         completion: streamTextArray.join(""),
         completion_timestamp: completion_timestamp,
         engine: activeEngine.key,
-        prompt_tokens: prompt_tokens,
-        completion_tokens: completion_tokens,
-        prompt_price: (
-          (prompt_tokens / 1000) *
-          activeEngine.costPerKiloToken
-        ).toFixed(5),
-        completion_price: (
-          (completion_tokens / 1000) *
-          activeEngine.costPerKiloToken
-        ).toFixed(5),
       });
-      //console.log(chatHistory);
       setStream("");
       setPrompt("");
     } catch {

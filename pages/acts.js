@@ -80,7 +80,7 @@ export default function MyPage() {
         ...AIstate,
       };
       //console.log(options);
-      const response = await fetch("/api/generate-chat", {
+      const response = await fetch("/api/generate-chat-completion", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

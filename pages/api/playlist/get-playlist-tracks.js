@@ -22,7 +22,7 @@ export default async function handler(req, res) {
     accessToken = access_token;
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ message: "Can't get Spotify Access Token" });
+    return res.status(200).json({ error: "Can't get Spotify Access Token" });
   }
   // console.log(accessToken);
 
@@ -44,8 +44,8 @@ export default async function handler(req, res) {
     }
     if (playlistPromiseArray.length === 0)
       return res
-        .status(500)
-        .json({ message: "Authentication to spotify failed" });
+        .status(200)
+        .json({ error: "Authentication to spotify failed" });
 
     const playlist = await Promise.all(playlistPromiseArray);
     const mutatedPlaylist = [];
@@ -68,8 +68,8 @@ export default async function handler(req, res) {
       return res.status(200).json(JSON.parse(JSON.stringify(mutatedPlaylist)));
     } else
       return res
-        .status(500)
-        .json({ message: "Couldn't find any of the tracks!" });
+        .status(200)
+        .json({ error: "Couldn't find any of the tracks!" });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Internal server error" });
