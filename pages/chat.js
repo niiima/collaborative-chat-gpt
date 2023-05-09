@@ -18,7 +18,7 @@ export default function MyPage() {
   const { chatHistory, addToHistory, isLoading, setIsLoading } =
     useContext(ChatContext);
 
-  const { AIstate, setAIState } = useContext(AIContext);
+  const { AIstate } = useContext(AIContext);
   const [activeEngine, setActiveEngine] = useState(engines[0]);
   async function handleSubmit(e) {
     const prompt_timestamp = new Date();
@@ -58,16 +58,16 @@ export default function MyPage() {
         completion: data.text.trim(),
         completion_timestamp: completion_timestamp, //data.created,
         engine: activeEngine.key,
-        prompt_tokens: data.usage.prompt_tokens,
-        completion_tokens: data.usage.completion_tokens,
-        prompt_price: (
-          (data.usage.prompt_tokens / 1000) *
-          activeEngine.costPerKiloToken
-        ).toFixed(5),
-        completion_price: (
-          (data.usage.completion_tokens / 1000) *
-          activeEngine.costPerKiloToken
-        ).toFixed(5),
+        // prompt_tokens: data.usage.prompt_tokens,
+        // completion_tokens: data.usage.completion_tokens,
+        // prompt_price: (
+        //   (data.usage.prompt_tokens / 1000) *
+        //   activeEngine.costPerKiloToken
+        // ).toFixed(5),
+        // completion_price: (
+        //   (data.usage.completion_tokens / 1000) *
+        //   activeEngine.costPerKiloToken
+        // ).toFixed(5),
       });
 
       // console.log(chatHistory);
@@ -112,6 +112,9 @@ export default function MyPage() {
         stream={""}
         handleSendMessage={handleSubmit}
         handlePromptTextChange={handlePromptChange}
+        handleOnClick={() => {
+          if (asideExpanded) setAsideExpand(false);
+        }}
       />
     </div>
   );
