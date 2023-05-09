@@ -18,19 +18,19 @@ const GlobalStyles = createGlobalStyle`
 
 html, body, #root {
     height: '100%';
-    width: '100%'; margin: 0;
-  padding: 0;
+    width: '100%'; 
+    margin: 0;
+    padding: 0;
   }
 
 body{
   margin: 0;
   padding: 0;
   overflow: hidden;
-  /* user-select: none; */
   font-family: 'Chivo Mono', sans-serif;
   justify-content: center;
   align-items: center;
-  background: #f0f0f0;
+  background: gray; 
   }
 
 *,
@@ -48,13 +48,39 @@ body{
   justify-content: center;
 }
 
+/* .cs-main-container{
+  background-color: black ;
+} */
+
+.cs-chat-container .cs-message-input{
+background-color:#222 ;
+}
+/* .cs-main-container .cs-chat-container{
+  background-color:red !important ;
+} */
+
+.cs-main-container .cs-chat-container{
+  background-color:transparent ;
+}
+
+.scrollbar-container{
+  background-color:#222;
+}
+
+.cs-message__custom-content *{
+  line-height:1em;
+  /* padding:0; */
+  margin:2px;
+}
 
 /* .cs-message--incoming .cs-message__content{
   background-color:#f6d365 !important;
 } */
 
 .cs-message--outgoing .cs-message__content{
-  background-color:rgba(61,153,251,1) !important;
+  /* background-color:rgba(61,153,251,1) !important; */
+  background: linear-gradient(320deg, #11e7df 0%, #39f 50%, #b490ca 100%);
+
   /* color:#333; */
 }
 

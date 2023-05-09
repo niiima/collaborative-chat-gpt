@@ -170,15 +170,15 @@ const ChatComponent = ({
                             marginLeft: 1,
                           }}>
                           <AiOutlineCopy
-                            size={11}
-                            color={"white"}></AiOutlineCopy>
+                            size={13}
+                            color={"black"}></AiOutlineCopy>
                         </span>
                       </span>
                       <span
                         style={{
                           marginTop: -2,
                           marginLeft: 3,
-                          backgroundColor: "lightskyblue",
+                          backgroundColor: "purple",
                           padding: "2px 2px 1px 1px",
                           borderRadius: 4,
                           width: 15,
@@ -201,7 +201,7 @@ const ChatComponent = ({
                             marginTop: -1,
                             marginLeft: 1,
                           }}>
-                          <BsMarkdown size={11} color={"white"}></BsMarkdown>
+                          <BsMarkdown size={14} color={"white"}></BsMarkdown>
                         </span>
                       </span>
                     </Box>
