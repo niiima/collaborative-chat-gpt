@@ -108,6 +108,7 @@ export default function MyPage() {
         completion: streamTextArray.join(""),
         completion_timestamp: completion_timestamp,
         engine: activeEngine.key,
+        showMarkdown: false,
       });
       //console.log(chatHistory);
       setStream("");

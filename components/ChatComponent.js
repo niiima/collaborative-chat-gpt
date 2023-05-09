@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import {
   MainContainer,
   ChatContainer,
@@ -18,6 +18,8 @@ import {
 import ChatContext from "../context/ChatContext";
 import { Typography } from "./Atoms/Typography";
 import { AiOutlineCopy } from "react-icons/ai";
+import { BsMarkdown } from "react-icons/bs";
+
 import moment from "moment";
 import {
   userAvatarLogo,
@@ -25,6 +27,9 @@ import {
   gptBlueAvatarLogo,
 } from "../model/icons";
 import { Box } from "../components/Atoms/Box";
+import parse from "html-react-parser";
+import ReactMarkdown from "react-markdown";
+
 const copyToClipboard = (text) => {
   navigator.clipboard.writeText(text);
 };
@@ -36,8 +41,16 @@ const ChatComponent = ({
   prompt,
   handleOnClick,
 }) => {
-  const { chatHistory, isLoading } = useContext(ChatContext);
+  const {
+    chatHistory,
+    isLoading,
+    isMarkdownFormatEnabled,
+    setIsMarkdownFormatEnabled,
+  } = useContext(ChatContext);
 
+  useEffect(() => {
+    setIsMarkdownFormatEnabled(false);
+  }, [isMarkdownFormatEnabled]);
   const chatList = [];
   let len = chatHistory.length - 1;
   chatHistory.forEach((h, i) => {
@@ -51,6 +64,7 @@ const ChatComponent = ({
       // price: h.prompt_price,
       sender: "You",
       position: "normal",
+      showMarkdown: false, // h.showMarkdown,
     });
     chatList.push({
       id: h.chatId,
@@ -62,8 +76,11 @@ const ChatComponent = ({
       // price: h.completion_price,
       sender: "GPT",
       position: i === len ? "last" : "normal",
+      showMarkdown: h.showMarkdown,
     });
   });
+
+  console.log(chatList);
 
   return (
     <div
@@ -101,7 +118,12 @@ const ChatComponent = ({
                       lineHeight={1}
                       color={i % 2 ? "white" : "#333"}
                       fontWeight={i % 2 ? "bold" : "normal"}>
-                      {msg.message}
+                      {/* {isMarkdownFormatEnabled ? ( */}
+                      {msg.showMarkdown ? (
+                        <ReactMarkdown>{msg.message}</ReactMarkdown>
+                      ) : (
+                        msg.message
+                      )}
                     </Typography>
                   </Message.CustomContent>
 
@@ -150,6 +172,36 @@ const ChatComponent = ({
                           <AiOutlineCopy
                             size={11}
                             color={"white"}></AiOutlineCopy>
+                        </span>
+                      </span>
+                      <span
+                        style={{
+                          marginTop: -2,
+                          marginLeft: 3,
+                          backgroundColor: "lightskyblue",
+                          padding: "2px 2px 1px 1px",
+                          borderRadius: 4,
+                          width: 15,
+                          height: 15,
+                        }}
+                        onClick={
+                          () => {
+                            chatHistory.find(
+                              (massageItem) =>
+                                massageItem[
+                                  msg.sender === "GPT" ? "chatId" : "id"
+                                ] === msg.id
+                            ).showMarkdown = !msg.showMarkdown;
+                            setIsMarkdownFormatEnabled(true);
+                          }
+                          // setIsMarkdownFormatEnabled((curr) => !curr)
+                        }>
+                        <span
+                          style={{
+                            marginTop: -1,
+                            marginLeft: 1,
+                          }}>
+                          <BsMarkdown size={11} color={"white"}></BsMarkdown>
                         </span>
                       </span>
                     </Box>

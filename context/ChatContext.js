@@ -6,6 +6,7 @@ const ChatContext = createContext({});
 export function ChatProvider({ children }) {
   const [chatHistory, setChatHistory] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isMarkdownFormatEnabled, setIsMarkdownFormatEnabled] = useState(false);
 
   const addToHistory = (messageItem) => {
     setChatHistory((prevChatHistory) => [
@@ -30,6 +31,8 @@ export function ChatProvider({ children }) {
         isLoading,
         setIsLoading,
         clearChatHistory,
+        isMarkdownFormatEnabled,
+        setIsMarkdownFormatEnabled,
       }}>
       {children}
     </ChatContext.Provider>
