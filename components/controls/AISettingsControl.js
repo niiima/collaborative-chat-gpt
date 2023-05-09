@@ -50,5 +50,15 @@ export default function ChatSettingsControl({ aiType = "basic" }) {
     },
   });
 
+  console.log(max_tokens);
+
+  setAIState(
+    max_tokens,
+    temperature,
+    top_p,
+    frequency_penalty,
+    presence_penalty
+  );
+
   return <ColorfulButtonSet items={AIstate}></ColorfulButtonSet>;
 }
