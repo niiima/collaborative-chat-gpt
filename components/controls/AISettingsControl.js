@@ -50,7 +50,7 @@ export default function ChatSettingsControl({ aiType = "basic" }) {
     },
   });
 
-  console.log(max_tokens);
+  // console.log(max_tokens);
 
   setAIState(
     max_tokens,

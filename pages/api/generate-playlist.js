@@ -14,7 +14,7 @@ export default async function handler(req, res) {
       },
       { role: "user", content: `${req.body.message}` },
     ];
-    console.log(msgs);
+    // console.log(msgs);
 
     try {
       const response = await openai.createChatCompletion({
@@ -28,7 +28,7 @@ export default async function handler(req, res) {
       });
 
       const generatedPlaylist = response.data.choices[0].message.content;
-      console.log(generatedPlaylist);
+      // console.log(generatedPlaylist);
 
       // Extract the JSON part from the string
       const startIndex = generatedPlaylist.indexOf("[");
@@ -39,7 +39,7 @@ export default async function handler(req, res) {
       try {
         const jsonObject = JSON.parse(jsonPart);
 
-        console.log(jsonObject);
+        // console.log(jsonObject);
         res.status(200).json(jsonObject);
       } catch (error) {
         console.log(error);

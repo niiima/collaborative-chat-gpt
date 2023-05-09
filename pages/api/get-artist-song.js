@@ -1,8 +1,8 @@
 export default async function handler(req, res) {
-  console.log(req);
+  // console.log(req);
   //const { name, artist } = { name: "lady in red", artist: "chris de burgh" }; //
   const { name, artist, access_token } = req.body;
-  console.log(name, artist);
+  // console.log(name, artist);
   try {
     // First, get an access token from the Spotify API
     // const response = await fetch("https://accounts.spotify.com/api/token", {

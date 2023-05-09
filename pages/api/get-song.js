@@ -8,7 +8,7 @@ async function fetchWebApi(endpoint, method, body) {
     method,
     body: JSON.stringify(body),
   });
-  console.log(res);
+  // console.log(res);
   return await res.json();
 }
 
@@ -26,12 +26,12 @@ async function getTopTracks() {
 export default async function handler(req, res) {
   try {
     const topTracks = await getTopTracks();
-    console.log(
-      topTracks?.map(
-        ({ name, artists }) =>
-          `${name} by ${artists.map((artist) => artist.name).join(", ")}`
-      )
-    );
+    // console.log(
+    //   topTracks?.map(
+    //     ({ name, artists }) =>
+    //       `${name} by ${artists.map((artist) => artist.name).join(", ")}`
+    //   )
+    // );
     //const { data } = await topTracks;
     //console.log(data);
     // if (response.status === "ok") {

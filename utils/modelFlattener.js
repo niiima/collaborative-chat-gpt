@@ -91,7 +91,7 @@ export function hierarchyStructure(data) {
       });
     }
   }
-  console.log(rootNodes);
+  // console.log(rootNodes);
 
   // Return the root nodes with their children sorted by created timestamp and permission property removed
   for (let parent of rootNodes) {
@@ -181,7 +181,7 @@ export function getModelPurposes(modelName) {
 
 export function flattenAndSort(data) {
   const newData = data.map(({ permission, created, ...model }) => {
-    console.log(model.id);
+    // console.log(model.id);
     const types = getModelPurposes(model.id);
     //console.log(types);
     // If `permission` has a `created` property, move the other properties to `model`

@@ -35,7 +35,7 @@ export default async function handler(req, res) {
       }
     );
   }
-  console.log(accessToken);
+  // console.log(accessToken);
 
   // Use the access token to search for the track on the Spotify API
   const playlistPromiseArray = [];

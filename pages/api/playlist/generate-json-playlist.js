@@ -44,7 +44,7 @@ export default async function handler(req, res) {
       const data = await response.json();
       const generatedPlaylist = data.choices[0].text;
 
-      console.log(generatedPlaylist);
+      // console.log(generatedPlaylist);
 
       // Extract the JSON part from the string
       const startIndex = generatedPlaylist.indexOf("[");

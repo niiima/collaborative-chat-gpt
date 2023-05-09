@@ -12,7 +12,7 @@ export default async function handler(req, res) {
     // if (response.status === "ok") {
     // const flattedArray =
     const flattenedAndSorted = flattenAndSort(data.data);
-    console.log(flattenedAndSorted);
+    // console.log(flattenedAndSorted);
     res.status(200).json({ data: flattenedAndSorted });
     //}
   } catch (error) {
