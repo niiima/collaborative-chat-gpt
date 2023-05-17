@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, memo } from "react";
 import { useControls } from "leva";
 import AIContext from "../../context/AIContext";
 import ColorfulButtonSet from "../Buttons/ColorfulButtons";
@@ -60,5 +60,5 @@ export default function ChatSettingsControl({ aiType = "basic" }) {
     presence_penalty
   );
 
-  return <ColorfulButtonSet items={AIstate}></ColorfulButtonSet>;
+  return memo(<ColorfulButtonSet items={AIstate}></ColorfulButtonSet>);
 }

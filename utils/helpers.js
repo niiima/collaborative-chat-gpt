@@ -237,7 +237,7 @@ export const $$ = (function () {
         try {
           setTimeout(() => resolve(cb()), delay);
         } catch {
-          (err) => console.log(err);
+          (error) => console.log(error);
         }
       });
     },

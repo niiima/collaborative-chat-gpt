@@ -15,19 +15,19 @@ const handler = async (req) => {
     presence_penalty,
   } = await req.json();
 
+  console.log(messages);
   const payload = {
-    model: engine, //"text-davinci-003",
-    messages: messages, //prompt,
-    temperature: temperature, //0.7,
-    top_p: top_p, //1,
-    frequency_penalty: frequency_penalty, //0,
-    presence_penalty: presence_penalty, //0,
-    max_tokens: max_tokens, //200, // max_tokens, //200,
+    model: engine,
+    messages: messages,
+    temperature: temperature,
+    top_p: top_p,
+    frequency_penalty: frequency_penalty,
+    presence_penalty: presence_penalty,
+    max_tokens: max_tokens,
     stream: true,
     n: 1,
-    stop: ["assistant", "user"],
+    stop: ["assistant:", "user:"],
   };
-  //console.log(messages[messages.length - 1]);
 
   const stream = await OpenAIChatStream(payload);
   return new Response(stream);

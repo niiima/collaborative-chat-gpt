@@ -16,7 +16,10 @@ export default async function handler(req, res) {
       temperature: 0,
       max_tokens: req.body.maxTokens,
     });
-    //console.log(response.data);
+    console.log({
+      response: response.data.choices[0].text,
+      prompt: req.body.prompt,
+    });
     res.status(200).json({
       id: response.data.id,
       text: response.data.choices[0].text,

@@ -103,7 +103,7 @@ export default function MyPage() {
       setStream("");
       setPrompt("");
     } catch {
-      (err) => console.log(err);
+      (error) => console.log(error);
     } finally {
       setIsLoading(false);
     }

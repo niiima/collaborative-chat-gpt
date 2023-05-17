@@ -68,7 +68,7 @@ background-color:#222 ;
 }
 
 .cs-message__custom-content *{
-  line-height:1em;
+  /* line-height:1em; */
   /* padding:0; */
   margin:2px;
 }
@@ -82,6 +82,12 @@ background-color:#222 ;
   background: linear-gradient(320deg, #11e7df 0%, #39f 50%, #b490ca 100%);
 
   /* color:#333; */
+}
+
+.cs-message-list__typing-indicator-container .cs-typing-indicator{
+  background-color:#222;
+  color:skyblue;
+  font-size:1.1em ;
 }
 
 /* .cs-message--outgoing .cs-message__avatar{

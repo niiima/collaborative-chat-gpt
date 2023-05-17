@@ -73,7 +73,7 @@ export default function MyPage() {
       // console.log(chatHistory);
       setPrompt("");
     } catch {
-      (err) => console.log(err);
+      (error) => console.log(error);
     } finally {
       setIsLoading(false);
     }

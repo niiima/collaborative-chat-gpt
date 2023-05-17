@@ -35,7 +35,6 @@ const copyToClipboard = (text) => {
 };
 
 const ChatComponent = ({
-  handlePromptTextChange,
   handleSendMessage,
   stream,
   prompt,
@@ -51,6 +50,7 @@ const ChatComponent = ({
   useEffect(() => {
     setIsMarkdownFormatEnabled(false);
   }, [isMarkdownFormatEnabled]);
+
   const chatList = [];
   let len = chatHistory.length - 1;
   chatHistory.forEach((h, i) => {
@@ -80,7 +80,7 @@ const ChatComponent = ({
     });
   });
 
-  console.log(chatList);
+  //console.log(chatList);
 
   return (
     <div
@@ -109,83 +109,82 @@ const ChatComponent = ({
             }>
             {chatList.map((msg, i) => {
               const start = moment(new Date(msg.sentTime));
+              if (msg.message.length > 0)
+                return (
+                  <Message key={msg.id} model={msg} avatarPosition='cl'>
+                    <Message.CustomContent>
+                      <Typography
+                        fontSize={1}
+                        // lineHeight={1}
+                        // color={i % 2 ? "white" : "#333"}
+                        fontWeight={i % 2 ? "bold" : "normal"}>
+                        {/* {isMarkdownFormatEnabled ? ( */}
+                        {msg.showMarkdown ? (
+                          <ReactMarkdown>{msg.message}</ReactMarkdown>
+                        ) : (
+                          msg.message
+                        )}
+                      </Typography>
+                    </Message.CustomContent>
 
-              return (
-                <Message key={msg.id} model={msg} avatarPosition='cl'>
-                  <Message.CustomContent>
-                    <Typography
-                      fontSize={1}
-                      lineHeight={1}
-                      color={i % 2 ? "white" : "#333"}
-                      fontWeight={i % 2 ? "bold" : "normal"}>
-                      {/* {isMarkdownFormatEnabled ? ( */}
-                      {msg.showMarkdown ? (
-                        <ReactMarkdown>{msg.message}</ReactMarkdown>
-                      ) : (
-                        msg.message
-                      )}
-                    </Typography>
-                  </Message.CustomContent>
-
-                  <Message.Footer
-                    sender={msg.sender}
-                    sentTime={start.fromNow()}>
-                    <Box width={"100%"} spacing={0}>
-                      {i % 2 !== 0 && (
-                        <>
-                          <span
-                            style={{
-                              color: "rgba(21,162,127,1)",
-                              borderRadius: 3,
-                              fontSize: ".5rem",
-                            }}>
-                            {start.fromNow()}
-                          </span>
-                          <span
-                            style={{
-                              color: "orange",
-                              borderRadius: 3,
-                              textAlign: "right",
-                              fontSize: ".5rem",
-                              paddingLeft: 10,
-                            }}>
-                            {"By"} {msg.engine}
-                          </span>
-                        </>
-                      )}
-                      <span
-                        style={{
-                          marginTop: -2,
-                          marginLeft: 3,
-                          backgroundColor: "lightskyblue",
-                          padding: "2px 2px 1px 1px",
-                          borderRadius: 4,
-                          width: 15,
-                          height: 15,
-                        }}
-                        onClick={() => copyToClipboard(msg.message)}>
+                    <Message.Footer
+                      sender={msg.sender}
+                      sentTime={start.fromNow()}>
+                      <Box width={"100%"} spacing={0}>
+                        {i % 2 !== 0 && (
+                          <>
+                            <span
+                              style={{
+                                color: "rgba(21,162,127,1)",
+                                borderRadius: 3,
+                                fontSize: ".5rem",
+                              }}>
+                              {start.fromNow()}
+                            </span>
+                            <span
+                              style={{
+                                color: "orange",
+                                borderRadius: 3,
+                                textAlign: "right",
+                                fontSize: ".5rem",
+                                paddingLeft: 10,
+                              }}>
+                              {"By"} {msg.engine}
+                            </span>
+                          </>
+                        )}
                         <span
                           style={{
-                            marginTop: -1,
-                            marginLeft: 1,
-                          }}>
-                          <AiOutlineCopy
-                            size={13}
-                            color={"black"}></AiOutlineCopy>
+                            marginTop: -2,
+                            marginLeft: 3,
+                            backgroundColor: "lightskyblue",
+                            padding: "2px 2px 1px 1px",
+                            borderRadius: 4,
+                            width: 15,
+                            height: 15,
+                          }}
+                          onClick={() => copyToClipboard(msg.message)}>
+                          <span
+                            style={{
+                              marginTop: -1,
+                              marginLeft: 1,
+                            }}>
+                            <AiOutlineCopy
+                              size={13}
+                              color={"black"}></AiOutlineCopy>
+                          </span>
                         </span>
-                      </span>
-                      <span
-                        style={{
-                          marginTop: -2,
-                          marginLeft: 3,
-                          backgroundColor: "purple",
-                          padding: "2px 2px 1px 1px",
-                          borderRadius: 4,
-                          width: 15,
-                          height: 15,
-                        }}
-                        onClick={
-                          () => {
+                        <span
+                          style={{
+                            marginTop: -2,
+                            marginLeft: 3,
+                            backgroundColor: "purple",
+                            padding: "2px 2px 1px 1px",
+                            borderRadius: 4,
+                            width: 15,
+                            height: 15,
+                          }}
+                          onClick={() => {
                             chatHistory.find(
                               (massageItem) =>
                                 massageItem[
@@ -193,26 +192,24 @@ const ChatComponent = ({
                                 ] === msg.id
                             ).showMarkdown = !msg.showMarkdown;
                             setIsMarkdownFormatEnabled(true);
-                          }
-                          // setIsMarkdownFormatEnabled((curr) => !curr)
-                        }>
-                        <span
-                          style={{
-                            marginTop: -1,
-                            marginLeft: 1,
                           }}>
-                          <BsMarkdown size={14} color={"white"}></BsMarkdown>
+                          <span
+                            style={{
+                              marginTop: -1,
+                              marginLeft: 1,
+                            }}>
+                            <BsMarkdown size={14} color={"white"}></BsMarkdown>
+                          </span>
                         </span>
-                      </span>
-                    </Box>
-                  </Message.Footer>
+                      </Box>
+                    </Message.Footer>
 
-                  <Avatar
-                    src={i % 2 === 0 ? userAvatarLogo : gptBlueAvatarLogo}
-                    name='GPT'
-                  />
-                </Message>
-              );
+                    {/* <Avatar
+                      src={i % 2 === 0 ? userAvatarLogo : gptBlueAvatarLogo}
+                      name='GPT'
+                    /> */}
+                  </Message>
+                );
             })}
 
             {prompt !== "" && stream !== "" ? (
@@ -228,9 +225,7 @@ const ChatComponent = ({
             {stream !== "" ? (
               <Message model={{ direction: "outgoing" }}>
                 <Message.CustomContent>
-                  <Typography color={"white"} fontWeight={"bold"}>
-                    {stream}
-                  </Typography>
+                  <Typography fontWeight={"bold"}>{stream}</Typography>
                 </Message.CustomContent>
               </Message>
             ) : (
@@ -238,9 +233,7 @@ const ChatComponent = ({
             )}
           </MessageList>
           <MessageInput
-            placeholder="What's on your mind?"
-            // value={messageInputValue}
-            onChange={(val) => handlePromptTextChange(val)}
+            placeholder='Ask anything from GPT. . .'
             onSend={(val) => handleSendMessage(val)}
           />
         </ChatContainer>

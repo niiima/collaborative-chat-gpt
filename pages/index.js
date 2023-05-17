@@ -10,19 +10,13 @@ import Header from "../components/Header/Header.js";
 import UIContext from "../context/UIContext.js";
 import { FlexItem } from "../components/Atoms/FlexItem.js";
 import { v4 as uuidv4 } from "uuid";
-import styled from "styled-components";
 import OrdinaryButton from "../components/Buttons/OrdinaryButton";
 import { MdDeleteSweep } from "react-icons/md";
-import { GiStopSign } from "react-icons/gi";
 import ModeSelector from "../components/AIManipulatingComponents/ModeSelector.js";
 import SystemPromptTextArea from "../components/AIManipulatingComponents/SystemPromptTextArea";
-// import EngineSelector from "../components/AIManipulatingComponents/EngineSelector.js";
 import ColorfulButtonSet from "../components/Buttons/ColorfulButtons.js";
 import GroupRadioButtons from "../components/Inputs/GroupRadio/GroupRadioButtons.js";
 import ActSelector from "../components/AIManipulatingComponents/ActSelector.js";
-const StopGeneratePromptButton = styled(OrdinaryButton)`
-  /* color: red; */
-`;
 
 export default function MyPage() {
   const { asideExpanded, setAsideExpand } = useContext(UIContext);
@@ -41,10 +35,13 @@ export default function MyPage() {
   const [prompt, setPrompt] = useState("");
   const [systemPrompt, setSystemPrompt] = useState("");
   const [stream, setStream] = useState("");
+  const [initialGreets, setInitialGreets] = useState("pending");
 
-  async function handleSubmit(e) {
+  const handleSubmit = async (e) => {
+    // console.log(e);
     const streamTextArray = [];
     const prompt_timestamp = new Date();
+    const streamArray = [];
     setIsLoading(true);
 
     try {
@@ -68,13 +65,22 @@ export default function MyPage() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(options),
-      });
+      }).catch((error) => console.log(error));
       if (!response.ok) {
-        throw new Error(response.statusText);
+        try {
+          setIsLoading(false);
+          throw new Error(response.statusText);
+          // return;
+        } catch {
+          (error) => console.log(error);
+          // console.log(response.statusText);
+        }
       }
 
       const data = response.body;
+      // console.log(data);
       if (!data) {
+        console.log("No Data");
         return;
       }
 
@@ -103,45 +109,32 @@ export default function MyPage() {
 
       addToHistory({
         chatId: uuidv4(),
-        prompt: prompt,
+        prompt: e,
         prompt_timestamp: prompt_timestamp,
-        completion: streamTextArray.join(""),
+        completion: completion,
         completion_timestamp: completion_timestamp,
         engine: activeEngine.key,
         showMarkdown: false,
       });
       //console.log(chatHistory);
       setStream("");
+      // if (initialGreets === "done")
       setPrompt("");
     } catch {
-      (err) => console.log(err);
+      (error) => console.log(error);
     } finally {
       setIsLoading(false);
     }
-  }
-
-  function handlePromptChange(e) {
-    let trimPrompt = e.trim();
-    if (trimPrompt.length > 0) {
-      setPrompt(trimPrompt);
-    }
-  }
+  };
 
   return (
     <div>
       <Head>
-        {/* Make Conversation GPT knows the whole  */}
-        <title>GPT Continues Conversation</title>
+        <title>MyGPT3.5</title>
       </Head>
       <Sidebar show={asideExpanded}>
         <ColorfulButtonSet items={AIstate}></ColorfulButtonSet>
         <ChatSettingsControl aiType='new' />
-        {/* <EngineSelector
-          engines={engines}
-          changeEngineHandler={(e) => {
-            let engineType = e.currentTarget.value;
-            setActiveEngine(engines.find((eng) => eng.key === engineType));
-          }}></EngineSelector> */}
         <GroupRadioButtons
           items={[
             ...engines.map((engine) => {
@@ -178,18 +171,12 @@ export default function MyPage() {
             text={""}
             icon={<MdDeleteSweep size='20' color='#ef3c39' />}
             handleOnClick={() => clearChatHistory()}></OrdinaryButton>
-          {/* <StopGeneratePromptButton
-            text={""}
-            icon={<GiStopSign size='30' />}
-            handleOnClick={() => clearChatHistory()}
-          /> */}
         </FlexItem>
       </Header>
       <ChatComponent
         stream={stream}
         prompt={prompt}
         handleSendMessage={handleSubmit}
-        handlePromptTextChange={handlePromptChange}
         handleOnClick={() => setAsideExpand(false)}
       />
     </div>

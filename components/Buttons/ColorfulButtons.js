@@ -77,6 +77,7 @@ const ButtonContent = styled.div`
 `;
 
 function ColorfulButtonSet({ items }) {
+  // console.log(items);
   const itemsArray = [1, 2, 3, 4, 5, 6, 7];
   return (
     <ButtonWrapper>
