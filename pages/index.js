@@ -50,7 +50,7 @@ export default function MyPage() {
         messages.push({ role: "user", content: h.prompt });
         messages.push({ role: "assistant", content: h.completion });
       });
-      messages.push({ role: "user", content: prompt });
+      messages.push({ role: "user", content: e });
 
       //console.log(AIstate);
       let options = {
