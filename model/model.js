@@ -1,6 +1,7 @@
 export const AISettings = {
   //engine: "gpt-3.5-turbo-0301",
   max_tokens: 2048,
+  max_response_tokens: 2048,
   temperature: 0,
   top_p: 1.0,
   frequency_penalty: 0.0,

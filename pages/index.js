@@ -17,6 +17,7 @@ import SystemPromptTextArea from "../components/AIManipulatingComponents/SystemP
 import ColorfulButtonSet from "../components/Buttons/ColorfulButtons.js";
 import GroupRadioButtons from "../components/Inputs/GroupRadio/GroupRadioButtons.js";
 import ActSelector from "../components/AIManipulatingComponents/ActSelector.js";
+import { encode } from "gpt-tokenizer";
 
 export default function MyPage() {
   const { asideExpanded, setAsideExpand } = useContext(UIContext);
@@ -43,19 +44,45 @@ export default function MyPage() {
     const prompt_timestamp = new Date();
     const streamArray = [];
     setIsLoading(true);
+    const messages = [];
+    const tokenRange = AIstate.max_tokens;
 
+    let messagesToken = 0;
+    const chatLength = chatHistory.length - 1;
     try {
-      const messages = [{ role: "system", content: systemPrompt }];
-      chatHistory.forEach((h) => {
-        messages.push({ role: "user", content: h.prompt });
-        messages.push({ role: "assistant", content: h.completion });
-      });
+      for (let i = chatLength; i > 0; i--) {
+        const { prompt, completion } = chatHistory[i];
+        console.log(prompt, completion);
+        let dialogTokens = encode(prompt).length + encode(completion).length;
+
+        if (messagesToken + systemPrompt + dialogTokens <= tokenRange) {
+          messages.push({ role: "user", content: prompt });
+          messages.push({ role: "assistant", content: completion });
+          messagesToken += dialogTokens;
+        }
+        console.log(
+          `dialogTokens: ${dialogTokens} | messageTokens: ${messagesToken}`
+        );
+      }
+
+      const dialogs = [];
+
+      console.log(messages);
+      if (systemPrompt.length > 0)
+        dialogs.push({ role: "system", content: systemPrompt });
+      messages.forEach((message) => dialogs.push(message));
+
+      console.log(dialogs);
+      // chatHistory.forEach((h) => {
+      //   messages.push({ role: "user", content: h.prompt });
+      //   messages.push({ role: "assistant", content: h.completion });
+      // });
       messages.push({ role: "user", content: e });
 
       //console.log(AIstate);
       let options = {
         engine: activeEngine.key,
-        messages: messages,
+        messages: dialogs,
         ...AIstate,
       };
       //console.log(options);

@@ -20,6 +20,7 @@
     "@vercel/analytics": "^0.1.11",
     "eventsource-parser": "^1.0.0",
     "gpt-3-encoder": "^1.1.4",
+    "gpt-tokenizer": "^1.0.5",
     "html-react-parser": "^3.0.16",
     "leva": "^0.9.34",
     "moment": "^2.29.4",
