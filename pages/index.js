@@ -45,7 +45,10 @@ export default function MyPage() {
     const streamArray = [];
     setIsLoading(true);
     const messages = [];
-    const tokenRange = AIstate.max_tokens;
+    const tokenRange =
+      AIstate.max_tokens - AIstate.max_response_tokens < 4096
+        ? AIstate.max_tokens - AIstate.max_response_tokens
+        : 2048;
 
     let messagesToken = 0;
     const chatLength = chatHistory.length - 1;
@@ -72,13 +75,8 @@ export default function MyPage() {
         dialogs.push({ role: "system", content: systemPrompt });
       messages.forEach((message) => dialogs.push(message));
 
+      dialogs.push({ role: "user", content: e });
       console.log(dialogs);
-      // chatHistory.forEach((h) => {
-      //   messages.push({ role: "user", content: h.prompt });
-      //   messages.push({ role: "assistant", content: h.completion });
-      // });
-      messages.push({ role: "user", content: e });
-
       console.log(AIstate);
       let options = {
         engine: activeEngine.key,
@@ -94,13 +92,13 @@ export default function MyPage() {
         body: JSON.stringify(options),
       }).catch((error) => console.log(error));
       if (!response.ok) {
+        setIsLoading(false);
         try {
-          setIsLoading(false);
           throw new Error(response.statusText);
           // return;
         } catch {
           (error) => console.log(error);
-          // console.log(response.statusText);
+          console.log(response?.statusText);
         }
       }
 

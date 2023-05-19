@@ -16,8 +16,15 @@ export default function ChatSettingsControl({ aiType = "basic" }) {
   useControls({
     max_tokens: {
       step: 1,
-      value: 1024,
-      max: 4000,
+      value: 2024,
+      max: 4096,
+      min: 0,
+      onChange: (value) => setAIState({ max_tokens: value }),
+    },
+    max_response_tokens: {
+      step: 1,
+      value: 2024,
+      max: 3900,
       min: 0,
       onChange: (value) => setAIState({ max_tokens: value }),
     },
