@@ -55,7 +55,7 @@ export default function MyPage() {
         console.log(prompt, completion);
         let dialogTokens = encode(prompt).length + encode(completion).length;
 
-        if (messagesToken + systemPrompt + dialogTokens <= tokenRange) {
+        if (messagesToken + systemPrompt + dialogTokens + e <= tokenRange) {
           messages.push({ role: "user", content: prompt });
           messages.push({ role: "assistant", content: completion });
           messagesToken += dialogTokens;
@@ -79,13 +79,13 @@ export default function MyPage() {
       // });
       messages.push({ role: "user", content: e });
 
-      //console.log(AIstate);
+      console.log(AIstate);
       let options = {
         engine: activeEngine.key,
         messages: dialogs,
         ...AIstate,
       };
-      //console.log(options);
+      console.log(options);
       const response = await fetch("/api/generate-chat-completion", {
         method: "POST",
         headers: {
