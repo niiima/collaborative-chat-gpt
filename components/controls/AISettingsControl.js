@@ -24,9 +24,9 @@ export default function ChatSettingsControl({ aiType = "basic" }) {
     max_response_tokens: {
       step: 1,
       value: 2024,
-      max: 3900,
+      max: 3074,
       min: 0,
-      onChange: (value) => setAIState({ max_tokens: value }),
+      onChange: (value) => setAIState({ max_response_tokens: value }),
     },
     temperature: {
       value: 1,
