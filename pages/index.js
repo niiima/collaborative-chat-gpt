@@ -30,13 +30,13 @@ export default function MyPage() {
     clearChatHistory,
   } = useContext(ChatContext);
 
-  const { AIstate, setAIState } = useContext(AIContext);
+  const { AIstate } = useContext(AIContext);
   const [activeEngine, setActiveEngine] = useState(engines[0]);
 
   const [prompt, setPrompt] = useState("");
   const [systemPrompt, setSystemPrompt] = useState("");
   const [stream, setStream] = useState("");
-  const [initialGreets, setInitialGreets] = useState("pending");
+  // const [initialGreets, setInitialGreets] = useState("pending");
 
   const handleSubmit = async (e) => {
     // console.log(e);
@@ -45,45 +45,53 @@ export default function MyPage() {
     const streamArray = [];
     setIsLoading(true);
     const messages = [];
+
     const tokenRange =
       AIstate.max_tokens - AIstate.max_response_tokens < 4096
         ? AIstate.max_tokens - AIstate.max_response_tokens
         : 2048;
 
-    let messagesToken = 0;
+    let previousMessagesToken = 0;
     const chatLength = chatHistory.length - 1;
     try {
-      for (let i = chatLength; i > 0; i--) {
+      for (let i = chatLength; i >= 0; i--) {
         const { prompt, completion } = chatHistory[i];
-        console.log(prompt, completion);
         let dialogTokens = encode(prompt).length + encode(completion).length;
-
-        if (messagesToken + systemPrompt + dialogTokens + e <= tokenRange) {
+        // console.log(
+        //   `tokenRange: ${tokenRange} |
+        //    dialogTokens: ${dialogTokens} | messageTokens: ${previousMessagesToken}`
+        // );
+        if (
+          previousMessagesToken +
+            systemPrompt.length +
+            dialogTokens +
+            e.length <=
+          tokenRange
+        ) {
           messages.push({ role: "user", content: prompt });
           messages.push({ role: "assistant", content: completion });
-          messagesToken += dialogTokens;
+          previousMessagesToken += dialogTokens;
+        } else {
+          // console.log("breaking");
+          break;
         }
-        console.log(
-          `dialogTokens: ${dialogTokens} | messageTokens: ${messagesToken}`
-        );
       }
 
       const dialogs = [];
 
-      console.log(messages);
       if (systemPrompt.length > 0)
         dialogs.push({ role: "system", content: systemPrompt });
+
       messages.forEach((message) => dialogs.push(message));
 
       dialogs.push({ role: "user", content: e });
-      console.log(dialogs);
-      console.log(AIstate);
+      // console.log(dialogs);
       let options = {
         engine: activeEngine.key,
         messages: dialogs,
         ...AIstate,
       };
-      console.log(options);
+      // console.log(options);
       const response = await fetch("/api/generate-chat-completion", {
         method: "POST",
         headers: {
@@ -141,7 +149,7 @@ export default function MyPage() {
         engine: activeEngine.key,
         showMarkdown: false,
       });
-      //console.log(chatHistory);
+      // console.log(chatHistory);
       setStream("");
       // if (initialGreets === "done")
       setPrompt("");
@@ -159,7 +167,7 @@ export default function MyPage() {
       </Head>
       <Sidebar show={asideExpanded}>
         <ColorfulButtonSet items={AIstate}></ColorfulButtonSet>
-        <ChatSettingsControl aiType='new' />
+        <ChatSettingsControl />
         <GroupRadioButtons
           items={[
             ...engines.map((engine) => {
@@ -175,12 +183,12 @@ export default function MyPage() {
           }></GroupRadioButtons>
         <ModeSelector
           handleChange={(prompt) => {
-            clearChatHistory();
+            // clearChatHistory();
             setSystemPrompt(prompt);
           }}></ModeSelector>
         <ActSelector
           onChangeHandler={(prompt) => {
-            clearChatHistory();
+            // clearChatHistory();
             setSystemPrompt(prompt);
           }}></ActSelector>
         <SystemPromptTextArea
